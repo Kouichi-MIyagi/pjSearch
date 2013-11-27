@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @response.user_id %>
+</p>
+
+<p>
+  <b>Customer:</b>
+  <%= @response.customer_id %>
+</p>
+
+<p>
+  <b>Pjname:</b>
+  <%= @response.pjName %>
+</p>
+
+<p>
+  <b>Targetyear:</b>
+  <%= @response.targetYear %>
+</p>
+
+<p>
+  <b>Targetmonth:</b>
+  <%= @response.targetMonth %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%= @response.comment %>
+</p>
+
+<p>
+  <b>Attachedfile:</b>
+  <%= @response.attachedFile %>
+</p>
+
+
+<%= link_to 'Edit', edit_response_path(@response) %> |
+<%= link_to 'Back', responses_path %>

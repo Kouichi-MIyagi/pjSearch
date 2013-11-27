@@ -1,0 +1,35 @@
+<h1>Listing responses</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Customer</th>
+    <th>Pjname</th>
+    <th>Targetyear</th>
+    <th>Targetmonth</th>
+    <th>Comment</th>
+    <th>Attachedfile</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @responses.each do |response| %>
+  <tr>
+    <td><%= response.user_id %></td>
+    <td><%= response.customer_id %></td>
+    <td><%= response.pjName %></td>
+    <td><%= response.targetYear %></td>
+    <td><%= response.targetMonth %></td>
+    <td><%= response.comment %></td>
+    <td><%= response.attachedFile %></td>
+    <td><%= link_to 'Show', response %></td>
+    <td><%= link_to 'Edit', edit_response_path(response) %></td>
+    <td><%= link_to 'Destroy', response, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Response', new_response_path %>
