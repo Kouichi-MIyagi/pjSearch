@@ -1,4 +1,10 @@
 PjSearch::Application.routes.draw do
+  resources :response_items
+
+
+  resources :responses
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

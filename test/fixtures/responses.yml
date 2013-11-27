@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  customer_id: 1
+  pjName: MyString
+  targetYear: 1
+  targetMonth: 1
+  comment: MyString
+  attachedFile: MyString
+
+two:
+  user_id: 1
+  customer_id: 1
+  pjName: MyString
+  targetYear: 1
+  targetMonth: 1
+  comment: MyString
+  attachedFile: MyString

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Response:</b>
+  <%= @response_item.response_id %>
+</p>
+
+<p>
+  <b>Question:</b>
+  <%= @response_item.question %>
+</p>
+
+<p>
+  <b>Selectionnumber:</b>
+  <%= @response_item.selectionNumber %>
+</p>
+
+<p>
+  <b>Selectionitem:</b>
+  <%= @response_item.selectionItem %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%= @response_item.Comment %>
+</p>
+
+
+<%= link_to 'Edit', edit_response_item_path(@response_item) %> |
+<%= link_to 'Back', response_items_path %>
