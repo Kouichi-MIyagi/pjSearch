@@ -11,6 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20131127054131) do
+
+  create_table "response_items", :force => true do |t|
+    t.integer  "response_id"
+    t.string   "question"
+    t.integer  "selectionNumber"
+    t.string   "selectionItem"
+    t.string   "Comment"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "responses", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "customer_id"
+    t.string   "pjName"
+    t.integer  "targetYear"
+    t.integer  "targetMonth"
+    t.string   "comment"
+    t.string   "attachedFile"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
 end

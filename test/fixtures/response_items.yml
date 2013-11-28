@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  response_id: 1
+  question: MyString
+  selectionNumber: 1
+  selectionItem: MyString
+  Comment: MyString
+
+two:
+  response_id: 1
+  question: MyString
+  selectionNumber: 1
+  selectionItem: MyString
+  Comment: MyString
