@@ -10,5 +10,7 @@
 
 <%= yield %>
 
+<br />
+<%= link_to_unless_current 'MainMenu', :controller => :menu, :action => :index %>
 </body>
 </html>

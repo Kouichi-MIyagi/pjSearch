@@ -1,4 +1,6 @@
 PjSearch::Application.routes.draw do
+  get "menu/index"
+
   resources :customers
 
 
