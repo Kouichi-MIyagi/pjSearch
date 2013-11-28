@@ -1,6 +1,10 @@
-PjSearch::Application.routes.draw do
-  resources :customers
+﻿PjSearch::Application.routes.draw do
 
+  # root :to => 'customers#index'
+
+  devise_for :users
+
+  resources :customers
 
   resources :response_items
 
