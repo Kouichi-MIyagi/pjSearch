@@ -1,13 +1,14 @@
-﻿PjSearch::Application.routes.draw do
+PjSearch::Application.routes.draw do
 
-  # root :to => 'customers#index'
+  root :to => 'menu#index'
+  
+  get "menu/index"
 
   devise_for :users
 
   resources :customers
 
   resources :response_items
-
 
   resources :responses
 
