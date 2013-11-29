@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿<!DOCTYPE html> 
 <html>
 <head>
   <title>PjSearch</title>
@@ -7,10 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <p> <%= notice %></p>
+  <p> <%= alert %></p>
   <% if user_signed_in? %>
     <table>
+	
     <tr>
-    <td>~〇-〇~　客先みえるくん　~〇-〇~　　　</td>
+    <!--<td>~〇-〇~　客先みえるくん　~〇-〇~　　　</td> -->
     <td>
      <Div Align="right">
       <%= link_to "⇒ログアウト", destroy_user_session_path,:method => "DELETE" %>
