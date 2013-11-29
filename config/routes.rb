@@ -1,11 +1,10 @@
 PjSearch::Application.routes.draw do
+  
+  devise_for :users
+  #get "menu/index"
 
   root :to => 'menu#index'
   
-  get "menu/index"
-
-  devise_for :users
-
   resources :customers
 
   resources :response_items
