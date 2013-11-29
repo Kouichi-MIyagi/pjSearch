@@ -1,4 +1,9 @@
 PjSearch::Application.routes.draw do
+  get "menu/index"
+
+  resources :customers
+
+
   resources :response_items
 
 
@@ -60,5 +65,5 @@ PjSearch::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+   match ':controller(/:action(/:id))(.:format)'
 end
