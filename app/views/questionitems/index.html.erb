@@ -1,0 +1,29 @@
+<h1>Listing questionitems</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Question</th>
+    <th>Selectionnumber</th>
+    <th>Questionitem</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @questionitems.each do |questionitem| %>
+  <tr>
+    <td><%= questionitem.id %></td>
+    <td><%= questionitem.question %></td>
+    <td><%= questionitem.selectionNumber %></td>
+    <td><%= questionitem.questionItem %></td>
+    <td><%= link_to 'Show', questionitem %></td>
+    <td><%= link_to 'Edit', edit_questionitem_path(questionitem) %></td>
+    <td><%= link_to 'Destroy', questionitem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Questionitem', new_questionitem_path %>
