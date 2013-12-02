@@ -8,7 +8,6 @@
     <th>Targetyear</th>
     <th>Targetmonth</th>
     <th>Comment</th>
-    <th>Attachedfile</th>
     <th></th>
     <th></th>
     <th></th>
@@ -22,7 +21,6 @@
     <td><%= response.targetYear %></td>
     <td><%= response.targetMonth %></td>
     <td><%= response.comment %></td>
-    <td><%= response.attachedFile %></td>
     <td><%= link_to 'Show', response %></td>
     <td><%= link_to 'Edit', edit_response_path(response) %></td>
     <td><%= link_to 'Destroy', response, method: :delete, data: { confirm: 'Are you sure?' } %></td>
