@@ -12,19 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :id %><br />
-    <%= f.number_field :id %>
-  </div>
-  <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label :タイトル %><br />
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :effectiveFrom %><br />
+    <%= f.label :有効期限From %><br />
     <%= f.date_select :effectiveFrom %>
   </div>
   <div class="field">
-    <%= f.label :effectiveTo %><br />
+    <%= f.label :有効期限To %><br />
     <%= f.date_select :effectiveTo %>
   </div>
   <div class="actions">
