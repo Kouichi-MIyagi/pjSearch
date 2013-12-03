@@ -1,25 +1,54 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <p>
-  <b>Id:</b>
+  <b>番号:</b>
   <%= @questionnaire.id %>
 </p>
 
 <p>
-  <b>Title:</b>
+  <b>タイトル:</b>
   <%= @questionnaire.title %>
 </p>
 
 <p>
-  <b>Effectivefrom:</b>
+  <b>有効期限from:</b>
   <%= @questionnaire.effectiveFrom %>
 </p>
 
 <p>
-  <b>Effectiveto:</b>
+  <b>有効期限to:</b>
   <%= @questionnaire.effectiveTo %>
 </p>
 
+<h5>質問項目一覧</h5>
+
+<table>
+  <tr>
+    <th>質問番号</th>
+    <th>質問</th>
+    <th>選択肢1</th>
+    <th>選択肢2</th>
+    <th>選択肢3</th>
+    <th>選択肢4</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @questionnaire.questionitems.each do |questionitem| %>
+  <tr>
+    <td><%= questionitem.id %></td>
+    <td><%= questionitem.question %></td>
+    <td><%= questionitem.answer1_item %></td>
+    <td><%= questionitem.answer2_item %></td>
+    <td><%= questionitem.answer3_item %></td>
+    <td><%= questionitem.answer4_item %></td>
+    <td><%= link_to 'Show', questionitem %></td>
+    <td><%= link_to 'Edit', edit_questionitem_path(questionitem) %></td>
+    <td><%= link_to 'Destroy', questionitem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
 
 <%= link_to 'Edit', edit_questionnaire_path(@questionnaire) %> |
 <%= link_to 'Back', questionnaires_path %>

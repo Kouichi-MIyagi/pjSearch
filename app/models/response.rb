@@ -3,4 +3,5 @@ class Response < ActiveRecord::Base
   
   has_many :response_items
   belongs_to :customer
+  belongs_to :user
 end

@@ -1,11 +1,13 @@
-<h1>Listing questionitems</h1>
+<h1>質問項目一覧</h1>
 
 <table>
   <tr>
-    <th>Id</th>
-    <th>Question</th>
-    <th>Selectionnumber</th>
-    <th>Questionitem</th>
+    <th>質問番号</th>
+    <th>質問</th>
+    <th>選択肢1</th>
+    <th>選択肢2</th>
+    <th>選択肢3</th>
+    <th>選択肢4</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,8 +17,10 @@
   <tr>
     <td><%= questionitem.id %></td>
     <td><%= questionitem.question %></td>
-    <td><%= questionitem.selectionNumber %></td>
-    <td><%= questionitem.questionItem %></td>
+    <td><%= questionitem.answer1_item %></td>
+    <td><%= questionitem.answer2_item %></td>
+    <td><%= questionitem.answer3_item %></td>
+    <td><%= questionitem.answer4_item %></td>
     <td><%= link_to 'Show', questionitem %></td>
     <td><%= link_to 'Edit', edit_questionitem_path(questionitem) %></td>
     <td><%= link_to 'Destroy', questionitem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
