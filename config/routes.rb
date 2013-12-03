@@ -1,5 +1,11 @@
 PjSearch::Application.routes.draw do
   
+  resources :questionitems
+
+
+  resources :questionnaires
+
+
   devise_for :users
   #get "menu/index"
 

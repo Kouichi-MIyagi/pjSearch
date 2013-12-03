@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  title: MyString
+  effectiveFrom: 2013-11-30
+  effectiveTo: 2013-11-30
+
+two:
+  id: 1
+  title: MyString
+  effectiveFrom: 2013-11-30
+  effectiveTo: 2013-11-30
