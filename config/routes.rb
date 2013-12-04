@@ -1,5 +1,8 @@
 PjSearch::Application.routes.draw do
   
+  resources :request_questionnaires
+
+
   resources :questionitems
 
 

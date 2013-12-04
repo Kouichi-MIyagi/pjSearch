@@ -25,6 +25,21 @@ class ResponsesController < ApplicationController
   # GET /responses/new.json
   def new
     @response = Response.new
+	  @response.user_id = current_user.id
+	#  @response.customer_id = current_user
+	#  @response.pjName = current_user.lastPjName
+	
+	# 直近のアンケート依頼のとり方は修正が必要
+	  @current_request = current_user.request_questionnaires[0]
+	  
+	  @response.targetYear = @current_request.target_year
+	  @response.targetMonth = @current_request.target_month
+	  
+	  @current_request.questionnaire.questionitems.each do |item|
+	    responce_item = ResponseItem.new
+		responce_item.question = item.question
+		@response.response_items << responce_item
+	  end
 
     respond_to do |format|
       format.html # new.html.erb

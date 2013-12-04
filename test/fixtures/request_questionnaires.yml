@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  questionnaire_id: 1
+  target_year: 1
+  target_month: 1
+
+two:
+  user_id: 1
+  questionnaire_id: 1
+  target_year: 1
+  target_month: 1
