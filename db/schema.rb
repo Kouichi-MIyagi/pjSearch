@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131204023100) do
+ActiveRecord::Schema.define(:version => 20131205023247) do
+>>>>>>> a53941195442035299813cafb9a47dd5fa66d853
 
   create_table "customers", :force => true do |t|
     t.string   "csname"
@@ -22,21 +23,10 @@ ActiveRecord::Schema.define(:version => 20131204023100) do
 
   create_table "questionitems", :force => true do |t|
     t.string   "question"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.integer  "answer1"
-    t.string   "answer1_item"
-    t.integer  "answer2"
-    t.string   "answer2_item"
-    t.integer  "answer3"
-    t.string   "answer3_item"
-    t.integer  "answer4"
-    t.string   "answer4_item"
-  end
-
-  create_table "questionitems_questionnaires", :id => false, :force => true do |t|
-    t.integer "questionitem_id"
-    t.integer "questionnaire_id"
+    t.integer  "selectionNumber"
+    t.string   "questionItem"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "questionnaires", :force => true do |t|
@@ -91,6 +81,13 @@ ActiveRecord::Schema.define(:version => 20131204023100) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "user_id"
+    t.string   "user_name"
+    t.integer  "customer_id"
+    t.string   "user_access"
+    t.string   "recent_project"
+    t.string   "recent_customer"
+    t.string   "recent_resident"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
