@@ -42,14 +42,18 @@
       <th>質問</th>
       <th>回答</th>
       <th>コメント</th>
+      <th></th>
     </tr>
   
+    <% i = 0 %>
     <% @response.response_items.each do |res_i| %>
 	  <%= f.fields_for :response_items, res_i do |item| %>
         <tr>
         <td><%= res_i.question %></td>
-        <td></td>
+		<td><%= item.collection_select :selectionItem, @current_request.questionnaire.questionitems[i].answers_select, :last, :first, :include_blank => true %></td>
         <td><%= item.text_field :Comment %></td>
+		<td><%= item.hidden_field :question %></td>
+		<% i = i + 1 %>
 	    </tr>
       <% end %>	
 	<% end %>

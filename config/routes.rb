@@ -2,12 +2,9 @@ PjSearch::Application.routes.draw do
   
   resources :request_questionnaires
 
-
   resources :questionitems
 
-
   resources :questionnaires
-
 
   devise_for :users
   #get "menu/index"
@@ -17,9 +14,7 @@ PjSearch::Application.routes.draw do
   resources :customers
 
   resources :response_items
-
   resources :responses
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
