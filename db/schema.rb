@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20131205023247) do
+=======
+ActiveRecord::Schema.define(:version => 20131204023100) do
+>>>>>>> a54b433465c04abbf6638dab2305010555da1b8f
 
   create_table "customers", :force => true do |t|
     t.string   "csname"
@@ -45,6 +49,15 @@ ActiveRecord::Schema.define(:version => 20131205023247) do
     t.date     "effectiveTo"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "request_questionnaires", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "questionnaire_id"
+    t.integer  "target_year"
+    t.integer  "target_month"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "response_items", :force => true do |t|

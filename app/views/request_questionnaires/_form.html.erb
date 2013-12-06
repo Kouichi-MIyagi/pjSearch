@@ -1,0 +1,33 @@
+<%= form_for(@request_questionnaire) do |f| %>
+  <% if @request_questionnaire.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@request_questionnaire.errors.count, "error") %> prohibited this request_questionnaire from being saved:</h2>
+
+      <ul>
+      <% @request_questionnaire.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :questionnaire_id %><br />
+    <%= f.number_field :questionnaire_id %>
+  </div>
+  <div class="field">
+    <%= f.label :target_year %><br />
+    <%= f.number_field :target_year %>
+  </div>
+  <div class="field">
+    <%= f.label :target_month %><br />
+    <%= f.number_field :target_month %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

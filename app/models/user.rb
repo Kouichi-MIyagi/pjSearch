@@ -32,3 +32,7 @@
 
   
 end
+
+  has_many :request_questionnaires
+  has_many :questionnaires, :through => :request_questionnaires
+end

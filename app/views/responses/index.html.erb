@@ -2,9 +2,8 @@
 
 <table>
   <tr>
-    <th>ユーザー名</th>
-    <th>顧客</th>
-    <th>プロジェクト</th>
+    <th>顧客名</th>
+    <th>プロジェクト名</th>
     <th>対象年</th>
     <th>対象月</th>
     <th>コメント</th>
@@ -15,7 +14,6 @@
 
 <% @responses.each do |response| %>
   <tr>
-    <td><%= response.user.email %></td>
     <td><%= response.customer.csname %></td>
     <td><%= response.pjName %></td>
     <td><%= response.targetYear %></td>
