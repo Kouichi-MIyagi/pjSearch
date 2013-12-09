@@ -95,7 +95,7 @@ class RequestQuestionnairesController < ApplicationController
       puts 'users_r size:' + users_r.size.to_s
     end
     if !(params[:transfferred].blank?)
-      users_t = User.where('users.transfferred = ?', params[:transfferred])
+      users_t = User.where(users.transfferred = ?', params[:transfferred])
       puts 'users_t size:' + users_t.size.to_s
     end
     return (users_r & users_t)
@@ -111,9 +111,6 @@ class RequestQuestionnairesController < ApplicationController
       user.request_questionnaire = @request_questionnaire
       user.save
     end
-    #User.all.each do |user|
-    #  user.save
-    #end  
   end
   
 end

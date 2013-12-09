@@ -15,7 +15,7 @@ class ResponsesController < ApplicationController
   def show
     @response = Response.find(params[:id])
 	# 直近のアンケート依頼のとり方は修正が必要
-	  @current_request = current_request
+	  current_request 
 	  
     respond_to do |format|
       format.html # show.html.erb
@@ -31,7 +31,7 @@ class ResponsesController < ApplicationController
 	  @response.customer_id = current_user.customer_id
 	  @response.pjName = current_user.recent_project
 	
-	  @current_request = RequestQuestionnaire.current_request
+	  current_request
 	  
 	  @response.targetYear = @current_request.target_year
 	  @response.targetMonth = @current_request.target_month
@@ -51,7 +51,7 @@ class ResponsesController < ApplicationController
   # GET /responses/1/edit
   def edit
     @response = Response.find(params[:id])
-	@current_request = current_request
+	  current_request
   end
 
   # POST /responses
@@ -100,6 +100,6 @@ class ResponsesController < ApplicationController
   end
   def current_request
     # 直近のアンケート依頼のとり方は修正が必要
-	@current_request = current_user.request_questionnaires.last
+    @current_request = current_user.request_questionnaire
   end
 end

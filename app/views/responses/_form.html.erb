@@ -48,7 +48,7 @@
         <tr>
         <td><%= res_i.question %></td>
 		<td><%= item.collection_select :selectionItem, @current_request.questionnaire.questionitems[i].answers_select, :last, :first, :include_blank => true %></td>
-        <td><%= item.text_field :Comment %></td>
+        <td><%= item.text_area :Comment, :size=>"60x4" %></td>
 		<td><%= item.hidden_field :question %></td>
 		<% i = i + 1 %>
 	    </tr>
@@ -59,7 +59,7 @@
    
   <div class="field">
     <%= f.label :その他コメント %><br />
-    <%= f.text_field :comment %>
+    <%= f.text_area :comment, :size=>"110x4" %>
   </div>
 
 
