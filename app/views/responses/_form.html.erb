@@ -12,29 +12,56 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
+    <%= f.label :ユーザー名 %><br />
+    <%= @response.user.user_name %>
+    <%= f.hidden_field :user_id %>
   </div>
   <div class="field">
-    <%= f.label :customer_id %><br />
-    <%= f.number_field :customer_id %>
+    <%= f.label :顧客名 %><br />
+    <%= @response.customer.csname %>
+    <%= f.hidden_field :customer_id %>
   </div>
   <div class="field">
-    <%= f.label :pjName %><br />
-    <%= f.text_field :pjName %>
+    <%= f.label :プロジェクト名 %><br />
+    <%= @response.pjName %>
+    <%= f.hidden_field :pjName %>
   </div>
   <div class="field">
-    <%= f.label :targetYear %><br />
-    <%= f.number_field :targetYear %>
-  </div>
+    <%= f.label :対象年月 %><br />
+    <%= @response.targetYMD %>
+    <%= f.hidden_field :targetYear %>
+	<%= f.hidden_field :targetMonth %>
+
+  <br>
+  <br>
+  <table>
+    <tr>
+      <th>質問</th>
+      <th>回答</th>
+      <th>コメント</th>
+      <th></th>
+    </tr>
+  
+    <% i = 0 %>
+    <% @response.response_items.each do |res_i| %>
+	  <%= f.fields_for :response_items, res_i do |item| %>
+        <tr>
+        <td><%= res_i.question %></td>
+		<td><%= item.collection_select :selectionItem, @current_request.questionnaire.questionitems[i].answers_select, :last, :first, :include_blank => true %></td>
+        <td><%= item.text_field :Comment %></td>
+		<td><%= item.hidden_field :question %></td>
+		<% i = i + 1 %>
+	    </tr>
+      <% end %>	
+	<% end %>
+  </table>
+  <br/>
+   
   <div class="field">
-    <%= f.label :targetMonth %><br />
-    <%= f.number_field :targetMonth %>
-  </div>
-  <div class="field">
-    <%= f.label :comment %><br />
+    <%= f.label :その他コメント %><br />
     <%= f.text_field :comment %>
   </div>
+
 
   <div class="actions">
     <%= f.submit %>

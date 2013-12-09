@@ -23,6 +23,15 @@
     <%= f.label :有効期限To %><br />
     <%= f.date_select :effectiveTo %>
   </div>
+  
+  <% Questionitem.all.each do |qi| %>
+    <%= f.check_box :questionitem_ids, 
+      {:checked => @questionnaire.questionitems.include?(qi), 
+       :name => "questionnaire[questionitem_ids][]"}, qi.id, " " %>
+    <%= qi.question %>
+    <br>
+    <% end %>
+  <p>
   <div class="actions">
     <%= f.submit %>
   </div>

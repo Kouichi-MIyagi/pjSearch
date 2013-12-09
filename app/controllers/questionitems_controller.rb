@@ -25,7 +25,11 @@ class QuestionitemsController < ApplicationController
   # GET /questionitems/new.json
   def new
     @questionitem = Questionitem.new
-
+      @questionitem.answer1 = 1
+      @questionitem.answer2 = 2
+      @questionitem.answer3 = 3
+      @questionitem.answer4 = 4
+	  
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @questionitem }

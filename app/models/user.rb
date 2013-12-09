@@ -6,10 +6,13 @@
 
   # Setup accessible (or protected) attributes for your model
   # Change user_id etc. 2013/12/3 by Miyagi 
-  attr_accessible :user_id, :email, :password, :password_confirmation, :remember_me, :user_id, :user_name, :customer_id, :user_access, :recent_project, :recent_customer, :recent_resident, :login
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :user_id, :user_name, :customer_id, :user_access, :recent_project, :recent_customer, :recent_resident, :login
 
   # attr_accessible :title, :body
   
+  has_many :request_questionnaires
+  has_many :questionnaires, :through => :request_questionnaires
+
   # attr_accessor :login
   attr_accessible :login
   

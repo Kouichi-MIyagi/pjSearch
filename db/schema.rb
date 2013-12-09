@@ -22,10 +22,21 @@ ActiveRecord::Schema.define(:version => 20131205023247) do
 
   create_table "questionitems", :force => true do |t|
     t.string   "question"
-    t.integer  "selectionNumber"
-    t.string   "questionItem"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "answer1"
+    t.string   "answer1_item"
+    t.integer  "answer2"
+    t.string   "answer2_item"
+    t.integer  "answer3"
+    t.string   "answer3_item"
+    t.integer  "answer4"
+    t.string   "answer4_item"
+  end
+
+  create_table "questionitems_questionnaires", :id => false, :force => true do |t|
+    t.integer "questionitem_id"
+    t.integer "questionnaire_id"
   end
 
   create_table "questionnaires", :force => true do |t|
@@ -34,6 +45,15 @@ ActiveRecord::Schema.define(:version => 20131205023247) do
     t.date     "effectiveTo"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "request_questionnaires", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "questionnaire_id"
+    t.integer  "target_year"
+    t.integer  "target_month"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "response_items", :force => true do |t|
