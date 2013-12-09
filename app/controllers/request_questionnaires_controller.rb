@@ -25,7 +25,7 @@ class RequestQuestionnairesController < ApplicationController
   # GET /request_questionnaires/new.json
   def new
     @request_questionnaire = RequestQuestionnaire.new
-    @request_questionnaire.user = current_user
+    @questionnaires = Questionnaire.all()
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,14 +36,15 @@ class RequestQuestionnairesController < ApplicationController
   # GET /request_questionnaires/1/edit
   def edit
     @request_questionnaire = RequestQuestionnaire.find(params[:id])
+    @questionnaires = Questionnaire.all()
   end
 
   # POST /request_questionnaires
   # POST /request_questionnaires.json
   def create
     @request_questionnaire = RequestQuestionnaire.new(params[:request_questionnaire])
-    @request_questionnaire.user = current_user
-
+    self.requestToTargetUsers
+    
     respond_to do |format|
       if @request_questionnaire.save
         format.html { redirect_to @request_questionnaire, notice: 'Request questionnaire was successfully created.' }
@@ -58,8 +59,9 @@ class RequestQuestionnairesController < ApplicationController
   # PUT /request_questionnaires/1
   # PUT /request_questionnaires/1.json
   def update
-    @request_questionnaire = RequestQuestionnaire.find(params[:id])
-
+    @request_questionnaire = RequestQuestionnaire.find(params[:id])        
+    self.requestToTargetUsers
+    
     respond_to do |format|
       if @request_questionnaire.update_attributes(params[:request_questionnaire])
         format.html { redirect_to @request_questionnaire, notice: 'Request questionnaire was successfully updated.' }
@@ -82,4 +84,36 @@ class RequestQuestionnairesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  # 画面で指示された対象のユーザを抽出する
+  def extractTargetUsers
+    users_r = User.all
+    users_t = users_r.dup
+    
+    if !(params[:resident].blank?)
+      users_r = User.where('users.resident = ?', params[:resident])
+      puts 'users_r size:' + users_r.size.to_s
+    end
+    if !(params[:transfferred].blank?)
+      users_t = User.where('users.transfferred = ?', params[:transfferred])
+      puts 'users_t size:' + users_t.size.to_s
+    end
+    return (users_r & users_t)
+  end
+  
+  # 対象ユーザを判別し、対象となったユーザにリクエストをセットすると同時に、対象外のユーザはリセットする
+  def requestToTargetUsers
+    User.all.each do |user|
+      user.request_questionnaire = nil
+      user.save
+    end
+    self.extractTargetUsers.each do |user|
+      user.request_questionnaire = @request_questionnaire
+      user.save
+    end
+    #User.all.each do |user|
+    #  user.save
+    #end  
+  end
+  
 end

@@ -28,6 +28,12 @@
   <div><%= f.label :customer %><br />
   <%= f.collection_select( :customer_id, Customer.all, :id, :csname, :include_blank => true) %></div>
 
+  <div><%= f.label :resident %><br />
+  <%= f.check_box :resident %></div>
+
+  <div><%= f.label :transfferred %><br />
+  <%= f.check_box :transfferred %></div>
+
   <div><%= f.label :recent_project %><br />
   <%= f.text_field :recent_project %></div>
 

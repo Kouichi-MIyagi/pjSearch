@@ -1,13 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>User:</b>
-  <%= @request_questionnaire.user.user_name %>
-</p>
-
-<p>
-  <b>Questionnaire_id:</b>
-  <%= @request_questionnaire.questionnaire_id %>
+  <b>Title:</b>
+  <%= @request_questionnaire.questionnaire.title %>
 </p>
 
 <p>
@@ -19,6 +14,39 @@
   <b>Target month:</b>
   <%= @request_questionnaire.target_month %>
 </p>
+
+<p>
+  <b>resident:</b>
+  <% #@request_questionnaire.resident %>
+</p>
+
+<p>
+  <b>transfferred:</b>
+  <% #@request_questionnaire.transfferred %>
+</p>
+
+<p> for test </p>
+<table>
+  <tr>
+    <th>User ID</th>
+    <th>User Name</th>
+    <th>resident</th>
+    <th>transfferred</th>
+    <th>request</th>
+  </tr>
+
+<% User.all.each do | user | %>
+  <tr>
+    <td><%= user.user_id %></td>
+    <td><%= user.user_name %></td>
+    <td><%= user.resident %></td>
+    <td><%= user.transfferred %></td>
+    <td><%= user.request_questionnaire_id %></td>
+  </tr>
+<% end %>
+</table>
+
+
 
 
 <%= link_to 'Edit', edit_request_questionnaire_path(@request_questionnaire) %> |

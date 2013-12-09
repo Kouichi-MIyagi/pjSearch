@@ -12,22 +12,32 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_name %><br />
-    <%= @request_questionnaire.user.user_name %>
-  </div>
-  <div class="field">
-    <%= f.label :questionnaire_id %><br />
-    <%= f.number_field :questionnaire_id %>
+    <%= f.label :questionnaire_title %><br />
+    <%= f.collection_select( :questionnaire_id, Questionnaire.all, :id, :title, :include_blank => false) %></div>
   </div>
   <div class="field">
     <%= f.label :target_year %><br />
-    <%= f.number_field :target_year %>
+    <%= f.number_field :target_year, :in => 2013..2020 %>
   </div>
   <div class="field">
     <%= f.label :target_month %><br />
-    <%= f.number_field :target_month %>
+    <%= f.number_field :target_month, :in => 1..12 %>
   </div>
+
+  <p> target uses </p>
+  <div class="field">
+    resident<br />
+    <%= select_tag 'resident',  options_for_select({"" => "", "常駐者" => "t", "常駐者以外" => "f"})  %>
+  </div>
+  
+  <div class="field">
+    transfferred<br />
+    <%= select_tag 'transfferred',  options_for_select({"" => "", "出向者" => "t", "出向者以外" => "f"})  %>
+  </div>
+  
+  
   <div class="actions">
     <%= f.submit %>
   </div>
+  
 <% end %>
