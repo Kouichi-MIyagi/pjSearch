@@ -28,8 +28,8 @@ class ResponsesController < ApplicationController
   def new
     @response = Response.new
 	  @response.user_id = current_user.id
-	#  @response.customer_id = current_user
-	#  @response.pjName = current_user.lastPjName
+	  @response.customer_id = current_user.customer_id
+	  @response.pjName = current_user.recent_project
 	
 	  @current_request = current_request
 	  

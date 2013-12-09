@@ -1,26 +1,21 @@
 <p>
-  <b>User:</b>
-  <%= @response.user.email %>
+  <b>ユーザー名:</b>
+  <%= @response.user.user_name %>
 </p>
 
 <p>
-  <b>Customer:</b>
+  <b>顧客名:</b>
   <%= @response.customer.csname %>
 </p>
 
 <p>
-  <b>Pjname:</b>
+  <b>プロジェクト名:</b>
   <%= @response.pjName %>
 </p>
 
 <p>
-  <b>Targetyear:</b>
-  <%= @response.targetYear %>
-</p>
-
-<p>
-  <b>Targetmonth:</b>
-  <%= @response.targetMonth %>
+  <b>対象年月:</b>
+  <%= @response.targetYMD %>
 </p>
 
 <p>
