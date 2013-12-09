@@ -1,0 +1,49 @@
+<%= form_for(@questionitem) do |f| %>
+  <% if @questionitem.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@questionitem.errors.count, "error") %> prohibited this questionitem from being saved:</h2>
+
+      <ul>
+      <% @questionitem.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :質問 %><br />
+    <%= f.text_field :question %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :answer1 %>
+  </div>
+  <div class="field">
+    <%= f.label :選択肢内容1 %><br />
+    <%= f.text_field :answer1_item %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :answer2 %>
+  </div>
+  <div class="field">
+    <%= f.label :選択肢内容2 %><br />
+    <%= f.text_field :answer2_item %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :answer3 %>
+  </div>
+  <div class="field">
+    <%= f.label :選択肢内容3 %><br />
+    <%= f.text_field :answer3_item %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :answer4 %>
+  </div>
+  <div class="field">
+    <%= f.label :選択肢内容4 %><br />
+    <%= f.text_field :answer4_item %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,38 @@
+<%= form_for(@questionnaire) do |f| %>
+  <% if @questionnaire.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@questionnaire.errors.count, "error") %> prohibited this questionnaire from being saved:</h2>
+
+      <ul>
+      <% @questionnaire.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :タイトル %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :有効期限From %><br />
+    <%= f.date_select :effectiveFrom %>
+  </div>
+  <div class="field">
+    <%= f.label :有効期限To %><br />
+    <%= f.date_select :effectiveTo %>
+  </div>
+  
+  <% Questionitem.all.each do |qi| %>
+    <%= f.check_box :questionitem_ids, 
+      {:checked => @questionnaire.questionitems.include?(qi), 
+       :name => "questionnaire[questionitem_ids][]"}, qi.id, " " %>
+    <%= qi.question %>
+    <br>
+    <% end %>
+  <p>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

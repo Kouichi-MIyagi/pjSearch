@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @request_questionnaire.user.user_name %>
+</p>
+
+<p>
+  <b>Questionnaire_id:</b>
+  <%= @request_questionnaire.questionnaire_id %>
+</p>
+
+<p>
+  <b>Target year:</b>
+  <%= @request_questionnaire.target_year %>
+</p>
+
+<p>
+  <b>Target month:</b>
+  <%= @request_questionnaire.target_month %>
+</p>
+
+
+<%= link_to 'Edit', edit_request_questionnaire_path(@request_questionnaire) %> |
+<%= link_to 'Back', request_questionnaires_path %>

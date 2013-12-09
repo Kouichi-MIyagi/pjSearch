@@ -1,13 +1,12 @@
-<h1>Listing responses</h1>
+<h1>アンケート一覧</h1>
 
 <table>
   <tr>
-    <th>User</th>
-    <th>Customer</th>
-    <th>Pjname</th>
-    <th>Targetyear</th>
-    <th>Targetmonth</th>
-    <th>Comment</th>
+    <th>顧客名</th>
+    <th>プロジェクト名</th>
+    <th>対象年</th>
+    <th>対象月</th>
+    <th>コメント</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,8 +14,7 @@
 
 <% @responses.each do |response| %>
   <tr>
-    <td><%= response.user_id %></td>
-    <td><%= response.customer_id %></td>
+    <td><%= response.customer.csname %></td>
     <td><%= response.pjName %></td>
     <td><%= response.targetYear %></td>
     <td><%= response.targetMonth %></td>
