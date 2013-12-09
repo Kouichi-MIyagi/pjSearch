@@ -7,4 +7,8 @@ class Response < ActiveRecord::Base
   
   belongs_to :customer
   belongs_to :user
+  
+  def targetYMD
+    return targetYear.to_s + "/" + targetMonth.to_s
+  end
 end
