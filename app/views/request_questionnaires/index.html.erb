@@ -2,10 +2,9 @@
 
 <table>
   <tr>
-    <th>User</th>
     <th>Questionnaire</th>
-    <th>Target year</th>
-    <th>Target month</th>
+    <th>Target Year</th>
+    <th>Target Month</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,8 +12,7 @@
 
 <% @request_questionnaires.each do |request_questionnaire| %>
   <tr>
-    <td><%= request_questionnaire.user_id %></td>
-    <td><%= request_questionnaire.questionnaire_id %></td>
+    <td><%= request_questionnaire.questionnaire.title %></td>
     <td><%= request_questionnaire.target_year %></td>
     <td><%= request_questionnaire.target_month %></td>
     <td><%= link_to 'Show', request_questionnaire %></td>
