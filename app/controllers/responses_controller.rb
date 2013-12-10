@@ -58,6 +58,7 @@ class ResponsesController < ApplicationController
   # POST /responses.json
   def create
     @response = Response.new(params[:response])
+    @response.request_questionnaire = current_request
 
     respond_to do |format|
       if @response.save

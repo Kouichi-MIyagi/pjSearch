@@ -25,7 +25,29 @@
   <% #@request_questionnaire.transfferred %>
 </p>
 
-<p> for test </p>
+<p>
+  <b>mail_tilte:</b>
+  <%= @request_questionnaire.mail_tilte %>
+</p>
+<p>
+  <b>mail_banner:</b>
+  <%= @request_questionnaire.mail_banner %>
+</p>
+<p>
+  <b>mail_content:</b>
+  <%= @request_questionnaire.mail_content %>
+</p>
+<p>
+  <b>mail_trailer:</b>
+  <%= @request_questionnaire.mail_trailer %>
+</p>
+
+<p>
+  <b>day_of_mail_sent:</b>
+  <% @request_questionnaire.day_of_mail_sent %>
+</p>
+
+<p> <b>---- list of mail recievers below ----</b></p>
 <table>
   <tr>
     <th>User ID</th>
@@ -45,9 +67,12 @@
   </tr>
 <% end %>
 </table>
-
-
-
+<br />
+<%= form_for(@request_questionnaire, :url => {:action => 'sendRequestMail' + '/ ' + @request_questionnaire.id.to_s} ) do |f| %>
+  <div class="actions">
+    <%= f.submit '依頼メールを送信する' , data: { confirm: '対象者に依頼メールを送信していいですか?' } %>
+  </div>
+<% end %>
 
 <%= link_to 'Edit', edit_request_questionnaire_path(@request_questionnaire) %> |
 <%= link_to 'Back', request_questionnaires_path %>

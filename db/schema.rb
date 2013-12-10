@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131209085024) do
+ActiveRecord::Schema.define(:version => 20131210142900) do
 
   create_table "customers", :force => true do |t|
     t.string   "csname"
@@ -53,6 +53,11 @@ ActiveRecord::Schema.define(:version => 20131209085024) do
     t.integer  "target_month"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.string   "mail_tilte"
+    t.text     "mail_banner"
+    t.text     "mail_content"
+    t.text     "mail_trailer"
+    t.date     "day_of_mail_sent"
   end
 
   create_table "response_items", :force => true do |t|
@@ -73,8 +78,9 @@ ActiveRecord::Schema.define(:version => 20131209085024) do
     t.integer  "targetMonth"
     t.string   "comment"
     t.string   "attachedFile"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.integer  "request_questionnaire_id"
   end
 
   create_table "users", :force => true do |t|
