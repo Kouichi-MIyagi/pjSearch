@@ -47,14 +47,14 @@
     :port => 587,
     :domain => 'localhost',
     :authentication => :login,
-    :user_name => 'sankaikaz@gmail.com',
-    :password  => '1taka3kai'
+    :user_name => 'xxx@gmail.com',
+    :password  => 'ppppppp'
   }
   #config.action_mailer.smtp_settings = {
   #  :address => 'smtp.ogis-ri.co.jp',
   #  :port => 25,
   #  :authentication => :login,
-  #  :user_name => 'P9572843',
+  #  :user_name => 'P000000',
   #  :password => 'pppppppp',
   #}
 end
