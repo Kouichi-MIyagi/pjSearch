@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131209085024) do
+ActiveRecord::Schema.define(:version => 20131210050951) do
 
   create_table "customers", :force => true do |t|
     t.string   "csname"
@@ -58,11 +58,11 @@ ActiveRecord::Schema.define(:version => 20131209085024) do
   create_table "response_items", :force => true do |t|
     t.integer  "response_id"
     t.string   "question"
-    t.integer  "selectionNumber"
-    t.string   "selectionItem"
-    t.string   "Comment"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.integer  "selection_number"
+    t.string   "selection_item"
+    t.string   "comment"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "responses", :force => true do |t|
@@ -90,13 +90,13 @@ ActiveRecord::Schema.define(:version => 20131209085024) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
+    t.string   "user_id"
     t.string   "user_name"
     t.integer  "customer_id"
     t.string   "user_access"
     t.string   "recent_project"
     t.string   "recent_customer"
     t.string   "recent_resident"
-    t.string   "user_id"
     t.boolean  "resident"
     t.boolean  "transfferred"
     t.integer  "request_questionnaire_id"

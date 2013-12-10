@@ -37,8 +37,8 @@
 <% @response.response_items.each do |response_item| %>
   <tr>
     <td><%= response_item.question %></td>
-    <td><%= response_item.selectionItem %></td>
-    <td><%= response_item.Comment %></td>
+    <td><%= response_item.selection_item %></td>
+    <td><%= response_item.comment %></td>
     <td><%= link_to 'Show', response_item %></td>
     <td><%= link_to 'Edit', edit_response_item_path(response_item) %></td>
     <td><%= link_to 'Destroy', response_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
