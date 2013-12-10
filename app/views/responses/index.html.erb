@@ -28,4 +28,7 @@
 
 <br />
 
-<%= link_to 'New Response', new_response_path %>
+<% if current_user.requested? %>
+<%= link_to 'アンケートに回答する', new_response_path %>
+<% end %>
+
