@@ -1,8 +1,9 @@
 class RequestQuestionnaire < ActiveRecord::Base
-  attr_accessible :questionnaire_id, :target_month, :target_year, :user_id
+  attr_accessible :questionnaire_id, :target_month, :target_year, :user_id, :mail_tilte, :mail_banner, :mail_content, :mail_trailer, :day_of_mail_sent
   
   belongs_to :questionnaire
-  has_many :user
+  has_many :users
+  has_many :responces
 
   # 現在のアンケート依頼を返す。
   def self.current_request

@@ -1,6 +1,10 @@
 <h1>客先みえるくん　メインメニュー</h1>
 <br>
-<p><%= link_to 'アンケート回答', new_response_path %></p>
+<% if current_user.requested? %>
+  <p><%= link_to 'アンケートに回答する', new_response_path %></p>
+<% else %>
+  <p>現在、アンケート依頼はありません</p>
+<% end %>
 <p><%= link_to 'アンケート一覧', responses_path %></p>
 <br>
 <br>
