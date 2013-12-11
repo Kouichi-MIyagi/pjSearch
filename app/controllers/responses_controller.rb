@@ -4,8 +4,11 @@ class ResponsesController < ApplicationController
   def index
 
     if params[:request_id].nil?    
-      @responses = Response.all
+    #  @responses = Response.all
+	   # ログインしたユーザーの回答一覧
+       @responses = Response.where("user_id = ?", current_user.id)
     else
+	  # アンケート依頼に対する回答一覧
       request = RequestQuestionnaire.find(params[:request_id])
       if request
         @responses = request.responses
