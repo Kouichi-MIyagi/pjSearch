@@ -54,7 +54,7 @@
     :address => 'smtp.ogis-ri.co.jp',
     :port => 25,
     :authentication => :login,
-    :user_name => 'P9572843',
-    :password => '3kai1taka',
+    :user_name => 'P0000000',
+    :password => 'pppppppppp',
   }
 end
