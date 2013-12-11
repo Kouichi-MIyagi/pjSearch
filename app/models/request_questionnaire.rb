@@ -3,7 +3,7 @@ class RequestQuestionnaire < ActiveRecord::Base
   
   belongs_to :questionnaire
   has_many :users
-  has_many :responces
+  has_many :responses
 
   # 現在のアンケート依頼を返す。
   def self.current_request

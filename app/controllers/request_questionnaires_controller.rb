@@ -105,11 +105,9 @@ class RequestQuestionnairesController < ApplicationController
     
     if !(params[:resident].blank?)
       users_r = User.where('users.resident = ?', params[:resident])
-      puts 'users_r size:' + users_r.size.to_s
     end
     if !(params[:transfferred].blank?)
-      users_t = User.where(users.transfferred = ?', params[:transfferred])
-      puts 'users_t size:' + users_t.size.to_s
+      users_t = User.where('users.transfferred = ?', params[:transfferred])
     end
     return (users_r & users_t)
   end

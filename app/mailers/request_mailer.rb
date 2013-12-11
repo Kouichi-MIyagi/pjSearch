@@ -13,7 +13,7 @@ class RequestMailer < ActionMailer::Base
     @mail_content = request_questionnaire.mail_content
     @mail_trailer = request_questionnaire.mail_trailer
 
-    mail to: "sankaikaz@gmail.com", subject: request_questionnaire.mail_tilte
+    mail to: "Tamura_Tetsuya@ogis-ri.co.jp", subject: request_questionnaire.mail_tilte #,  bcc: list_of_recievers
     
   end
 end

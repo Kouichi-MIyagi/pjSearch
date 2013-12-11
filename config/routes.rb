@@ -2,6 +2,8 @@ PjSearch::Application.routes.draw do
   
   match 'request_questionnaires/sendRequestMail/:id' => 'request_questionnaires#sendRequestMail'
  
+  match 'responses/index/:request_id' => 'responses#index'
+  
   resources :request_questionnaires
 
   resources :questionitems
