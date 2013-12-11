@@ -1,15 +1,20 @@
 <h1>客先みえるくん　メインメニュー</h1>
 <br>
+<% if current_user.request_questionnaire == nil then %>
+<p>アンケート回答</p>
+<% else %>
 <p><%= link_to 'アンケート回答', new_response_path %></p>
+<% end %>
 <p><%= link_to 'アンケート一覧', responses_path %></p>
 <br>
 <br>
 <b>マスタ管理</b>
 <br>
-<p><%= link_to '顧客管理', customers_path %></p>
-<p><%= link_to 'アンケート管理', questionnaires_path %></p>
-<p><%= link_to '質問項目管理', questionitems_path %></p>
 <p><%= link_to 'アンケート依頼実績作成', request_questionnaires_path %><p>
+<p><%= link_to '質問項目管理', questionitems_path %></p>
+<p><%= link_to 'アンケート管理', questionnaires_path %></p>
+<p><%= link_to '管理部門トピック作成', topics_path %><p>
+<p><%= link_to '顧客管理', customers_path %></p>
 <br>
 <br>
 <br><%= link_to 'プロファイル', edit_user_registration_path %>

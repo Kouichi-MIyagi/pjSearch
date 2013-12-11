@@ -58,7 +58,10 @@ class ResponsesController < ApplicationController
   # POST /responses.json
   def create
     @response = Response.new(params[:response])
-
+    #アンケート依頼との関連をはずす
+	  current_user.request_questionnaire = nil
+      current_user.save
+	  
     respond_to do |format|
       if @response.save
         format.html { redirect_to @response, notice: 'Response was successfully created.' }
@@ -92,7 +95,10 @@ class ResponsesController < ApplicationController
     @response = Response.find(params[:id])
     @response.response_items.destroy
     @response.destroy
-
+    #アンケート依頼状態に戻す
+	current_user.request_questionnaire = @request_questionnaire
+    current_user.save
+	
     respond_to do |format|
       format.html { redirect_to responses_url }
       format.json { head :no_content }
