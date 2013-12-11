@@ -5,8 +5,13 @@ class ResponsesController < ApplicationController
 
     if params[:request_id].nil?    
     #  @responses = Response.all
-	   # ログインしたユーザーの回答一覧
-       @responses = Response.where("user_id = ?", current_user.id)
+	  if current_user.isAdmin?
+	    # 管理者は全て表示する
+	    @responses = Response.all
+	  else
+	    # ログインしたユーザーの回答一覧
+        @responses = Response.where("user_id = ?", current_user.id)
+	  end
     else
 	  # アンケート依頼に対する回答一覧
       request = RequestQuestionnaire.find(params[:request_id])
