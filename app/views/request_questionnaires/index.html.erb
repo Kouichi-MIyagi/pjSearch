@@ -16,12 +16,12 @@
     <td><%= request_questionnaire.target_year %></td>
     <td><%= request_questionnaire.target_month %></td>
     <td><%= link_to 'Show', request_questionnaire %></td>
+    <td><%= link_to 'List Response', list_responses_path(request_questionnaire) %></td>
     <td><%= link_to 'Edit', edit_request_questionnaire_path(request_questionnaire) %></td>
     <td><%= link_to 'Destroy', request_questionnaire, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
-
 <br />
 
 <%= link_to 'New Request questionnaire', new_request_questionnaire_path %>

@@ -2,8 +2,17 @@ class ResponsesController < ApplicationController
   # GET /responses
   # GET /responses.json
   def index
-    @responses = Response.all
 
+    if params[:request_id].nil?    
+      @responses = Response.all
+    else
+      request = RequestQuestionnaire.find(params[:request_id])
+      if request
+        @responses = request.responses
+      else
+        @responses = Array new
+      end
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @responses }
