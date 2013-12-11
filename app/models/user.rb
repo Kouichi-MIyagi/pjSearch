@@ -35,4 +35,8 @@
     end
   end
   
+  def requested?
+    return !(self.request_questionnaire.nil?)
+  end
+  
 end

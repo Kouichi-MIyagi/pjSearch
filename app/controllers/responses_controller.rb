@@ -2,8 +2,17 @@ class ResponsesController < ApplicationController
   # GET /responses
   # GET /responses.json
   def index
-    @responses = Response.all
 
+    if params[:request_id].nil?    
+      @responses = Response.all
+    else
+      request = RequestQuestionnaire.find(params[:request_id])
+      if request
+        @responses = request.responses
+      else
+        @responses = Array new
+      end
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @responses }
@@ -58,7 +67,7 @@ class ResponsesController < ApplicationController
   # POST /responses.json
   def create
     @response = Response.new(params[:response])
-    #アンケート依頼との関連をはずす
+    @response.request_questionnaire = current_request
 	  current_user.request_questionnaire = nil
       current_user.save
 	  

@@ -40,4 +40,21 @@
   
   # 2013/11/28 for User by Miyagi
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.smtp_settings = {
+  #  :address => 'smtp.gmail.com',
+  #  :port => 587,
+  #  :domain => 'localhost',
+  #  :authentication => :login,
+  #  :user_name => 'xxx@gmail.com',
+  #  :password  => 'ppppppp'
+  #}
+  config.action_mailer.smtp_settings = {
+    :address => 'smtp.ogis-ri.co.jp',
+    :port => 25,
+    :authentication => :login,
+    :user_name => 'P0000000',
+    :password => 'pppppppppp',
+  }
 end

@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>回答者名</th>
     <th>顧客名</th>
     <th>プロジェクト名</th>
     <th>対象年</th>
@@ -14,6 +15,7 @@
 
 <% @responses.each do |response| %>
   <tr>
+    <td><%= response.user.user_name %></td>
     <td><%= response.customer.csname %></td>
     <td><%= response.pjName %></td>
     <td><%= response.targetYear %></td>
@@ -28,4 +30,9 @@
 
 <br />
 
-<%#= link_to 'New Response', new_response_path %>
+<% if current_user.requested? %>
+  <%= link_to 'アンケートに回答する', new_response_path %>
+<% else %>
+  <p>現在、アンケート依頼はありません</p>
+<% end %>
+

@@ -85,23 +85,34 @@ class RequestQuestionnairesController < ApplicationController
     end
   end
   
-  # ‰æ–Ê‚Åw¦‚³‚ê‚½‘ÎÛ‚Ìƒ†[ƒU‚ğ’Šo‚·‚é
+  # PUT /request_questionnaires/sendRequestMail
+  # ä¾é ¼ãƒ¡ãƒ¼ãƒ«ã‚’é€ä¿¡ã™ã‚‹ã€‚
+  def sendRequestMail
+    @request_questionnaire = RequestQuestionnaire.find(params[:id])
+    @request_questionnaire.day_of_mail_sent = Date.today
+    @request_questionnaire.save
+
+    @mail = RequestMailer.sendRequestMail(@request_questionnaire).deliver
+
+    render :text => 'mail sent'
+    
+  end
+
+  # ç”»é¢ã§æŒ‡ç¤ºã•ã‚ŒãŸå¯¾è±¡ã®ãƒ¦ãƒ¼ã‚¶ã‚’æŠ½å‡ºã™ã‚‹
   def extractTargetUsers
     users_r = User.all
     users_t = users_r.dup
     
     if !(params[:resident].blank?)
       users_r = User.where('users.resident = ?', params[:resident])
-      puts 'users_r size:' + users_r.size.to_s
     end
     if !(params[:transfferred].blank?)
-      users_t = User.where(users.transfferred = ?', params[:transfferred])
-      puts 'users_t size:' + users_t.size.to_s
+      users_t = User.where('users.transfferred = ?', params[:transfferred])
     end
     return (users_r & users_t)
   end
   
-  # ‘ÎÛƒ†[ƒU‚ğ”»•Ê‚µA‘ÎÛ‚Æ‚È‚Á‚½ƒ†[ƒU‚ÉƒŠƒNƒGƒXƒg‚ğƒZƒbƒg‚·‚é‚Æ“¯‚ÉA‘ÎÛŠO‚Ìƒ†[ƒU‚ÍƒŠƒZƒbƒg‚·‚é
+  # å¯¾è±¡ãƒ¦ãƒ¼ã‚¶ã‚’åˆ¤åˆ¥ã—ã€å¯¾è±¡ã¨ãªã£ãŸãƒ¦ãƒ¼ã‚¶ã«ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’ã‚»ãƒƒãƒˆã™ã‚‹ã¨åŒæ™‚ã«ã€å¯¾è±¡å¤–ã®ãƒ¦ãƒ¼ã‚¶ã¯ãƒªã‚»ãƒƒãƒˆã™ã‚‹
   def requestToTargetUsers
     User.all.each do |user|
       user.request_questionnaire = nil
