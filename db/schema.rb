@@ -63,11 +63,11 @@ ActiveRecord::Schema.define(:version => 20131210142900) do
   create_table "response_items", :force => true do |t|
     t.integer  "response_id"
     t.string   "question"
-    t.integer  "selectionNumber"
-    t.string   "selectionItem"
-    t.string   "Comment"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.integer  "selection_number"
+    t.string   "selection_item"
+    t.string   "comment"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "responses", :force => true do |t|
@@ -81,6 +81,13 @@ ActiveRecord::Schema.define(:version => 20131210142900) do
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
     t.integer  "request_questionnaire_id"
+  end
+
+  create_table "topics", :force => true do |t|
+    t.string   "contents"
+    t.date     "effective_to"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "users", :force => true do |t|

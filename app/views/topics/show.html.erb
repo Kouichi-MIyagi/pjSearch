@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Contents:</b>
+  <%= @topic.contents %>
+</p>
+
+<p>
+  <b>Effective to:</b>
+  <%= @topic.effective_to %>
+</p>
+
+
+<%= link_to 'Edit', edit_topic_path(@topic) %> |
+<%= link_to 'Back', topics_path %>

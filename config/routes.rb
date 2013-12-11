@@ -4,6 +4,9 @@ PjSearch::Application.routes.draw do
  
   match 'responses/index/:request_id' => 'responses#index'
   
+  resources :topics
+
+
   resources :request_questionnaires
 
   resources :questionitems
