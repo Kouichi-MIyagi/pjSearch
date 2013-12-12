@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131210142900) do
+ActiveRecord::Schema.define(:version => 20131212023252) do
 
   create_table "customers", :force => true do |t|
     t.string   "csname"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20131210142900) do
     t.boolean  "resident"
     t.boolean  "transfferred"
     t.integer  "request_questionnaire_id"
+    t.string   "role"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
