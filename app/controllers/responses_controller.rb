@@ -3,6 +3,9 @@ class ResponsesController < ApplicationController
   # GET /responses.json
   def index
 
+    @searched = Hash.new()
+    session[:searched] = @searched
+	
     if params[:request_id].nil?    
     #  @responses = Response.all
 	  if current_user.isAdmin?
@@ -21,6 +24,29 @@ class ResponsesController < ApplicationController
         @responses = Array new
       end
     end
+	
+	if !params[:search].nil?
+	# 検索ボタン押下時：画面入力された条件のセッションへの保存
+      params[:search].each do | key, value |
+      @searched.store(key, value)
+      end
+	end
+		
+	# 検索条件が指定されていれば、抽出条件としてwhere句を追加
+    # プロジェクト名
+    if !(@searched.fetch('pjName', nil).blank?)
+      @responses = Response.where('responses.pjName like ?', "%" + @searched.fetch('pjName')+ "%")
+    end
+    # 対象年
+    if !(@searched.fetch('targetYear', nil).blank?)
+      @responses = Response.where('responses.targetYear = ?', @searched.fetch('targetYear'))
+    end
+    # 対象月
+    if !(@searched.fetch('targetMonth', nil).blank?)
+      @responses = Response.where('responses.targetMonth = ?', @searched.fetch('targetMonth'))
+    end
+
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @responses }
