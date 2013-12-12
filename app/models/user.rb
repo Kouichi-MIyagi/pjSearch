@@ -43,4 +43,12 @@
     return !(self.request_questionnaire.nil?)
   end
   
+  def isAdmin?
+    return self.role == 'admin' ?  true : false;
+  end
+  
+  def isAuthor?
+    return !isAdmin?
+  end
+  
 end

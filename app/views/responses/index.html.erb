@@ -1,5 +1,21 @@
-<h1>アンケート一覧</h1>
-
+<h1>アンケート回答結果一覧</h1>
+<h3><b>検索条件</b></h3>
+<%= form_tag "/responses/index" do %>
+<table id = "square">
+  <tr>
+    <td>プロジェクト名   </td>
+    <td><%= text_field :search, :pjName, :value => @searched.fetch('pjName', "") %><br /></td></tr>
+  <tr>
+    <td>対象年   </td>
+    <td><%= number_field :search, :targetYear, :value => @searched.fetch('targetYear', "") %><br /></td>
+    <td>対象月   </td>
+    <td><%= number_field :search, :targetMonth, :value => @searched.fetch('targetMonth', "") %><br /></td>
+  </tr>
+</table>
+<%= submit_tag "検索" %>
+<br />
+<br />
+<% end %>
 <table>
   <tr>
     <th>回答者名</th>
@@ -27,6 +43,7 @@
   </tr>
 <% end %>
 </table>
+<%= will_paginate @responses, :previous_label=>'≪前', :next_label=>'次≫' %>
 
 <br />
 

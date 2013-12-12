@@ -40,3 +40,5 @@ gem 'jquery-rails'
 gem 'devise'
 
 gem 'cancan'
+
+gem 'will_paginate'
