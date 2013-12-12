@@ -3,25 +3,6 @@ class ResponsesController < ApplicationController
   # GET /responses.json
   def index
 
-    if params[:request_id].nil?    
-    # アンケート依頼に対する回答一覧以外（通常はこちら）
-      if current_user.isAdmin?
-	  # 管理者は全て表示する
-	    @responses = Response.all
-	  else
-	  # ログインしたユーザーの回答一覧
-        @responses = Response.where("user_id = ?", current_user.id)
-	  end
-    else
-	# アンケート依頼に対する回答一覧
-      request = RequestQuestionnaire.find(params[:request_id])
-      if request
-        @responses = request.responses
-      else
-        @responses = Array new
-      end
-    end
-
     if params[:page].nil?
     # 検索条件の設定
     # ページ繰り以外
@@ -40,10 +21,30 @@ class ResponsesController < ApplicationController
       @searched = session[:searched]
 	end
 	
+    if params[:request_id].nil?    
+    # アンケート依頼に対する回答一覧以外（通常はこちら）
+	  @responses = Response.all
+      if current_user.isAuthor?
+        @searched.store('user_id', current_user.id)
+	  end
+    else
+	# アンケート依頼に対する回答一覧
+      request = RequestQuestionnaire.find(params[:request_id])
+      if request
+        @responses = request.responses
+      else
+        @responses = Array new
+      end
+    end
+	
 	# まずはページングを指示
     @responses = Response.paginate(:page => params[:page], :per_page => 10)
-	
+
 	# 検索条件が指定されていれば、抽出条件としてwhere句を追加
+    # ユーザーID
+    if !(@searched.fetch('user_id', nil).blank?)
+      @responses = @responses.where('responses.user_id = ?', @searched.fetch('user_id'))
+    end
     # プロジェクト名
     if !(@searched.fetch('pjName', nil).blank?)
       @responses = @responses.where('responses.pjName like ?', "%" + @searched.fetch('pjName')+ "%")

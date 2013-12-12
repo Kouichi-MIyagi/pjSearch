@@ -44,8 +44,11 @@
   end
   
   def isAdmin?
-    #roleで判断するよう修正要（とりあえず常駐でもなく、出向している人以外は管理者とみなす）
-    return !(self.resident || self.transfferred)
+    return self.role == 'admin' ?  true : false;
+  end
+  
+  def isAuthor?
+    return !isAdmin?
   end
   
 end
