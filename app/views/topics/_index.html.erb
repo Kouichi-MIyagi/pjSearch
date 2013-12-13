@@ -1,0 +1,15 @@
+﻿<table border=1>
+  <tr>
+    <th>お知らせ</th>
+    <th>期　　限</th>
+  </tr>
+
+<% @topics.each do |topic| %>
+  <% if topic.effective_to > Date.today %>
+  <tr>
+    <td><%= topic.contents %></td>
+    <td><%= topic.effective_to %></td>
+  </tr>
+  <% end %>
+<% end %>
+</table>
