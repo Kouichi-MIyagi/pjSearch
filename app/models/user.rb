@@ -51,4 +51,18 @@
     return !isAdmin?
   end
   
+  # CSVアップロード
+  def self.from_csv(anArray)
+    u = new
+    u.role  = 'author'
+    u.email  = anArray[0]
+    u.password  = anArray[1]
+    u.user_name = anArray[2].to_s.encode('utf-8', 'sjis')
+    u.recent_project = anArray[3].to_s.encode('utf-8', 'sjis')
+    u.recent_customer = anArray[4].to_s.encode('utf-8', 'sjis')
+    u.user_id  = anArray[5]
+	anArray[6].to_s == '1' ? u.resident = true : u.resident = false
+	anArray[7].to_s.encode('utf-8', 'sjis') == '出向' ? u.transfferred = true : u.transfferred = false
+    return u    	
+  end  
 end

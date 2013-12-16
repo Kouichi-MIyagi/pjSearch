@@ -20,7 +20,13 @@
 <p><%= link_to 'アンケート管理', questionnaires_path %></p>
 <p><%= link_to '管理部門トピック作成', topics_path %><p>
 <p><%= link_to '顧客管理', customers_path %></p>
-
+<br/>
+<%= form_tag 'user/upload', :multipart => true do %>
+  ユーザー一括登録:（*.csv）
+  <%= file_field_tag 'upload_file', :accept => 'text/comma-separated-values' %>
+  <%= submit_tag "アップロード", :confirm => "アップロードしてよろしいですか？" %>
+<% end %>
+<br/>
 <br>
 <br>
 <br><%= link_to 'プロファイル', edit_user_registration_path %>

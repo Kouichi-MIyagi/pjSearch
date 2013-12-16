@@ -1,11 +1,10 @@
 PjSearch::Application.routes.draw do
   
   match 'request_questionnaires/sendRequestMail/:id' => 'request_questionnaires#sendRequestMail'
- 
   match 'responses/index/:request_id' => 'responses#index'
+  match 'user/upload' => 'menu#upload'
   
   resources :topics
-
 
   resources :request_questionnaires
 
