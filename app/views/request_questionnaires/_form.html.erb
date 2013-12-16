@@ -27,12 +27,12 @@
   <p><b> target uses</b> </p>
   <div class="field">
     resident<br />
-    <%= select_tag 'resident',  options_for_select({"" => "", "常駐者" => "t", "常駐者以外" => "f"})  %>
+    <%= f.select :resident,  options_for_select({"" => "", "常駐者" => "t", "常駐者以外" => "f"})  %>
   </div>
   
   <div class="field">
     transfferred<br />
-    <%= select_tag 'transfferred',  options_for_select({"" => "", "出向者" => "t", "出向者以外" => "f"})  %>
+    <%= f.select :transfferred,  options_for_select({"" => "", "出向者" => "t", "出向者以外" => "f"})  %>
 	  </div>
   <p><b> mail template</b> </p>
   <div class="field">
