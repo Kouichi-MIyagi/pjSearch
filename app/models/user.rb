@@ -60,6 +60,12 @@
     u.user_name = anArray[2].to_s.encode('utf-8', 'sjis')
     u.recent_project = anArray[3].to_s.encode('utf-8', 'sjis')
     u.recent_customer = anArray[4].to_s.encode('utf-8', 'sjis')
+	cu = Customer.where("csname = ?", u.recent_customer).first
+	if !cu == nil 
+	  u.customer_id = cu.id
+	else
+	  puts 'customer is nil !!'
+	end
     u.user_id  = anArray[5]
 	anArray[6].to_s == '1' ? u.resident = true : u.resident = false
 	anArray[7].to_s.encode('utf-8', 'sjis') == '出向' ? u.transfferred = true : u.transfferred = false
