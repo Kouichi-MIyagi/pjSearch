@@ -91,10 +91,10 @@ class RequestQuestionnairesController < ApplicationController
     @request_questionnaire = RequestQuestionnaire.find(params[:id])
     @request_questionnaire.day_of_mail_sent = Date.today
     @request_questionnaire.save
+    
+    RequestMailer.sendRequestMail(@request_questionnaire, @request_questionnaire.collectMailAddrs).deliver
 
-    @mail = RequestMailer.sendRequestMail(@request_questionnaire).deliver
-
-    render :text => 'mail sent'
+    render :text => "Request mail sent!  bcc are : " + @request_questionnaire.collectMailAddrs
     
   end
 

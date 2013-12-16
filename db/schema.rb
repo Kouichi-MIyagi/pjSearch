@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131212023252) do
+ActiveRecord::Schema.define(:version => 20131216012823) do
 
   create_table "customers", :force => true do |t|
     t.string   "csname"
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(:version => 20131212023252) do
     t.text     "mail_content"
     t.text     "mail_trailer"
     t.date     "day_of_mail_sent"
+    t.string   "resident"
+    t.string   "transfferred"
   end
 
   create_table "response_items", :force => true do |t|
