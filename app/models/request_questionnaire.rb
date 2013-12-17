@@ -17,7 +17,6 @@ class RequestQuestionnaire < ActiveRecord::Base
     self.users.each do | user |
       destination = destination + user.email + ';'
     end
-    puts destination
     return destination
   end
   

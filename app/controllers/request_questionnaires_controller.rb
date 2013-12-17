@@ -103,13 +103,23 @@ class RequestQuestionnairesController < ApplicationController
     users_r = User.all
     users_t = users_r.dup
     
+    # 常駐か否かの観点で絞り込み
     if !(params[:resident].blank?)
       users_r = User.where('users.resident = ?', params[:resident])
     end
+
+    # 出向か否かの観点で絞り込み
     if !(params[:transfferred].blank?)
       users_t = User.where('users.transfferred = ?', params[:transfferred])
     end
-    return (users_r & users_t)
+    
+    # 常駐と出向のアンド条件
+    requested = (users_r & users_t)
+    
+    # 対象者の中からシステム管理者を除く
+    requested.delete_if {| user | user.isAdmin? }
+    
+    return requested
   end
   
   # 対象ユーザを判別し、対象となったユーザにリクエストをセットすると同時に、対象外のユーザはリセットする
