@@ -1,11 +1,9 @@
 PjSearch::Application.routes.draw do
   
   match 'request_questionnaires/sendRequestMail/:id' => 'request_questionnaires#sendRequestMail'
- 
   match 'responses/index/:request_id' => 'responses#index'
-  
-  resources :topics
 
+  resources :topics
 
   resources :request_questionnaires
 
@@ -13,8 +11,16 @@ PjSearch::Application.routes.draw do
 
   resources :questionnaires
 
-  devise_for :users
-  #get "menu/index"
+  devise_for :users, :controllers => {
+  :sessions      => 'users/sessions',
+  :registrations => 'users/registrations',
+  :passwords     => 'users/passwords'
+}
+
+  devise_scope :user do
+    match 'user/upload' => 'users/registrations#upload'
+    match 'user/index' => 'users/registrations#index'
+  end
 
   root :to => 'menu#index'
   
