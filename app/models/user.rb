@@ -61,10 +61,10 @@
     u.recent_project = anArray[3].to_s.encode('utf-8', 'sjis')
     u.recent_customer = anArray[4].to_s.encode('utf-8', 'sjis')
 	cu = Customer.where("csname = ?", u.recent_customer).first
-	if !cu == nil 
-	  u.customer_id = cu.id
+	if cu.blank? 
+	  puts u.recent_customer
 	else
-	  puts 'customer is nil !!'
+	  u.customer_id = cu.id
 	end
     u.user_id  = anArray[5]
 	anArray[6].to_s == '1' ? u.resident = true : u.resident = false

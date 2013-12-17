@@ -33,7 +33,7 @@
 	    CSV.parse(reader) do |row|
 	      u = User.from_csv(row)
 		  current_u = User.where("user_id = ?", u.user_id).first
-		  if current_u == nil
+		  if current_u.blank?
 		  #ユーザーテーブルにＣＳＶファイルの内容でｉｎｓｅｒｔ
 	        u.save()
 		  else
