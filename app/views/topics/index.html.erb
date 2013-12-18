@@ -6,22 +6,28 @@
     <th>Contents</th>
     <th>Effective to</th>
     <th></th>
-    <th></th>
-    <th></th>
+    <% if can? :update,@topics %>
+      <th></th>
+      <th></th>
+    <% end %>
   </tr>
 
 <% @topics.each do |topic| %>
   <tr>
-    <td><%= topic.title %></td>
-    <td><%= topic.contents %></td>
+    <td><%= simple_format(topic.title) %></td>
+    <td><%= simple_format(topic.contents) %></td>
     <td><%= topic.effective_to %></td>
     <td><%= link_to 'Show', topic %></td>
-    <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
-    <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% if can? :update,@topics %>
+      <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
+      <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
+<% if can? :update,@topics %>
 <%= link_to 'New Topic', new_topic_path %>
+<% end %>
