@@ -1,15 +1,13 @@
 ﻿<table border=1>
   <tr>
     <th>タイトル</th>
-    <th>詳細</th>
     <th>期　　限</th>
   </tr>
 
 <% @topics.each do |topic| %>
   <% if topic.effective_to > Date.today %>
   <tr>
-    <td><%= topic.title %></td>
-    <td><%= link_to 'Show', topic %></td>
+    <td><%= link_to topic.title, topic %></td>
     <td><%= topic.effective_to %></td>
   </tr>
   <% end %>
