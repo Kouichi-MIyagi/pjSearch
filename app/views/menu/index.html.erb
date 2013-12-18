@@ -11,6 +11,7 @@
 <% end %>
 <p><%= link_to 'アンケート回答結果一覧', responses_path %></p>
 
+<% if can? :update,@menus %>
 
 <hr>
 <b>マスタ管理</b>
@@ -21,5 +22,7 @@
 <p><%= link_to '管理部門トピック作成', topics_path %><p>
 <p><%= link_to '顧客管理', customers_path %></p>
 <p><%= link_to 'ユーザー管理', list_users_path %></p>
-<br>
+
+<% end %>
+
 <br><%= link_to 'プロファイル', edit_user_registration_path %>

@@ -1,7 +1,8 @@
-<h1>Listing topics</h1>
+﻿<h1>Listing topics</h1>
 
 <table>
   <tr>
+    <th>Title</th>
     <th>Contents</th>
     <th>Effective to</th>
     <th></th>
@@ -11,6 +12,7 @@
 
 <% @topics.each do |topic| %>
   <tr>
+    <td><%= topic.title %></td>
     <td><%= topic.contents %></td>
     <td><%= topic.effective_to %></td>
     <td><%= link_to 'Show', topic %></td>

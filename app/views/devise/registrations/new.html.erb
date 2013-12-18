@@ -30,6 +30,9 @@
   <div><%= f.label :recent_resident %><br />
   <%= f.text_field :recent_resident %></div>
 
+  <div><%= f.label :role %>
+  <%= f.collection_select :role, User::ROLES, :to_s, :humanize%></div>
+
   <div><%= f.submit "Sign up" %></div>
 <% end %>
 
