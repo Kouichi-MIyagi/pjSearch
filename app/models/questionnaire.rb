@@ -1,5 +1,5 @@
 class Questionnaire < ActiveRecord::Base
-  attr_accessible :id, :effectiveFrom, :effectiveTo, :title,
+  attr_accessible :id, :effective_from, :effective_to, :title,
       :questionitems, :questionitem_ids
   
   has_and_belongs_to_many :questionitems

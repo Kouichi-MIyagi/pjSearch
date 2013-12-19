@@ -46,16 +46,16 @@ class ResponsesController < ApplicationController
       @responses = @responses.where('responses.user_id = ?', @searched.fetch('user_id'))
     end
     # プロジェクト名
-    if !(@searched.fetch('pjName', nil).blank?)
-      @responses = @responses.where('responses.pjName like ?', "%" + @searched.fetch('pjName')+ "%")
+    if !(@searched.fetch('pj_name', nil).blank?)
+      @responses = @responses.where('responses.pj_name like ?', "%" + @searched.fetch('pj_name')+ "%")
     end
     # 対象年
-    if !(@searched.fetch('targetYear', nil).blank?)
-      @responses = @responses.where('responses.targetYear = ?', @searched.fetch('targetYear'))
+    if !(@searched.fetch('target_year', nil).blank?)
+      @responses = @responses.where('responses.target_year = ?', @searched.fetch('target_year'))
     end
     # 対象月
-    if !(@searched.fetch('targetMonth', nil).blank?)
-      @responses = @responses.where('responses.targetMonth = ?', @searched.fetch('targetMonth'))
+    if !(@searched.fetch('target_month', nil).blank?)
+      @responses = @responses.where('responses.target_month = ?', @searched.fetch('target_month'))
     end
 
     respond_to do |format|
@@ -68,9 +68,7 @@ class ResponsesController < ApplicationController
   # GET /responses/1.json
   def show
     @response = Response.find(params[:id])
-	# 直近のアンケート依頼のとり方は修正が必要
-	  current_request 
-	  
+	
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @response }
@@ -83,14 +81,14 @@ class ResponsesController < ApplicationController
     @response = Response.new
 	  @response.user_id = current_user.id
 	  @response.customer_id = current_user.customer_id
-	  @response.pjName = current_user.recent_project
-	
-	  current_request
+	  @response.pj_name = current_user.recent_project
+	  @response.request_questionnaire_id =  current_user.request_questionnaire.id
+	  @response.questionnaire_id =  current_user.request_questionnaire.questionnaire_id
 	  
-	  @response.targetYear = @current_request.target_year
-	  @response.targetMonth = @current_request.target_month
+	  @response.target_year = current_user.request_questionnaire.target_year
+	  @response.target_month = current_user.request_questionnaire.target_month
 	  
-	  @current_request.questionnaire.questionitems.each do |item|
+      current_user.request_questionnaire.questionnaire.questionitems.each do |item|
 	    responce_item = ResponseItem.new
 		responce_item.question = item.question
 		@response.response_items << responce_item
@@ -105,17 +103,16 @@ class ResponsesController < ApplicationController
   # GET /responses/1/edit
   def edit
     @response = Response.find(params[:id])
-	  current_request
   end
 
   # POST /responses
   # POST /responses.json
   def create
     @response = Response.new(params[:response])
-    @response.request_questionnaire = current_request
-	# アンケートに回答しても、回答依頼との関係をはずさない
-	#  current_user.request_questionnaire = nil
-    #  current_user.save
+    @response.request_questionnaire =  current_user.request_questionnaire
+    @response.questionnaire =  current_user.request_questionnaire.questionnaire
+	  current_user.request_questionnaire = nil
+      current_user.save
 	  
     respond_to do |format|
       if @response.save
@@ -148,18 +145,14 @@ class ResponsesController < ApplicationController
   # DELETE /responses/1.json
   def destroy
     @response = Response.find(params[:id])
-    @response.response_items.destroy
+    # 回答削除時は前のアンケートを結びつける（新たにアンケート依頼がきた時の考慮がない）
+	current_user.request_questionnaire = @response.request_questionnaire
     @response.destroy
-    #アンケートに回答しても、回答依頼との関係をはずさないので、コメントアウト
-	#current_user.request_questionnaire = @request_questionnaire
-    #current_user.save
+    current_user.save
 	
     respond_to do |format|
       format.html { redirect_to responses_url }
       format.json { head :no_content }
     end
-  end
-  def current_request
-    @current_request = current_user.request_questionnaire
   end
 end
