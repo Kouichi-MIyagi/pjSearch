@@ -113,8 +113,9 @@ class ResponsesController < ApplicationController
   def create
     @response = Response.new(params[:response])
     @response.request_questionnaire = current_request
-	  current_user.request_questionnaire = nil
-      current_user.save
+	# アンケートに回答しても、回答依頼との関係をはずさない
+	#  current_user.request_questionnaire = nil
+    #  current_user.save
 	  
     respond_to do |format|
       if @response.save
@@ -149,9 +150,9 @@ class ResponsesController < ApplicationController
     @response = Response.find(params[:id])
     @response.response_items.destroy
     @response.destroy
-    #アンケート依頼状態に戻す
-	current_user.request_questionnaire = @request_questionnaire
-    current_user.save
+    #アンケートに回答しても、回答依頼との関係をはずさないので、コメントアウト
+	#current_user.request_questionnaire = @request_questionnaire
+    #current_user.save
 	
     respond_to do |format|
       format.html { redirect_to responses_url }
@@ -159,7 +160,6 @@ class ResponsesController < ApplicationController
     end
   end
   def current_request
-    # 直近のアンケート依頼のとり方は修正が必要
     @current_request = current_user.request_questionnaire
   end
 end
