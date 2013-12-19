@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131217080417) do
+ActiveRecord::Schema.define(:version => 20131219020425) do
 
   create_table "customers", :force => true do |t|
     t.string   "csname"
@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(:version => 20131217080417) do
 
   create_table "questionnaires", :force => true do |t|
     t.string   "title"
-    t.date     "effectiveFrom"
-    t.date     "effectiveTo"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.date     "effective_from"
+    t.date     "effective_to"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "request_questionnaires", :force => true do |t|
@@ -75,14 +75,14 @@ ActiveRecord::Schema.define(:version => 20131217080417) do
   create_table "responses", :force => true do |t|
     t.integer  "user_id"
     t.integer  "customer_id"
-    t.string   "pjName"
-    t.integer  "targetYear"
-    t.integer  "targetMonth"
+    t.string   "pj_name"
+    t.integer  "target_year"
+    t.integer  "target_month"
     t.string   "comment"
-    t.string   "attachedFile"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
     t.integer  "request_questionnaire_id"
+    t.integer  "questionnaire_id"
   end
 
   create_table "topics", :force => true do |t|

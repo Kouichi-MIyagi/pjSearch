@@ -4,12 +4,12 @@
 <table id = "square">
   <tr>
     <td>プロジェクト名   </td>
-    <td><%= text_field :search, :pjName, :value => @searched.fetch('pjName', "") %><br /></td></tr>
+    <td><%= text_field :search, :pj_name, :value => @searched.fetch('pj_name', "") %><br /></td></tr>
   <tr>
     <td>対象年   </td>
-    <td><%= number_field :search, :targetYear, :value => @searched.fetch('targetYear', "") %><br /></td>
+    <td><%= number_field :search, :target_year, :value => @searched.fetch('target_year', "") %><br /></td>
     <td>対象月   </td>
-    <td><%= number_field :search, :targetMonth, :value => @searched.fetch('targetMonth', "") %><br /></td>
+    <td><%= number_field :search, :target_month, :value => @searched.fetch('target_month', "") %><br /></td>
   </tr>
 </table>
 <%= submit_tag "検索" %>
@@ -33,9 +33,9 @@
   <tr>
     <td><%= response.user.user_name %></td>
     <td><%= response.customer.csname %></td>
-    <td><%= response.pjName %></td>
-    <td><%= response.targetYear %></td>
-    <td><%= response.targetMonth %></td>
+    <td><%= response.pj_name %></td>
+    <td><%= response.target_year %></td>
+    <td><%= response.target_month %></td>
     <td><%= response.comment %></td>
     <td><%= link_to 'Show', response %></td>
     <td><%= link_to 'Edit', edit_response_path(response) %></td>

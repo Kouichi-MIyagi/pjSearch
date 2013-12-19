@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :有効期限From %><br />
-    <%= f.date_select :effectiveFrom %>
+    <%= f.date_select :effective_from %>
   </div>
   <div class="field">
     <%= f.label :有効期限To %><br />
-    <%= f.date_select :effectiveTo %>
+    <%= f.date_select :effective_to %>
   </div>
   
   <% Questionitem.all.each do |qi| %>

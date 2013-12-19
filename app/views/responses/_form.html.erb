@@ -23,14 +23,14 @@
   </div>
   <div class="field">
     <%= f.label :プロジェクト名 %><br />
-    <%= @response.pjName %>
-    <%= f.hidden_field :pjName %>
+    <%= @response.pj_name %>
+    <%= f.hidden_field :pj_name %>
   </div>
   <div class="field">
     <%= f.label :対象年月 %><br />
     <%= @response.targetYMD %>
-    <%= f.hidden_field :targetYear %>
-	<%= f.hidden_field :targetMonth %>
+    <%= f.hidden_field :target_year %>
+	<%= f.hidden_field :target_month %>
 
   <br>
   <br>
@@ -47,7 +47,8 @@
 	  <%= f.fields_for :response_items, res_i do |item| %>
         <tr>
         <td><%= res_i.question %></td>
-		<td><%= item.collection_select :selection_item, @current_request.questionnaire.questionitems[i].answers_select, :last, :first, :include_blank => true %></td>
+		<td><%= item.collection_select :selection_item, 
+            @response.questionnaire.questionitems[i].answers_select, :last, :first, :include_blank => true %></td>
         <td><%= item.text_area :comment, :size=>"60x4" %></td>
 		<td><%= item.hidden_field :question %></td>
 		<% i = i + 1 %>
