@@ -56,19 +56,15 @@
     u = new
     u.role  = 'author'
     u.email  = anArray[0]
-    u.password  = u.email
-    u.user_name = anArray[1].to_s.encode('utf-8', 'sjis')
-    u.recent_project = anArray[2].to_s.encode('utf-8', 'sjis')
-    u.recent_customer = anArray[3].to_s.encode('utf-8', 'sjis')
-	cu = Customer.where("csname = ?", u.recent_customer).first
-	if cu.blank? 
-	  puts u.recent_customer
-	else
-	  u.customer_id = cu.id
-	end
-    u.user_id  = anArray[4]
-	anArray[5].to_s == '1' ? u.resident = true : u.resident = false
-	anArray[6].to_s.encode('utf-8', 'sjis') == '出向' ? u.transfferred = true : u.transfferred = false
+    u.password  = u.email #暫定対応。メールアドレス
+    u.user_name = anArray[7].to_s.encode('utf-8', 'sjis')
+    u.recent_project = anArray[24].to_s.encode('utf-8', 'sjis') #暫定対応。プロジェクト名
+    u.recent_customer = anArray[14].to_s.encode('utf-8', 'sjis')
+	csv_id = anArray[9]
+	csv_id.size < 7 ? csv_id = "%07d" % anArray[9] :
+    u.user_id = 'p' + csv_id
+	anArray[10].to_s == '1' ? u.resident = true : u.resident = false
+	anArray[4].to_s.encode('utf-8', 'sjis') == '出向' ? u.transfferred = true : u.transfferred = false
     return u    	
   end  
 end
