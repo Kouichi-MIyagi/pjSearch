@@ -10,6 +10,7 @@
     <th>常駐</th>
     <th>出向</th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @users.each do |u| %>
@@ -22,6 +23,7 @@
     <td><%= u.resident %></td>
     <td><%= u.transfferred %></td>
     <td><%= link_to 'Edit', edit_user_registration_path(u) %></td>
+	<td><%= link_to 'Destroy', admin_destroy_user_path(u), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

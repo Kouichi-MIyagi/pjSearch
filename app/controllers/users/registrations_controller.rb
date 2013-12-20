@@ -14,8 +14,13 @@
   def update
     super
   end
+
   def destroy
-    super
+    @user = User.find(params[:id])
+    @user.destroy
+    if @user.destroy
+	  redirect_to user_index_path, notice: "User deleted."	 
+    end
   end
   
   def index
@@ -30,11 +35,28 @@
     require 'csv'
 	  if !params[:upload_file].blank?
 	    reader = params[:upload_file].read
+		#autherのプロジェクト情報をクリア
+		#User.where("role = ?", 'author').update_all(:recent_project => nil, :recent_customer => nil, 
+		#    :customer_id => nil, :resident => false, :transfferred => false)
 	    CSV.parse(reader,:headers => true) do |row|
 	      u = User.from_csv(row)
+		  if u.resident? or u.transfferred?
+		  #客先常駐または出向の場合、顧客マスターを確認
+            cu = Customer.where("csname = ?", u.recent_customer).first
+            if cu.blank? 
+		    #顧客が存在せず、顧客マスターに新規作成
+	          puts u.recent_customer
+			  ncu = Customer.create(:csname => u.recent_customer)
+			  u.customer_id = ncu.id
+            else
+		    #顧客が存在する場合は、その顧客IDをセット
+	          u.customer_id = cu.id
+            end
+		  end 
+
 		  current_u = User.where("user_id = ?", u.user_id).first
 		  if current_u.blank?
-		  #ユーザーテーブルにＣＳＶファイルの内容でｉｎｓｅｒｔ
+		  #新規ユーザーの場合はＣＳＶファイルの内容でｉｎｓｅｒｔ
 	        u.save()
 		  else
 		  #既に存在するユーザーの場合は、ＣＳＶファイルの内容でupdate
@@ -43,7 +65,7 @@
 		  end
 	    end
 	  end
-	 redirect_to :action => :index
+	 redirect_to user_index_path, notice: "User updated."	 
   end
 
 end
