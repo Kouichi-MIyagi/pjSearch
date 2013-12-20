@@ -7,25 +7,29 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          <%= link_to "~〇-〇~　客先みえるくん　~〇-〇~", '/', id: "logo" %>
+          <nav>
+            <ul class="nav pull-right">
+              <li><%= link_to_unless_current 'MainMenu', root_path %></li>
+              <% if user_signed_in? %>
+                   <li><%= link_to "⇒ログアウト", destroy_user_session_path,
+                       :method => "DELETE" %></li>
+              <% end %>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
   <p> <%= notice %></p>
   <p> <%= alert %></p>
-  <% if user_signed_in? %>
-    <table>
-	
-    <tr>
-    <!--<td>~〇-〇~　客先みえるくん　~〇-〇~　　　</td> -->
-    <td>
-     <Div Align="right">
-      <%= link_to "⇒ログアウト", destroy_user_session_path,:method => "DELETE" %>
-     </Div>
-    </td>
-    </tr>
-    </table>
-  <% end %>
 
-<%= yield %>
+<div class="container">
+  <%= yield %>
+</div>
 
-<br />
-<%= link_to_unless_current 'MainMenu', root_path %>
 </body>
 </html>
