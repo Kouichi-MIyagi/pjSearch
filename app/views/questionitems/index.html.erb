@@ -1,6 +1,7 @@
-<h1>質問項目一覧</h1>
+<h3>質問項目一覧</h3>
 
-<table>
+<table class="table table-striped table-bordered table-condensed">
+
   <tr>
     <th>質問番号</th>
     <th>質問</th>
@@ -8,8 +9,6 @@
     <th>選択肢2</th>
     <th>選択肢3</th>
     <th>選択肢4</th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
 
@@ -21,13 +20,15 @@
     <td><%= questionitem.answer2_item %></td>
     <td><%= questionitem.answer3_item %></td>
     <td><%= questionitem.answer4_item %></td>
-    <td><%= link_to 'Show', questionitem %></td>
-    <td><%= link_to 'Edit', edit_questionitem_path(questionitem) %></td>
-    <td><%= link_to 'Destroy', questionitem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+      <%= link_to t('Show'), questionitem %>
+      <%= link_to t('Edit'), edit_questionitem_path(questionitem) %>
+      <%= link_to t('Destroy'), questionitem, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Questionitem', new_questionitem_path %>
+<%= link_to '質問項目登録', new_questionitem_path %>

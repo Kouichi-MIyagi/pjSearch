@@ -1,28 +1,13 @@
-<h1>客先みえるくん　メインメニュー</h1>
+<h3>メインメニュー</h3>
 
-＜＜会社からのご連絡＞＞
-<%= render 'topics/index' %>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2 class="panel-title">会社からのご連絡</h2>
+  </div>
+  <div class="panel-body">
+    <%= render 'topics/index' %>
+  </div>
+</div>
 
 <br>
-<% if current_user.requested? %>
-  <p><%= link_to 'アンケートに回答する', new_response_path %></p>
-<% else %>
-  <p>現在、アンケート依頼はありません</p>
-<% end %>
-<p><%= link_to 'アンケート回答結果一覧', responses_path %></p>
 
-<% if can? :update,@menus %>
-
-<hr>
-<b>マスタ管理</b>
-<br>
-<p><%= link_to 'アンケート依頼実績作成', request_questionnaires_path %><p>
-<p><%= link_to '質問項目管理', questionitems_path %></p>
-<p><%= link_to 'アンケート管理', questionnaires_path %></p>
-<p><%= link_to '管理部門トピック作成', topics_path %><p>
-<p><%= link_to '顧客管理', customers_path %></p>
-<p><%= link_to 'ユーザー管理', list_users_path %></p>
-
-<% end %>
-
-<br><%= link_to 'プロファイル', edit_user_registration_path %>

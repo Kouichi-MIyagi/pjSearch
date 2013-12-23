@@ -1,14 +1,11 @@
-<h1>アンケート一覧</h1>
+<h3>アンケート一覧</h3>
 
-<table>
+<table class="table table-striped table-bordered table-condensed">
   <tr>
     <th>番号</th>
     <th>タイトル</th>
     <th>有効期限from</th>
     <th>有効期限to</th>
-    <th></th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
 
@@ -18,14 +15,14 @@
     <td><%= questionnaire.title %></td>
     <td><%= questionnaire.effective_from %></td>
     <td><%= questionnaire.effective_to %></td>	
-    <td></td>
-    <td><%= link_to 'Show', questionnaire %></td>
-    <td><%= link_to 'Edit', edit_questionnaire_path(questionnaire) %></td>
-    <td><%= link_to 'Destroy', questionnaire, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+      <%= link_to t('Show'), questionnaire %>
+      <%= link_to t('Edit'), edit_questionnaire_path(questionnaire) %>
+      <%= link_to t('Destroy'), questionnaire, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Questionnaire', new_questionnaire_path %>
+<%= link_to 'アンケート一覧登録', new_questionnaire_path %>

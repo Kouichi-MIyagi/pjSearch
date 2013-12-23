@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :questionnaire_title %><br />
-    <%= f.collection_select( :questionnaire_id, Questionnaire.all, :id, :title, :include_blank => false) %></div>
+    <%= f.collection_select( :questionnaire_id, Questionnaire.all, :id, :title, :include_blank => false) %>
   </div>
   <div class="field">
     <%= f.label :target_year %><br />
@@ -23,6 +23,8 @@
     <%= f.label :target_month %><br />
     <%= f.number_field :target_month, :in => 1..12 %>
   </div>
+
+   <hr> 
 
   <p><b> target uses</b> </p>
   <div class="field">
@@ -34,6 +36,8 @@
     transfferred<br />
     <%= f.select :transfferred,  options_for_select({"" => "", "出向者" => "t", "出向者以外" => "f"})  %>
 	  </div>
+
+   <hr> 
   <p><b> mail template</b> </p>
   <div class="field">
     <%= f.label :mail_tilte %><br />

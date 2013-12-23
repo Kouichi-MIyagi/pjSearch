@@ -1,6 +1,6 @@
-﻿ <h1>ユーザー一覧</h1>
+﻿ <h3>ユーザー一覧</h3>
 
-<table>
+<table class="table table-striped table-bordered table-condensed">
   <tr>
     <th>id</th>
     <th>ユーザーID</th>
@@ -9,7 +9,6 @@
     <th>直近のプロジェクト</th>
     <th>常駐</th>
     <th>出向</th>
-    <th></th>
     <th></th>
   </tr>
 
@@ -22,17 +21,20 @@
     <td><%= u.recent_project %></td>
     <td><%= u.resident %></td>
     <td><%= u.transfferred %></td>
-    <td><%= link_to 'Edit', edit_user_registration_path(u) %></td>
-	<td><%= link_to 'Destroy', admin_destroy_user_path(u), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to t('Edit'), edit_user_registration_path(u) %>
+	<%= link_to t('Destroy'), admin_destroy_user_path(u), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
+
 </table>
 <%= will_paginate @users, :previous_label=>'≪前', :next_label=>'次≫' %>
 <br/>
+<hr>
 <%= form_tag './upload', :multipart => true do %>
-  ユーザー一括登録:（*.csv）
+ <h5> ユーザー一括登録:（*.csv）</h5>
   <%= file_field_tag 'upload_file', :accept => 'text/comma-separated-values' %>
+  <br>
   <%= submit_tag "アップロード", :confirm => "アップロードしてよろしいですか？" %>
 <% end %>
 <br />
-<%= link_to "Back", :back %>
+<%= link_to t("Back"), :back %>

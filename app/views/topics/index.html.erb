@@ -1,15 +1,12 @@
-﻿<h1>Listing topics</h1>
+﻿<h3>トピック一覧</h3>
 
-<table>
+<table class="table table-striped table-bordered table-condensed">
+
   <tr>
-    <th>Title</th>
-    <th>Contents</th>
-    <th>Effective to</th>
+    <th>タイトル</th>
+    <th>トピックス</th>
+    <th>表示期限</th>
     <th></th>
-    <% if can? :update,@topics %>
-      <th></th>
-      <th></th>
-    <% end %>
   </tr>
 
 <% @topics.each do |topic| %>
@@ -17,11 +14,12 @@
     <td><%= simple_format(topic.title) %></td>
     <td><%= simple_format(topic.contents) %></td>
     <td><%= topic.effective_to %></td>
-    <td><%= link_to 'Show', topic %></td>
+    <td><%= link_to t('Show'), topic %>
     <% if can? :update,@topics %>
-      <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
-      <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <%= link_to t('Edit'), edit_topic_path(topic) %>
+      <%= link_to t('Destroy'), topic, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
+    </td>
   </tr>
 <% end %>
 </table>
@@ -29,5 +27,5 @@
 <br />
 
 <% if can? :update,@topics %>
-<%= link_to 'New Topic', new_topic_path %>
+<%= link_to 'トピック登録', new_topic_path %>
 <% end %>

@@ -42,3 +42,6 @@ gem 'devise'
 gem 'cancan'
 
 gem 'will_paginate'
+
+#Use twitter-bootstrap3
+gem 'bootstrap-sass', '~> 3.0.3.0'

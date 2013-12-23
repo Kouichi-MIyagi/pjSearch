@@ -2,30 +2,53 @@
 <html>
 <head>
   <title>PjSearch</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
 </head>
 <body>
-  <p> <%= notice %></p>
-  <p> <%= alert %></p>
-  <% if user_signed_in? %>
-    <table>
-	
-    <tr>
-    <!--<td>~〇-〇~　客先みえるくん　~〇-〇~　　　</td> -->
-    <td>
-     <Div Align="right">
-      <%= link_to "⇒ログアウト", destroy_user_session_path,:method => "DELETE" %>
-     </Div>
-    </td>
-    </tr>
-    </table>
-  <% end %>
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <%= link_to "~〇-〇~ 客先みえるくん ~〇-〇~", '/', id: "logo", class: "navbar-brand" %>
+      </div>
+      <div class="collapse navbar-collapse">
+        <% if user_signed_in? %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to 'メインメニュー', root_path %></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, :method => "DELETE" %></li>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
-<%= yield %>
+<% if user_signed_in? %>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2">
+        <%= render 'menu/menu' %>
+      </div>
 
-<br />
-<%= link_to_unless_current 'MainMenu', root_path %>
+      <div class="col-sm-10">
+        <% unless notice.blank? %>
+          <div class="alert alert-info"><%= notice %></div>
+        <% end %>
+        <% unless alert.blank? %>
+          <div class="alert alert-danger"><%= alert %></div>
+        <% end %>
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="container">
+    <%= yield %>
+  </div>
+<% end %>
+
 </body>
 </html>
