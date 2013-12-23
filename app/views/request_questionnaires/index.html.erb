@@ -1,12 +1,10 @@
-<h1>Listing request_questionnaires</h1>
+<h3>アンケート依頼実績一覧</h3>
 
-<table>
+<table class="table table-striped table-bordered table-condensed">
   <tr>
-    <th>Questionnaire</th>
-    <th>Target Year</th>
-    <th>Target Month</th>
-    <th></th>
-    <th></th>
+    <th>アンケートタイトル</th>
+    <th>対象年</th>
+    <th>対象月</th>
     <th></th>
   </tr>
 
@@ -15,13 +13,15 @@
     <td><%= request_questionnaire.questionnaire.title %></td>
     <td><%= request_questionnaire.target_year %></td>
     <td><%= request_questionnaire.target_month %></td>
-    <td><%= link_to 'Show', request_questionnaire %></td>
-    <td><%= link_to 'List Response', list_responses_path(request_questionnaire) %></td>
-    <td><%= link_to 'Edit', edit_request_questionnaire_path(request_questionnaire) %></td>
-    <td><%= link_to 'Destroy', request_questionnaire, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+    <%= link_to t('Show'), request_questionnaire %>
+    <%= link_to t('ListResponse'), list_responses_path(request_questionnaire) %>
+    <%= link_to t('Edit'), edit_request_questionnaire_path(request_questionnaire) %>
+    <%= link_to t('Destroy'), request_questionnaire, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </td>
   </tr>
 <% end %>
 </table>
 <br />
 
-<%= link_to 'New Request questionnaire', new_request_questionnaire_path %>
+<%= link_to 'アンケート依頼登録', new_request_questionnaire_path %>

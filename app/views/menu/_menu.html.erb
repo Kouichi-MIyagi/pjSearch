@@ -1,0 +1,22 @@
+
+<% if current_user.requested? %>
+  <p><%= link_to 'アンケートに回答する', new_response_path %></p>
+<% else %>
+  <p>現在、アンケート依頼はありません</p>
+<% end %>
+
+<p><%= link_to 'アンケート回答結果一覧', responses_path %></p>
+
+<% if can? :update,@menus %>
+  <hr>
+  <h4>マスタ管理</h5>
+  <p><%= link_to 'アンケート依頼実績作成', request_questionnaires_path %><p>
+  <p><%= link_to '質問項目管理', questionitems_path %></p>
+  <p><%= link_to 'アンケート管理', questionnaires_path %></p>
+  <p><%= link_to '管理部門トピック作成', topics_path %><p>
+  <p><%= link_to '顧客管理', customers_path %></p>
+  <p><%= link_to 'ユーザー管理', list_users_path %></p>
+<% end %>
+
+<hr>
+<%= link_to 'プロファイル', edit_user_registration_path %>

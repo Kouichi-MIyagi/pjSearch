@@ -1,0 +1,39 @@
+ja:
+  activerecord:
+    attributes:
+      topic:
+        title: タイトル
+        contents: トピックス
+        effective_to: 表示期限
+      request_questionnaire:
+        questionnaire_title: アンケートタイトル
+        target_year: 対象年
+        target_month: 対象月
+        mail_tilte: メールタイトル
+        mail_banner: メールバナー
+        mail_content: メール内容
+        mail_trailer: メールトレーラー
+        day_of_mail_sent: メール送信日 
+        resident: 常駐者
+        transfferred: 出向者
+      response:
+        pj_name: プロジェクト名
+        targetYMD: 対象年月
+      customer:
+        csname: 顧客名
+        cscode: 顧客コード
+      user:
+        user_id: ユーザーID
+        user_name: ユーザー名
+        email: Eメールアドレス
+        password: パスワード
+        resident: 常駐
+        transfferred: 出向
+        remember_me: ログイン状態を記憶する 
+        password_confirmation: パスワード再入力
+        current_password: 現在のパスワード
+        customer: 現在の顧客名
+        recent_project: 直近のプロジェクト名
+        recent_customer: 直近の顧客名
+        recent_resident: 直近の常駐
+        role: 権限

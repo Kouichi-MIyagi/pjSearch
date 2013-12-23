@@ -1,6 +1,6 @@
 module RequestQuestionnairesHelper
 
-  # ‰ñ“šˆê——‚Ì‚½‚ß‚ÌƒpƒX‚ğ¶¬‚·‚é  
+  # å›ç­”ä¸€è¦§ã®ãŸã‚ã®ãƒ‘ã‚¹ã‚’ç”Ÿæˆã™ã‚‹  
   def list_responses_path(request_questionnaire)
     return '/responses/index/' + request_questionnaire.id.to_s
   end

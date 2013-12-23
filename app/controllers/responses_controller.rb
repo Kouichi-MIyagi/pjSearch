@@ -87,7 +87,7 @@ class ResponsesController < ApplicationController
 	  
 	  @response.target_year = current_user.request_questionnaire.target_year
 	  @response.target_month = current_user.request_questionnaire.target_month
-	  
+
       current_user.request_questionnaire.questionnaire.questionitems.each do |item|
 	    responce_item = ResponseItem.new
 		responce_item.question = item.question

@@ -20,6 +20,7 @@ PjSearch::Application.routes.draw do
   devise_scope :user do
     match 'user/upload' => 'users/registrations#upload'
     match 'user/index' => 'users/registrations#index'
+    match 'users/:id' => 'users/registrations#destroy', :as => :admin_destroy_user
   end
 
   root :to => 'menu#index'

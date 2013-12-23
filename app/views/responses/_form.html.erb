@@ -22,24 +22,25 @@
     <%= f.hidden_field :customer_id %>
   </div>
   <div class="field">
-    <%= f.label :プロジェクト名 %><br />
+    <%= f.label :pj_name %><br />
     <%= @response.pj_name %>
     <%= f.hidden_field :pj_name %>
   </div>
   <div class="field">
-    <%= f.label :対象年月 %><br />
+    <%= f.label :targetYMD %><br />
     <%= @response.targetYMD %>
     <%= f.hidden_field :target_year %>
 	<%= f.hidden_field :target_month %>
 
   <br>
+  <hr>
   <br>
-  <table>
+
+  <table class="table table-striped table-bordered table-condensed">
     <tr>
       <th>質問</th>
       <th>回答</th>
       <th>コメント</th>
-      <th></th>
     </tr>
   
     <% i = 0 %>
@@ -50,7 +51,7 @@
 		<td><%= item.collection_select :selection_item, 
             @response.questionnaire.questionitems[i].answers_select, :last, :first, :include_blank => true %></td>
         <td><%= item.text_area :comment, :size=>"60x4" %></td>
-		<td><%= item.hidden_field :question %></td>
+		<%= item.hidden_field :question %>
 		<% i = i + 1 %>
 	    </tr>
       <% end %>	

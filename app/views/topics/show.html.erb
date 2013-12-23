@@ -1,6 +1,4 @@
-﻿<p id="notice"><%= notice %></p>
-
-<p>
+﻿<p>
   <b>タイトル:</b>
   <%= simple_format(@topic.title) %>
 </p>
@@ -16,7 +14,7 @@
 </p>
 
 <% if can? :update,@topics %>
-<%= link_to 'Edit', edit_topic_path(@topic) %> |
+<%= link_to t('Edit'), edit_topic_path(@topic) %> |
 <% end %>
 
-<%= link_to 'Back', topics_path %>
+<%= link_to t('Back'), topics_path %>

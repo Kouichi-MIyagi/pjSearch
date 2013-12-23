@@ -1,4 +1,4 @@
-﻿<h2>アカウント情報の更新 <%= resource_name.to_s.humanize %></h2>
+﻿<h3>アカウント情報の更新　<%= resource_name.to_s.humanize %></h3>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -51,15 +51,17 @@
     <div><%= f.label :role %>
     <%= f.collection_select :role, User::ROLES, :to_s, :humanize%></div>
   <% end %>
+<br>
 
-  <div><%= f.submit "Update" %></div>
-
+  <%= f.submit %>
+  
 <% end %>
 
   <% if can? :update,@users %>
-    <h3>Cancel my account</h3>
+<hr>
+    <h4>アカウント削除</h4>
 
-    <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+    <p>アカウントを削除します <%= button_to "アカウントの削除", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
   <% end %>
 
-<%= link_to "Back", :back %>
+<%= link_to t("Back"), :back %>

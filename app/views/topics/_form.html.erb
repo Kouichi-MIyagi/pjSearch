@@ -12,17 +12,17 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :タイトル %><br />
+    <%= f.label :title %><br />
     <%= f.text_area :title, :size=>"60x2"%>
   </div>
 
   <div class="field">
-    <%= f.label :トピックス %><br />
+    <%= f.label :contents %><br />
     <%= f.text_area :contents, :size=>"60x4"%>
   </div>
 
   <div class="field">
-    <%= f.label :表示期限 %><br />
+    <%= f.label :effective_to %><br />
     <%= f.date_select :effective_to %>
   </div>
 

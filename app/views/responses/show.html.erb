@@ -23,8 +23,10 @@
   <%= @response.comment %>
 </p>
 
-<h3>回答明細</h3>
-<table>
+<hr>
+
+<h4>回答明細</h4>
+<table class="table table-striped table-bordered table-condensed">
   <tr>
     <th>質問</th>
     <th>回答</th>
@@ -41,5 +43,5 @@
 </table>
 
 
-<%= link_to 'Edit', edit_response_path(@response) %> |
-<%= link_to 'Back', responses_path %>
+<%= link_to t('Edit'), edit_response_path(@response) %> |
+<%= link_to t('Back'), responses_path %>
