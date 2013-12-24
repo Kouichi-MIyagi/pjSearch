@@ -26,19 +26,19 @@
 
    <hr> 
 
-  <p><b> target uses</b> </p>
+  <p><b> 対象ユーザー</b> </p>
   <div class="field">
-    resident<br />
+   　<%= f.label :resident %><br />
     <%= f.select :resident,  options_for_select({"" => "", "常駐者" => "t", "常駐者以外" => "f"})  %>
   </div>
   
   <div class="field">
-    transfferred<br />
+   　<%= f.label :transfferred %><br />
     <%= f.select :transfferred,  options_for_select({"" => "", "出向者" => "t", "出向者以外" => "f"})  %>
 	  </div>
 
    <hr> 
-  <p><b> mail template</b> </p>
+  <p><b>アンケート依頼メール文面</b> </p>
   <div class="field">
     <%= f.label :mail_tilte %><br />
     <%= f.text_field :mail_tilte %>

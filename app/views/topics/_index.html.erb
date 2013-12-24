@@ -5,7 +5,7 @@
   </tr>
 
 <% @topics.each do |topic| %>
-  <% if topic.effective_to > Date.today %>
+  <% if topic.effective_to >= Date.today %>
   <tr>
     <td><%= link_to topic.title, topic %></td>
     <td><%= topic.effective_to %></td>
