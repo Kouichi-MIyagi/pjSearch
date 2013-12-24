@@ -67,5 +67,5 @@
 	  end
 	 redirect_to user_index_path, notice: "User updated."	 
   end
-
+  
 end
