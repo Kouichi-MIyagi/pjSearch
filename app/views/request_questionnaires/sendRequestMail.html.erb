@@ -1,0 +1,12 @@
+<h3>アンケート依頼メール送信完了</h3>
+
+    <h5>以下のアドレスにBCCにて送信しました</h5>
+    <table class="table table-striped table-bordered table-condensed">
+<% mailAddrs =  @request_questionnaire.collectMailAddrs.split(';')  %>
+<% mailAddrs.each{|address| %>
+  <tr>
+   <td><%= address  %></td>
+  </tr>
+<% } %>
+</table>
+<br />

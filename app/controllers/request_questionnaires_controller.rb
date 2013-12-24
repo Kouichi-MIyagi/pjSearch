@@ -93,9 +93,8 @@ class RequestQuestionnairesController < ApplicationController
     @request_questionnaire.save
     
     RequestMailer.sendRequestMail(@request_questionnaire, @request_questionnaire.collectMailAddrs).deliver
+    #render :text => "Request mail sent!  bcc are : " + @request_questionnaire.collectMailAddrs
 
-    render :text => "Request mail sent!  bcc are : " + @request_questionnaire.collectMailAddrs
-    
   end
 
   # 画面で指示された対象のユーザを抽出する
