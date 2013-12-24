@@ -61,7 +61,9 @@
     u.recent_project = anArray[24].to_s.encode('utf-8', 'sjis') #暫定対応。プロジェクト名
     u.recent_customer = anArray[14].to_s.encode('utf-8', 'sjis')
 	csv_id = anArray[9]
-	csv_id.size < 7 ? csv_id = "%07d" % anArray[9] :
+	if csv_id.size < 7
+       csv_id = "%07d" % anArray[9]
+    end
     u.user_id = 'p' + csv_id
 	anArray[10].to_s == '1' ? u.resident = true : u.resident = false
 	anArray[4].to_s.encode('utf-8', 'sjis') == '出向' ? u.transfferred = true : u.transfferred = false

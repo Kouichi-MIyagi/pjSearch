@@ -45,9 +45,10 @@ class ResponsesController < ApplicationController
     if !(@searched.fetch('user_id', nil).blank?)
       @responses = @responses.where('responses.user_id = ?', @searched.fetch('user_id'))
     end
-    # プロジェクト名
-    if !(@searched.fetch('pj_name', nil).blank?)
-      @responses = @responses.where('responses.pj_name like ?', "%" + @searched.fetch('pj_name')+ "%")
+    # 顧客名
+    if !(@searched.fetch('csname', nil).blank?)
+      @responses = @responses.includes(:customer).where(Customer.arel_table[:csname].matches("%" + @searched.fetch('csname')+ "%"))
+      #where('responses.pj_name like ?', "%" + @searched.fetch('pj_name')+ "%")
     end
     # 対象年
     if !(@searched.fetch('target_year', nil).blank?)

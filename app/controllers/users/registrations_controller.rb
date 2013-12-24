@@ -24,7 +24,7 @@
   end
   
   def index
-    @users = User.paginate(:page => params[:page], :per_page => 5)
+    @users = User.paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
@@ -45,7 +45,6 @@
             cu = Customer.where("csname = ?", u.recent_customer).first
             if cu.blank? 
 		    #顧客が存在せず、顧客マスターに新規作成
-	          puts u.recent_customer
 			  ncu = Customer.create(:csname => u.recent_customer)
 			  u.customer_id = ncu.id
             else
