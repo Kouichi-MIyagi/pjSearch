@@ -1,0 +1,55 @@
+<h1>アンケート回答結果一覧</h1>
+<h3><b>検索条件</b></h3>
+<%= form_tag "/responses/index" do %>
+<table id = "square">
+  <tr>
+    <td>プロジェクト名   </td>
+    <td><%= text_field :search, :pj_name, :value => @searched.fetch('pj_name', "") %><br /></td></tr>
+  <tr>
+    <td>対象年   </td>
+    <td><%= number_field :search, :target_year, :value => @searched.fetch('target_year', "") %><br /></td>
+    <td>対象月   </td>
+    <td><%= number_field :search, :target_month, :value => @searched.fetch('target_month', "") %><br /></td>
+  </tr>
+</table>
+<%= submit_tag "検索" %>
+<br />
+<br />
+<% end %>
+<table>
+  <tr>
+    <th>回答者名</th>
+    <th>顧客名</th>
+    <th>プロジェクト名</th>
+    <th>対象年</th>
+    <th>対象月</th>
+    <th>コメント</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @responses.each do |response| %>
+  <tr>
+    <td><%= response.user.user_name %></td>
+    <td><%= response.customer.csname %></td>
+    <td><%= response.pj_name %></td>
+    <td><%= response.target_year %></td>
+    <td><%= response.target_month %></td>
+    <td><%= response.comment %></td>
+    <td><%= link_to 'Show', response %></td>
+    <td><%= link_to 'Edit', edit_response_path(response) %></td>
+    <td><%= link_to 'Destroy', response, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @responses, :previous_label=>'≪前', :next_label=>'次≫' %>
+
+<br />
+
+<% if current_user.requested? %>
+  <%= link_to 'アンケートに回答する', new_response_path %>
+<% else %>
+  <p>現在、アンケート依頼はありません</p>
+<% end %>
+
