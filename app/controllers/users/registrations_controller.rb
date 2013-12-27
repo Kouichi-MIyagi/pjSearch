@@ -44,7 +44,7 @@
 		  #客先常駐または出向の場合、顧客マスターを確認
             cu = Customer.where("csname = ?", u.recent_customer).first
             if cu.blank? 
-		    #顧客が存在せず、顧客マスターに新規作成
+		    #顧客が存在しない場合は、顧客マスターに新規作成
 			  ncu = Customer.create(:csname => u.recent_customer)
 			  u.customer_id = ncu.id
             else
