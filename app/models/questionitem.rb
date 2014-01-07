@@ -5,6 +5,27 @@ class Questionitem < ActiveRecord::Base
   attr_accessible :questionnaire_ids
   
   def answers_select
-	 return {answer1_item => answer1_item, answer2_item => answer2_item, answer3_item => answer3_item, answer4_item => answer4_item}
+   return {a_1 => a_1, a_2 => a_2, a_3 => a_3, a_4 => a_4}
   end
+
+  def concat_answer(answer, answer_item)
+    return answer.to_s + '.' + answer_item
+  end
+
+  def a_1
+    return concat_answer(self.answer1, self.answer1_item)
+  end
+
+  def a_2
+    return concat_answer(self.answer2, self.answer2_item)
+  end
+
+  def a_3
+    return concat_answer(self.answer3, self.answer3_item)
+  end
+
+  def a_4
+    return concat_answer(self.answer4, self.answer4_item)
+  end
+
 end
