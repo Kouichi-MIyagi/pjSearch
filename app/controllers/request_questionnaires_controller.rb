@@ -130,7 +130,13 @@ class RequestQuestionnairesController < ApplicationController
     self.extractTargetUsers.each do |user|
       user.request_questionnaire = @request_questionnaire
       user.save
+      #ユーザー情報のアンケート依頼日を更新する
+      userState = user.targetUserState(@request_questionnaire.target_year,@request_questionnaire.target_month)
+      if !(userState.blank?)
+        userState.request_date = Time.now
+        userState.save
+      end   
     end
   end
-  
+
 end

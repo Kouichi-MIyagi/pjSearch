@@ -15,6 +15,7 @@
   belongs_to :customer
   belongs_to :request_questionnaire
   has_many :questionnaires, :through => :request_questionnaires
+  has_many :user_states
 
   # attr_accessible :login
   attr_accessible :login
@@ -68,5 +69,9 @@
 	anArray[10].to_s == '1' ? u.resident = true : u.resident = false
 	anArray[4].to_s.encode('utf-8', 'sjis') == '出向' ? u.transfferred = true : u.transfferred = false
     return u    	
-  end  
+  end
+  
+  def targetUserState(targetYear,targetMonth)
+    return UserState.where(:user_id => self.id).where(:target_year => targetYear).where(:target_month => targetMonth).first
+  end
 end

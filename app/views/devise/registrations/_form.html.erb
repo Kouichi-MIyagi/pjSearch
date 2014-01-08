@@ -25,27 +25,25 @@
   <div><%= f.label :current_password %> <i>(現在のパスワード)</i><br />
   <%= f.password_field :current_password %></div>
 
-  <div><%= f.label :customer %><br />
-  <%= f.collection_select( :customer_id, Customer.all, :id, :csname, :include_blank => true) %></div>
-
   <% if can? :update,@users %>
+    <div><%= f.label :customer %><br />
+    <%= f.collection_select( :customer_id, Customer.all, :id, :csname, :include_blank => true) %></div>
+
     <div><%= f.label :resident %><br />
     <%= f.check_box :resident %></div>
 
     <div><%= f.label :transfferred %><br />
     <%= f.check_box :transfferred %></div>
-  <% end %>
 
-  <div><%= f.label :recent_project %><br />
-  <%= f.text_field :recent_project %></div>
+    <div><%= f.label :recent_project %><br />
+    <%= f.text_field :recent_project %></div>
 
-  <div><%= f.label :recent_customer %><br />
-  <%= f.text_field :recent_customer %></div>
+    <div><%= f.label :recent_customer %><br />
+    <%= f.text_field :recent_customer %></div>
 
-  <div><%= f.label :recent_resident %><br />
-  <%= f.text_field :recent_resident %></div>
+    <div><%= f.label :recent_resident %><br />
+    <%= f.text_field :recent_resident %></div>
 
-  <% if can? :update,@users %>
     <div><%= f.label :role %>
     <%= f.collection_select :role, User::ROLES, :to_s, :humanize%></div>
   <% end %>

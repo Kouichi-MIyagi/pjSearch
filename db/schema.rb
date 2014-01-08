@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131219020425) do
+ActiveRecord::Schema.define(:version => 20140107055537) do
 
   create_table "customers", :force => true do |t|
     t.string   "csname"
@@ -91,6 +91,21 @@ ActiveRecord::Schema.define(:version => 20131219020425) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "title"
+  end
+
+  create_table "user_states", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "customer_id"
+    t.integer  "target_year"
+    t.integer  "target_month"
+    t.float    "over_time"
+    t.boolean  "resident"
+    t.boolean  "transfferred"
+    t.date     "request_date"
+    t.date     "respose_date"
+    t.string   "csname"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "users", :force => true do |t|

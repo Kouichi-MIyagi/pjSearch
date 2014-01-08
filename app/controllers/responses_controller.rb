@@ -1,4 +1,4 @@
-class ResponsesController < ApplicationController
+﻿class ResponsesController < ApplicationController
   # GET /responses
   # GET /responses.json
   def index
@@ -24,9 +24,6 @@ class ResponsesController < ApplicationController
     if params[:request_id].nil?    
     # アンケート依頼に対する回答一覧以外（通常はこちら）
 	  @responses = Response.all
-      if current_user.isAuthor?
-        @searched.store('user_id', current_user.id)
-	  end
     else
 	# アンケート依頼に対する回答一覧
       request = RequestQuestionnaire.find(params[:request_id])
@@ -36,6 +33,11 @@ class ResponsesController < ApplicationController
         @responses = Array new
       end
     end
+
+	#管理者以外は自分自身のものしか見えないようにする
+    if current_user.isAuthor?
+      @searched.store('user_id', current_user.id)
+	end
 	
 	# まずはページングを指示
     @responses = Response.paginate(:page => params[:page], :per_page => 10)
@@ -68,7 +70,7 @@ class ResponsesController < ApplicationController
   # GET /responses/1
   # GET /responses/1.json
   def show
-    @response = Response.find(params[:id])
+    self.getResponse
 	
     respond_to do |format|
       format.html # show.html.erb
@@ -103,7 +105,7 @@ class ResponsesController < ApplicationController
 
   # GET /responses/1/edit
   def edit
-    @response = Response.find(params[:id])
+    self.getResponse
   end
 
   # POST /responses
@@ -114,7 +116,13 @@ class ResponsesController < ApplicationController
     @response.questionnaire =  current_user.request_questionnaire.questionnaire
 	  current_user.request_questionnaire = nil
       current_user.save
-	  
+    #ユーザー情報の回答日を更新する
+    @userState = current_user.targetUserState(@response.target_year,@response.target_month)
+    if !(@userState.blank?)
+      @userState.respose_date = current_user.updated_at
+      @userState.save
+    end
+    
     respond_to do |format|
       if @response.save
         format.html { redirect_to @response, notice: 'Response was successfully created.' }
@@ -129,7 +137,7 @@ class ResponsesController < ApplicationController
   # PUT /responses/1
   # PUT /responses/1.json
   def update
-    @response = Response.find(params[:id])
+    self.getResponse
 
     respond_to do |format|
       if @response.update_attributes(params[:response])
@@ -145,15 +153,29 @@ class ResponsesController < ApplicationController
   # DELETE /responses/1
   # DELETE /responses/1.json
   def destroy
-    @response = Response.find(params[:id])
-    # 回答削除時は前のアンケートを結びつける（新たにアンケート依頼がきた時の考慮がない）
+    self.getResponse
+    # 回答削除時は現在のアンケートを結びつける
 	current_user.request_questionnaire = @response.request_questionnaire
     @response.destroy
     current_user.save
-	
+    # ユーザー状況の回答日もクリアする
+	@userState = current_user.targetUserState(@response.target_year,@response.target_month)
+    if !(@userState.blank?)
+      @userState.respose_date = nil
+      @userState.save
+    end
     respond_to do |format|
       format.html { redirect_to responses_url }
       format.json { head :no_content }
     end
+  end
+  
+  def getResponse
+    if current_user.isAuthor?
+	#管理者以外は自分自身のものしか見えないようにする
+	  @response = Response.where(:id => params[:id]).where(:user_id => current_user.id).first
+	else
+      @response = Response.find(params[:id])	
+	end
   end
 end

@@ -1,0 +1,164 @@
+﻿class UserStatesController < ApplicationController
+  # GET /user_states
+  # GET /user_states.json
+  def index
+    if params[:page].nil?
+    # ページ繰り以外
+      @target = Hash.new()
+      session[:target] = @target
+	  	
+	  if !params[:target].nil?
+	  # 検索ボタン押下時：画面入力された条件のセッションへの保存
+        params[:target].each do | key, value |
+        @target.store(key, value)
+        end
+	  end
+	  	
+	else
+	  # ページ繰り時：検索条件のセッションからの取り出し
+      @target = session[:target]
+	end
+    
+    #　まずはページング指示
+    @user_states = UserState.paginate(:page => params[:page], :per_page => 10).order('target_year DESC, target_month DESC')
+    # 検索条件が指定されていれば、抽出条件としてwhere句を追加
+    # 対象年
+    if !(@target.fetch('target_year', nil).blank?)
+      @user_states = @user_states.where('user_states.target_year = ?', @target.fetch('target_year'))
+    end
+    # 対象月
+    if !(@target.fetch('target_month', nil).blank?)
+      @user_states = @user_states.where('user_states.target_month = ?', @target.fetch('target_month'))
+    end
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @user_states }
+    end
+  end
+
+  # GET /user_states/1
+  # GET /user_states/1.json
+  def show
+    @user_state = UserState.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @user_state }
+    end
+  end
+
+  # GET /user_states/new
+  # GET /user_states/new.json
+  def new
+    @user_state = UserState.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @user_state }
+    end
+  end
+
+  # GET /user_states/1/edit
+  def edit
+    @user_state = UserState.find(params[:id])
+  end
+
+  # POST /user_states
+  # POST /user_states.json
+  def create
+    @user_state = UserState.new(params[:user_state])
+
+    respond_to do |format|
+      if @user_state.save
+        format.html { redirect_to @user_state, notice: 'User state was successfully created.' }
+        format.json { render json: @user_state, status: :created, location: @user_state }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @user_state.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /user_states/1
+  # PUT /user_states/1.json
+  def update
+    @user_state = UserState.find(params[:id])
+
+    respond_to do |format|
+      if @user_state.update_attributes(params[:user_state])
+        format.html { redirect_to @user_state, notice: 'User state was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @user_state.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /user_states/1
+  # DELETE /user_states/1.json
+  def destroy
+    @user_state = UserState.find(params[:id])
+    @user_state.destroy
+
+    respond_to do |format|
+      format.html { redirect_to user_states_url }
+      format.json { head :no_content }
+    end
+  end
+  
+  def upload
+    require 'csv'
+    @target = Hash.new()
+    session[:target] = @target
+    
+    if !params[:target].nil?
+    # アップロードボタン押下時：画面入力された年月のセッションへの保存
+      params[:target].each do | key, value |
+        @target.store(key, value)
+      end
+    end
+
+    targetYear = @target.fetch('uploadYear')
+    targetMonth = @target.fetch('uploadMonth')
+    
+    if !params[:upload_file].blank?
+      reader = params[:upload_file].read
+      #autherのプロジェクト情報をクリア
+      User.where("role = ?", 'author').update_all(:recent_project => nil, :recent_customer => nil, 
+              :customer_id => nil, :resident => false, :transfferred => false)
+      CSV.parse(reader,:headers => true) do |row|
+        u = User.from_csv(row)
+        if u.resident? or u.transfferred?
+        #客先常駐または出向の場合、顧客マスターを確認
+          cu = Customer.where("csname = ?", u.recent_customer).first
+          if cu.blank? 
+          #顧客が存在しない場合は、顧客マスターに新規作成
+            ncu = Customer.create(:csname => u.recent_customer)
+            u.customer_id = ncu.id
+          else
+            #顧客が存在する場合は、その顧客IDをセット
+            u.customer_id = cu.id
+          end
+        end 
+
+        current_u = User.where("user_id = ?", u.user_id).first
+        if current_u.blank?
+        #新規ユーザーの場合はＣＳＶファイルの内容でｉｎｓｅｒｔ
+          u.save()
+        else
+          #既に存在するユーザーの場合は、ＣＳＶファイルの内容でupdate
+          current_u.update_attributes( :email => u.email, :recent_project => u.recent_project, :recent_customer => u.recent_customer,
+               :customer_id => u.customer_id , :resident => u.resident, :transfferred => u.transfferred)
+          u.id = current_u.id
+        end
+        u_state = UserState.new(csname: u.recent_customer, resident: u.resident, transfferred:u.transfferred,
+             user_id: u.id, customer_id:u.customer_id, target_year: targetYear, target_month: targetMonth)
+        u_state.save()
+      end
+    end
+#    redirect_to user_index_path, notice: 'User state was successfully created.'
+    redirect_to user_states_path, notice: 'User state was successfully created.'
+  end
+end

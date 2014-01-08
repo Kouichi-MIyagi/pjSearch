@@ -1,4 +1,4 @@
-
+﻿
 <% if current_user.requested? %>
   <p><%= link_to 'アンケートに回答する', new_response_path %></p>
 <% else %>
@@ -15,7 +15,8 @@
   <p><%= link_to 'アンケート管理', questionnaires_path %></p>
   <p><%= link_to '管理部門トピック作成', topics_path %><p>
   <p><%= link_to '顧客管理', customers_path %></p>
-  <p><%= link_to 'ユーザー管理', list_users_path %></p>
+  <p><%= link_to 'ユーザー状況管理', user_states_path %></p>
+  <p><%= link_to 'ユーザー一覧', list_users_path %></p>
 <% end %>
 
 <hr>

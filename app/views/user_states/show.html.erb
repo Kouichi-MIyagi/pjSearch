@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @user_state.user_id %>
+</p>
+
+<p>
+  <b>Customer:</b>
+  <%= @user_state.customer_id %>
+</p>
+
+<p>
+  <b>Target year:</b>
+  <%= @user_state.target_year %>
+</p>
+
+<p>
+  <b>Target month:</b>
+  <%= @user_state.target_month %>
+</p>
+
+<p>
+  <b>Over time:</b>
+  <%= @user_state.over_time %>
+</p>
+
+<p>
+  <b>Resident:</b>
+  <%= @user_state.resident %>
+</p>
+
+<p>
+  <b>Transfferred:</b>
+  <%= @user_state.transfferred %>
+</p>
+
+<p>
+  <b>Request date:</b>
+  <%= @user_state.request_date %>
+</p>
+
+<p>
+  <b>Respose date:</b>
+  <%= @user_state.respose_date %>
+</p>
+
+<p>
+  <b>Csname:</b>
+  <%= @user_state.csname %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_state_path(@user_state) %> |
+<%= link_to 'Back', user_states_path %>
