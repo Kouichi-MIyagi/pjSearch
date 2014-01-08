@@ -134,7 +134,7 @@ class RequestQuestionnairesController < ApplicationController
       #ユーザー情報のアンケート依頼日を更新する
       userState = user.targetUserState(@request_questionnaire.target_year,@request_questionnaire.target_month)
       if !(userState.blank?)
-        userState.request_date = @request_questionnaire.updated_at
+        userState.request_date = Time.now
         userState.save
       end   
     end

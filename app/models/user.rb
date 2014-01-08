@@ -72,6 +72,6 @@
   end
   
   def targetUserState(targetYear,targetMonth)
-    return UserState.where(:user_id => user_id).where(:target_year => targetYear).where(:target_month => targetMonth).first
+    return UserState.where(:user_id => self.id).where(:target_year => targetYear).where(:target_month => targetMonth).first
   end
 end
