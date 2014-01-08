@@ -9,7 +9,7 @@ ja:
     failure:
       already_authenticated: "ログイン済みです。"
       inactive: "アカウントがまだ有効になっていません。"
-      invalid: "Iメールアドレスまたはパスワードが違います。"
+      invalid: "メールアドレスまたはパスワードが違います。"
       locked: "アカウントはロックされています。"
       last_attempt: "アカウントがアロックされる前にもう一度試してください。"
       not_found_in_database: "メールアドレスまたはパスワードが無効です。"

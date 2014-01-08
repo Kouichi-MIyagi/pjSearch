@@ -1,4 +1,4 @@
-class Response < ActiveRecord::Base
+﻿class Response < ActiveRecord::Base
   attr_accessible :comment, :customer_id, :pj_name, :target_month, :target_year, :user_id, :request_questionnaire_id, :questionnaire_id
   
   has_many :response_items, :dependent => :delete_all
@@ -13,4 +13,14 @@ class Response < ActiveRecord::Base
   def targetYMD
     return target_year.to_s + "/" + target_month.to_s
   end
+  
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |response|
+        csv << response.attributes.values_at(*column_names)
+      end
+    end
+  end
+
 end
