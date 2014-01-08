@@ -63,8 +63,11 @@
 
     respond_to do |format|
       format.html # index.html.erb
+      format.csv { send_data @responses.to_csv }
+      # format.xls { send_data @responses.to_csv(col_sep: "\t") }
       format.json { render json: @responses }
     end
+    
   end
 
   # GET /responses/1

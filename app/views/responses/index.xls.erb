@@ -1,0 +1,31 @@
+﻿<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">user id</Data></Cell>
+        <Cell><Data ss:Type="String">customer id</Data></Cell>
+        <Cell><Data ss:Type="String">pj name</Data></Cell>
+        <Cell><Data ss:Type="String">target year</Data></Cell>
+        <Cell><Data ss:Type="String">target month</Data></Cell>
+        <Cell><Data ss:Type="String">comment</Data></Cell>
+      </Row>
+    <% @responses.each do |response| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= response.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= response.user_id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= response.customer_id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= response.pj_name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= response.target_year %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= response.target_month %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= response.comment %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
