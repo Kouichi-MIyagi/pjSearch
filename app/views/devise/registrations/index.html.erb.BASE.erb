@@ -29,10 +29,5 @@
 </table>
 <%= will_paginate @users, :previous_label=>'≪前', :next_label=>'次≫' %>
 <br/>
-<%= form_tag './upload', :multipart => true do %>
-  ユーザー一括登録:（*.csv）
-  <%= file_field_tag 'upload_file', :accept => 'text/comma-separated-values' %>
-  <%= submit_tag "アップロード", :confirm => "アップロードしてよろしいですか？" %>
-<% end %>
 <br />
 <%= link_to "Back", :back %>

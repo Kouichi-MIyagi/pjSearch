@@ -114,7 +114,13 @@ class ResponsesController < ApplicationController
     @response.questionnaire =  current_user.request_questionnaire.questionnaire
 	  current_user.request_questionnaire = nil
       current_user.save
-	  
+    #ユーザー情報の回答日を更新する
+    @userState = current_user.targetUserState(@response.target_year,@response.target_month)
+    if !(@userState.blank?)
+      @userState.respose_date = current_user.updated_at
+      @userState.save
+    end
+    
     respond_to do |format|
       if @response.save
         format.html { redirect_to @response, notice: 'Response was successfully created.' }
@@ -146,11 +152,16 @@ class ResponsesController < ApplicationController
   # DELETE /responses/1.json
   def destroy
     @response = Response.find(params[:id])
-    # 回答削除時は前のアンケートを結びつける（新たにアンケート依頼がきた時の考慮がない）
+    # 回答削除時は現在のアンケートを結びつける
 	current_user.request_questionnaire = @response.request_questionnaire
     @response.destroy
     current_user.save
-	
+    # ユーザー状況の回答日もクリアする
+	@userState = current_user.taretUserState(@response.target_year,@response.target_month)
+    if !(@userState.blank?)
+      @userState.respose_date = nil
+      @userState.save
+    end
     respond_to do |format|
       format.html { redirect_to responses_url }
       format.json { head :no_content }
