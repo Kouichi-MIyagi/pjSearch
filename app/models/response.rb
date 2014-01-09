@@ -16,7 +16,8 @@
   
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
-      csv << column_names
+      # csv << column_names
+      csv << "id,社員id,顧客id,プロジェクト名,対象年,対象月,コメント,記入日,更新日,依頼id,質問id".parse_csv
       all.each do |response|
         csv << response.attributes.values_at(*column_names)
       end
