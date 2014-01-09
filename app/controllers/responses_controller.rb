@@ -117,8 +117,8 @@
     @response = Response.new(params[:response])
     @response.request_questionnaire =  current_user.request_questionnaire
     @response.questionnaire =  current_user.request_questionnaire.questionnaire
-	  current_user.request_questionnaire = nil
-      current_user.save
+	@response.user.request_questionnaire = nil
+    @response.user.save
     #ユーザー情報の回答日を更新する
     @userState = current_user.targetUserState(@response.target_year,@response.target_month)
     if !(@userState.blank?)
@@ -158,9 +158,9 @@
   def destroy
     self.getResponse
     # 回答削除時は現在のアンケートを結びつける
-	current_user.request_questionnaire = @response.request_questionnaire
+	@response.user.request_questionnaire = @response.request_questionnaire
+    @response.user.save
     @response.destroy
-    current_user.save
     # ユーザー状況の回答日もクリアする
 	@userState = current_user.targetUserState(@response.target_year,@response.target_month)
     if !(@userState.blank?)
