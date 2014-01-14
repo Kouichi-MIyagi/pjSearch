@@ -15,7 +15,7 @@
   belongs_to :customer
   belongs_to :request_questionnaire
   has_many :questionnaires, :through => :request_questionnaires
-  has_many :user_states
+  has_many :user_states, :order => 'target_year DESC , target_month DESC'
 
   # attr_accessible :login
   attr_accessible :login

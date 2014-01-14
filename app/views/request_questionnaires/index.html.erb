@@ -5,6 +5,8 @@
     <th>アンケートタイトル</th>
     <th>対象年</th>
     <th>対象月</th>
+    <th>resident</th>
+    <th>transfferred</th>
     <th></th>
   </tr>
 
@@ -13,6 +15,8 @@
     <td><%= request_questionnaire.questionnaire.title %></td>
     <td><%= request_questionnaire.target_year %></td>
     <td><%= request_questionnaire.target_month %></td>
+    <td><%= request_questionnaire.resident %></td>
+    <td><%= request_questionnaire.transfferred %></td>
     <td>
     <%= link_to t('Show'), request_questionnaire %>
     <%= link_to t('ListResponse'), list_responses_path(request_questionnaire) %>
