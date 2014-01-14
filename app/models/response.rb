@@ -17,9 +17,21 @@
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
       # csv << column_names
-      csv << "id,社員id,顧客id,プロジェクト名,対象年,対象月,コメント,記入日,更新日,依頼id,質問id".parse_csv
+      csv << "社員名,顧客名,プロジェクト名,対象年,対象月,コメント,質問,回答,コメント".parse_csv
+      
+      #  csv << response.attributes.values_at(*column_names)
       all.each do |response|
-        csv << response.attributes.values_at(*column_names)
+        response.response_items.each do |response_item|
+          csv << [response.user.user_name,
+                  response.customer.csname,
+                  response.pj_name,
+                  response.target_year,
+                  response.target_month,
+                  response.comment,
+                  response_item.question,
+                  response_item.selection_item,
+                  response_item.comment]
+        end
       end
     end
   end
