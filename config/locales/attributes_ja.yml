@@ -37,3 +37,5 @@ ja:
         recent_customer: 直近の顧客名
         recent_resident: 直近の常駐
         role: 権限
+        resident_email: 客先Eメールアドレス
+

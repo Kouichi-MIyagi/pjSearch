@@ -18,14 +18,14 @@ PjSearch::Application.routes.draw do
   :sessions      => 'users/sessions',
   :registrations => 'users/registrations',
   :passwords     => 'users/passwords'
-}
-
+  }
+  
   devise_scope :user do
-    match 'user/upload' => 'users/registrations#upload'
     match 'user/index' => 'users/registrations#index'
+    match 'user/show/:id' => 'users/registrations#show', :as => :admin_show_user
     match 'users/:id' => 'users/registrations#destroy', :as => :admin_destroy_user
   end
-
+ 
   root :to => 'menu#index'
   
   resources :customers

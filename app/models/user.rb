@@ -7,7 +7,7 @@
   # Setup accessible (or protected) attributes for your model
   # Change user_id etc. 2013/12/3 by Miyagi 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :user_id, :user_name, :customer_id,
-    :user_access, :recent_project, :recent_customer, :recent_resident, :resident, :transfferred, :request_questionnaire_id
+    :user_access, :recent_project, :recent_customer, :recent_resident, :resident, :transfferred, :request_questionnaire_id, :resident_email
   # , :login
 
   # attr_accessible :title, :body
@@ -57,8 +57,9 @@
     u = new
     u.role  = 'author'
     u.email  = anArray[0]
-    u.password  = u.email #暫定対応。メールアドレス
+    u.password  = u.email #暫定対応。初期パスワードはメールアドレス
     u.user_name = anArray[7].to_s.encode('utf-8', 'sjis')
+    u.resident_email = anArray[25]#暫定対応。客先メールアドレス
     u.recent_project = anArray[24].to_s.encode('utf-8', 'sjis') #暫定対応。プロジェクト名
     u.recent_customer = anArray[14].to_s.encode('utf-8', 'sjis')
 	csv_id = anArray[9]
@@ -73,5 +74,13 @@
   
   def targetUserState(targetYear,targetMonth)
     return UserState.where(:user_id => self.id).where(:target_year => targetYear).where(:target_month => targetMonth).first
+  end
+  
+  def myMailAddress
+    if self.resident_email.blank? 
+	  return self.email
+	else
+	  return self.email + ';' + self.resident_email
+	end
   end
 end

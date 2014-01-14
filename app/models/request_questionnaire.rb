@@ -15,7 +15,7 @@ class RequestQuestionnaire < ActiveRecord::Base
   def collectMailAddrs
     destination = ""
     self.users.each do | user |
-      destination = destination + user.email + ';'
+      destination = destination + user.myMailAddress + ';'
     end
     return destination
   end

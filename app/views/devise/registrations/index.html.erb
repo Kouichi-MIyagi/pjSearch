@@ -21,7 +21,8 @@
     <td><%= u.recent_project %></td>
     <td><%= u.resident %></td>
     <td><%= u.transfferred %></td>
-    <td><%= link_to t('Edit'), edit_user_registration_path(u) %>
+    <td><%= link_to t('Show'), admin_show_user_path(u), method: :show %>
+	<%= link_to t('Edit'), edit_user_registration_path(u) %>
 	<%= link_to t('Destroy'), admin_destroy_user_path(u), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
