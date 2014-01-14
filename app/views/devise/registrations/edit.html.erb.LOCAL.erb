@@ -12,6 +12,10 @@
 
     <div><%= f.label :email %><br />
     <%= f.email_field :email %></div>
+	
+	<div><%= f.label :resident_email %><br />
+    <%= f.email_field :resident_email %></div>
+
   <% end %>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

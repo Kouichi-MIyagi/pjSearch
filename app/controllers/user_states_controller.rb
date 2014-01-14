@@ -158,7 +158,6 @@
         u_state.save()
       end
     end
-#    redirect_to user_index_path, notice: 'User state was successfully created.'
     redirect_to user_states_path, notice: 'User state was successfully created.'
   end
 end
