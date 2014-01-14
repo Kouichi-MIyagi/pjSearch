@@ -77,6 +77,8 @@ class RequestQuestionnairesController < ApplicationController
   # DELETE /request_questionnaires/1.json
   def destroy
     @request_questionnaire = RequestQuestionnaire.find(params[:id])
+	User.where("request_questionnaire_id = ?", @request_questionnaire.id).update_all(:request_questionnaire_id => nil)
+	
     @request_questionnaire.destroy
 
     respond_to do |format|
@@ -103,13 +105,13 @@ class RequestQuestionnairesController < ApplicationController
     users_t = users_r.dup
     
     # 常駐か否かの観点で絞り込み
-    if !(params[:resident].blank?)
-      users_r = User.where('users.resident = ?', params[:resident])
+    if !(@request_questionnaire.resident.blank?)
+      users_r = User.where('users.resident = ?', @request_questionnaire.resident)
     end
 
     # 出向か否かの観点で絞り込み
-    if !(params[:transfferred].blank?)
-      users_t = User.where('users.transfferred = ?', params[:transfferred])
+    if !(@request_questionnaire.transfferred.blank?)
+      users_t = User.where('users.transfferred = ?', @request_questionnaire.transfferred)
     end
     
     # 常駐と出向のアンド条件
