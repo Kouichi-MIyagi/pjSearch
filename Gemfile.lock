@@ -51,6 +51,9 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.0.2)
+    gon (3.0.5)
+      actionpack (>= 2.3.0)
+      json
     hike (1.2.3)
     i18n (0.6.1)
     journey (1.0.4)
@@ -126,6 +129,7 @@ DEPENDENCIES
   cancan
   coffee-rails (~> 3.2.1)
   devise
+  gon (= 3.0.5)
   jquery-rails
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)

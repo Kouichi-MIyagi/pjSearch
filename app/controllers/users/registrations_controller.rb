@@ -41,6 +41,10 @@
 
   def show
     @user = User.find(params[:id])
+	
+    # data for google timeline chart
+	gon.graph_data = @user.asTimelineRows()
+	
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }

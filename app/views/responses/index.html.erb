@@ -1,4 +1,4 @@
-<h3>アンケート回答結果一覧</h3>
+<h3>回答結果一覧</h3>
 
 <div class="panel panel-info">
   <div class="panel-heading">
@@ -12,9 +12,9 @@
     <td><%= text_field :search, :csname, :value => @searched.fetch('csname', "") %><br /></td></tr>
   <tr>
     <td>対象年   </td>
-    <td><%= number_field :search, :target_year, :value => @searched.fetch('target_year', "") %><br /></td>
+    <td><%= number_field :search, :target_year, :in => 2013..2020, :value => @searched.fetch('target_year', "") %><br /></td>
     <td>対象月   </td>
-    <td><%= number_field :search, :target_month, :value => @searched.fetch('target_month', "") %><br /></td>
+    <td><%= number_field :search, :target_month, :in => 1..12, :value => @searched.fetch('target_month', "") %><br /></td>
   </tr>
 </table>
 <%= submit_tag "検索" %>
@@ -56,14 +56,12 @@
 
 <% if can? :update,@users %>
   <p>
-    アンケート結果ダウンロード：
+    回答結果ダウンロード：
     <%= link_to "[CSV形式⇒responses.csvを開きます]", responses_path(format: "csv") %>
     <! %= link_to "Excel", responses_path(format: "xls") % >
   </p>
 <% else %>
   <% if current_user.requested? %>
-    <%= link_to 'アンケートに回答する', new_response_path %>
-  <% else %>
-    <p>現在、アンケート依頼はありません</p>
+    <%= link_to '回答する', new_response_path %>
   <% end %>
 <% end %>

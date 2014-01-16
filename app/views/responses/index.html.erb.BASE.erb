@@ -1,4 +1,4 @@
-<h1>アンケート回答結果一覧</h1>
+<h1>回答結果一覧</h1>
 <h3><b>検索条件</b></h3>
 <%= form_tag "/responses/index" do %>
 <table id = "square">
@@ -7,9 +7,9 @@
     <td><%= text_field :search, :pj_name, :value => @searched.fetch('pj_name', "") %><br /></td></tr>
   <tr>
     <td>対象年   </td>
-    <td><%= number_field :search, :target_year, :value => @searched.fetch('target_year', "") %><br /></td>
+    <td><%= number_field :search, :target_year, :in => 2013..2020, :value => @searched.fetch('target_year', "") %><br /></td>
     <td>対象月   </td>
-    <td><%= number_field :search, :target_month, :value => @searched.fetch('target_month', "") %><br /></td>
+    <td><%= number_field :search, :target_month, :in => 1..12, :value => @searched.fetch('target_month', "") %><br /></td>
   </tr>
 </table>
 <%= submit_tag "検索" %>
@@ -48,8 +48,6 @@
 <br />
 
 <% if current_user.requested? %>
-  <%= link_to 'アンケートに回答する', new_response_path %>
-<% else %>
-  <p>現在、アンケート依頼はありません</p>
+  <%= link_to '回答する', new_response_path %>
 <% end %>
 
