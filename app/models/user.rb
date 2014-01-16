@@ -83,4 +83,13 @@
 	  return self.email + ';' + self.resident_email
 	end
   end
+  
+  def asTimelineRows
+    anArray = Array.new()
+    self.user_states.each do | anUserState |
+      anArray.push(anUserState.asTimelineRow)
+    end
+    return anArray
+  end
+
 end

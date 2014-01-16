@@ -40,6 +40,49 @@
 <% end %>
 </table>
 
+</p>
+<br />
+<div id="chart_div"></div>
+<br />
 
+<!------------------------------------------------------------------------>
+<!-- AJAX API のロード -->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+
+// Visualization API と折れ線グラフ用のパッケージのロード
+google.load("visualization", "1", {packages:["timeline"]});
+
+// Google Visualization API ロード時のコールバック関数の設定
+google.setOnLoadCallback(drawChart);
+
+// グラフ作成用のコールバック関数
+function drawChart() {
+
+	// データテーブルの作成
+	var dataTable = new google.visualization.DataTable();
+
+    dataTable.addColumn({ type: 'string', id: 'csname' });
+    dataTable.addColumn({ type: 'string', id: 'ymd' });
+    dataTable.addColumn({ type: 'date', id: 'Start' });
+    dataTable.addColumn({ type: 'date', id: 'End' });
+    
+    for (var row in gon.graph_data){
+ 	      dataTable.addRow([ gon.graph_data[row][0], gon.graph_data[row][1], new Date(gon.graph_data[row][2], gon.graph_data[row][3], gon.graph_data[row][4]),  new Date(gon.graph_data[row][5], gon.graph_data[row][6], gon.graph_data[row][7]) ])
+      }
+    
+    //dataTable.addRows(gon.graph_data)
+
+	// グラフのオプションを設定
+	var options = {avoidOverlappingGridLines: true};
+    
+	// LineChart のオブジェクトの作成
+	var chart = new google.visualization.Timeline(document.getElementById('chart_div'));
+
+	// データテーブルとオプションを渡して、グラフを描画
+	chart.draw(dataTable, options);
+
+}
+</script>
 
 <%= link_to t("Back"), :back %>
