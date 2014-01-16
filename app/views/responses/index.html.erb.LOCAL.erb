@@ -1,4 +1,4 @@
-<h3>アンケート回答結果一覧</h3>
+<h3>回答結果一覧</h3>
 
 
 <div class="panel panel-info">
@@ -60,8 +60,6 @@
 <br />
 
 <% if current_user.requested? %>
-  <%= link_to 'アンケートに回答する', new_response_path %>
-<% else %>
-  <p>現在、アンケート依頼はありません</p>
+  <%= link_to '回答する', new_response_path %>
 <% end %>
 

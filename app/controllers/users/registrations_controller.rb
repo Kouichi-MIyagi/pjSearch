@@ -44,7 +44,6 @@
 	
     # data for google timeline chart
 	gon.graph_data = @user.asTimelineRows()
-	puts gon.graph_data #debug print
 	
     respond_to do |format|
       format.html # show.html.erb

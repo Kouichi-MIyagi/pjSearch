@@ -1,4 +1,4 @@
-<h1>アンケート回答結果一覧</h1>
+<h1>回答結果一覧</h1>
 <h3><b>検索条件</b></h3>
 <%= form_tag "/responses/index" do %>
 <table id = "square">
@@ -48,8 +48,6 @@
 <br />
 
 <% if current_user.requested? %>
-  <%= link_to 'アンケートに回答する', new_response_path %>
-<% else %>
-  <p>現在、アンケート依頼はありません</p>
+  <%= link_to '回答する', new_response_path %>
 <% end %>
 
