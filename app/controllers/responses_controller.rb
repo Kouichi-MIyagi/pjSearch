@@ -3,7 +3,6 @@
   # GET /responses.json
   def index
 
-    puts request.format
     if request.format == Mime::CSV
 	  @csvDownLoad = true
 	end
@@ -44,20 +43,15 @@
 
 	# ページングを指示
 	if @csvDownLoad
-      @responses = Response.paginate(:page => params[:page], :per_page => 1000)
+      @responses = Response.paginate(:page => params[:page], :per_page => @responses.size + 1)
     else
       @responses = Response.paginate(:page => params[:page], :per_page => 10)
 	end
 
 	# 検索条件が指定されていれば、抽出条件としてwhere句を追加
-    # ユーザーID
-    if !(@searched.fetch('user_id', nil).blank?)
-      @responses = @responses.where('responses.user_id = ?', @searched.fetch('user_id'))
-    end
     # 顧客名
     if !(@searched.fetch('csname', nil).blank?)
       @responses = @responses.includes(:customer).where(Customer.arel_table[:csname].matches("%" + @searched.fetch('csname')+ "%"))
-      #where('responses.pj_name like ?', "%" + @searched.fetch('pj_name')+ "%")
     end
     # 対象年
     if !(@searched.fetch('target_year', nil).blank?)
@@ -67,10 +61,14 @@
     if !(@searched.fetch('target_month', nil).blank?)
       @responses = @responses.where('responses.target_month = ?', @searched.fetch('target_month'))
     end
+	# ユーザーID
+    if !(@searched.fetch('user_id', nil).blank?)
+      @responses = @responses.where('responses.user_id = ?', @searched.fetch('user_id'))
+    end
+
 
     respond_to do |format|
       format.html # index.html.erb
-      # format.csv { send_data NKF.nkf('-sW -Lw', @responses.to_csv), :filename => 'responses.csv', :type => 'text/csv; charset=Shift_JIS' }
       format.csv { send_data NKF.nkf('-sW -Lw', Response.to_csv(@responses)), :filename => 'responses.csv', :type => 'text/csv; charset=Shift_JIS' }
       # format.xls { send_data @responses.to_csv(col_sep: "\t") }
       format.json { render json: @responses }

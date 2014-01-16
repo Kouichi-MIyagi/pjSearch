@@ -14,6 +14,9 @@
   <b>Email:</b>
   <%= @user.email %>
 </p>
+<br >
+<%= link_to t("Back"), :back %>
+
 <hr>
 <h4>ユーザー情報</h4>
 <table class="table table-striped table-bordered table-condensed">
@@ -40,10 +43,7 @@
 <% end %>
 </table>
 
-</p>
-<br />
 <div id="chart_div"></div>
-<br />
 
 <!------------------------------------------------------------------------>
 <!-- AJAX API のロード -->
@@ -85,4 +85,3 @@ function drawChart() {
 }
 </script>
 
-<%= link_to t("Back"), :back %>
