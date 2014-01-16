@@ -3,23 +3,26 @@
   # GET /responses.json
   def index
 
-    if params[:page].nil?
-    # 検索条件の設定
-    # ページ繰り以外
-      @searched = Hash.new()
+    puts request.format
+    if request.format == Mime::CSV
+	  @csvDownLoad = true
+	end
+  
+	if @csvDownLoad || !(params[:page].nil?)
+	  # CSV出力、またはページ繰り時：画面入力された条件のセッションへの保存
+	  @searched = session[:searched]
+	else
+	  # 一覧表示、あるいは検索ボタン押下時
+	  @searched = Hash.new()
       session[:searched] = @searched
-	  	
+
 	  if !params[:search].nil?
 	  # 検索ボタン押下時：画面入力された条件のセッションへの保存
         params[:search].each do | key, value |
-        @searched.store(key, value)
+          @searched.store(key, value)
         end
 	  end
-	  	
-	else
-	  # ページ繰り時：検索条件のセッションからの取り出し
-      @searched = session[:searched]
-	end
+	end 
 	
     if params[:request_id].nil?    
     # アンケート依頼に対する回答一覧以外（通常はこちら）
@@ -38,9 +41,13 @@
     if current_user.isAuthor?
       @searched.store('user_id', current_user.id)
 	end
-	
-	# まずはページングを指示
-    @responses = Response.paginate(:page => params[:page], :per_page => 10)
+
+	# ページングを指示
+	if @csvDownLoad
+      @responses = Response.paginate(:page => params[:page], :per_page => 1000)
+    else
+      @responses = Response.paginate(:page => params[:page], :per_page => 10)
+	end
 
 	# 検索条件が指定されていれば、抽出条件としてwhere句を追加
     # ユーザーID
@@ -63,7 +70,8 @@
 
     respond_to do |format|
       format.html # index.html.erb
-      format.csv { send_data NKF.nkf('-sW -Lw', Response.to_csv), :filename => 'responses.csv', :type => 'text/csv; charset=Shift_JIS' }
+      # format.csv { send_data NKF.nkf('-sW -Lw', @responses.to_csv), :filename => 'responses.csv', :type => 'text/csv; charset=Shift_JIS' }
+      format.csv { send_data NKF.nkf('-sW -Lw', Response.to_csv(@responses)), :filename => 'responses.csv', :type => 'text/csv; charset=Shift_JIS' }
       # format.xls { send_data @responses.to_csv(col_sep: "\t") }
       format.json { render json: @responses }
     end
