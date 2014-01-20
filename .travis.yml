@@ -17,4 +17,3 @@ deploy:
     develop: pjsearch-staging
   run:
     - rake db:migrate
-	
