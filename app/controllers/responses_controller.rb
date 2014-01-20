@@ -124,16 +124,17 @@
     @response.request_questionnaire =  current_user.request_questionnaire
     @response.questionnaire =  current_user.request_questionnaire.questionnaire
 	@response.user.request_questionnaire = nil
-    @response.user.save
-    #ユーザー情報の回答日を更新する
-    @userState = current_user.targetUserState(@response.target_year,@response.target_month)
-    if !(@userState.blank?)
-      @userState.respose_date = current_user.updated_at
-      @userState.save
-    end
     
     respond_to do |format|
       if @response.save
+	    @response.user.save
+        #ユーザー情報の回答日を更新する
+        @userState = current_user.targetUserState(@response.target_year,@response.target_month)
+        if !(@userState.blank?)
+          @userState.respose_date = current_user.updated_at
+          @userState.save
+        end
+
         format.html { redirect_to @response, notice: 'Response was successfully created.' }
         format.json { render json: @response, status: :created, location: @response }
       else
