@@ -22,7 +22,7 @@
     anArray.push(aDate.year)
     anArray.push(aDate.month)
     anArray.push(aDate.day)
-    anArray.push(aDate.year)
+    anArray.push(aDate.next_month.year)
     anArray.push(aDate.next_month.month)
     anArray.push(1)
 #    anArray.push(aDate.month)

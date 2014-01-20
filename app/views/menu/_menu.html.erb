@@ -1,6 +1,6 @@
 ﻿
 <% if current_user.requested? %>
-  <p><%= link_to 'おしえて～', new_response_path %></p>
+  <p><%= link_to '回答依頼があります', new_response_path %></p>
 <% else %>
   <p>回答依頼はありません</p>
 <% end %>
