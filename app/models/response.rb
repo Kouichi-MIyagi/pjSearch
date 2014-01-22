@@ -1,5 +1,6 @@
 ﻿class Response < ActiveRecord::Base
-  attr_accessible :comment, :customer_id, :pj_name, :target_month, :target_year, :user_id, :request_questionnaire_id, :questionnaire_id
+  mount_uploader :picture, PictureUploader
+  attr_accessible :comment, :customer_id, :pj_name, :target_month, :target_year, :user_id, :request_questionnaire_id, :questionnaire_id, :picture
   
   has_many :response_items, :dependent => :delete_all
   accepts_nested_attributes_for :response_items

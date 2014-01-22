@@ -1,4 +1,4 @@
-<%= form_for(@topic) do |f| %>
+﻿<%= form_for(@topic, :html => {:multipart => true}) do |f| %>
   <% if @topic.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
@@ -19,6 +19,11 @@
   <div class="field">
     <%= f.label :contents %><br />
     <%= f.text_area :contents, :size=>"60x4"%>
+  </div>
+
+  <div class="field">
+    <%= f.label :写真をアップロード %><br />
+    <%= f.file_field :picture %>
   </div>
 
   <div class="field">

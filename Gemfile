@@ -9,6 +9,8 @@ gem 'rails', '3.2.13'
 
 group :development do
   gem 'sqlite3'
+  gem 'carrierwave'
+  gem 'mini_magick'
 end
 
 group :production do
@@ -55,3 +57,5 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 
 # for passing some data from controller to javascript
 gem 'gon', '3.0.5'
+
+gem 'rspec'
