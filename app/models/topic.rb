@@ -1,3 +1,5 @@
 ﻿class Topic < ActiveRecord::Base
-  attr_accessible :contents, :effective_to, :title
+  mount_uploader :picture, PictureUploader
+  attr_accessible :contents, :effective_to, :title, :picture
+
 end
