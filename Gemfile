@@ -58,3 +58,4 @@ gem 'gon', '3.0.5'
 
 gem 'rspec'
 gem 'carrierwave'
+gem 'mini_magick'
