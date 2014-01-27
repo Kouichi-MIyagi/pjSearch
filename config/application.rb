@@ -68,7 +68,6 @@ module PjSearch
 
     # for bootsrap-sass
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
-  end
 
   config.assets.initialize_on_precompile = false
   
@@ -91,5 +90,7 @@ module PjSearch
     :user_name => 'P0000000',
     :password => 'pppppppppp',
   }
+
+  end
 
 end
