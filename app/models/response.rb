@@ -24,12 +24,6 @@
       end
     end
   end
-  
-  def self.import(file)
-    CSV.foreach(file.path, headers: true) do |row|
-      Response.create! row.to_hash.to_s.encode('utf-8', 'sjis')
-    end
-  end
 
   # CSVアップロード
   def self.from_csv(anArray)

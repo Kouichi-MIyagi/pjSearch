@@ -13,18 +13,13 @@
       # end
     # end
 	CSV.generate do |csv|
-      csv << "id,response_id,question,selection_number,selection_item,comment,created_at,updated_at,社員名,顧客名,プロジェクト名,対象年,対象月,コメント,質問,回答,コメント".parse_csv
+      #csv << "id,response_id,question,selection_number,selection_item,comment,created_at,updated_at,社員名,顧客名,プロジェクト名,対象年,対象月,コメント,質問,回答,コメント".parse_csv
+       csv << column_names + "社員名,顧客名,プロジェクト名,対象年,対象月,コメント,質問,回答,コメント".parse_csv
 
       responses.each do |res|
         res.response_items.each do |item|
-          csv << [item.id,
-		          item.response_id,
-				  item.question,
-				  item.selection_number,
-				  item.selection_item,
-				  item.comment,
-				  item.created_at,
-				  item.updated_at,
+          csv << [item.id, item.response_id, item.question, item.selection_number, 
+		          item.selection_item, item.comment, item.created_at, item.updated_at,
 		          res.user.user_name,
                   res.customer.csname,
                   res.pj_name,

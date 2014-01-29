@@ -47,27 +47,10 @@
     else
       @responses = Response.paginate(:page => params[:page], :per_page => 10)
 	end
-
-	# 検索条件が指定されていれば、抽出条件としてwhere句を追加
-    # 顧客名
-    if !(@searched.fetch('csname', nil).blank?)
-      @responses = @responses.includes(:customer).where(Customer.arel_table[:csname].matches("%" + @searched.fetch('csname')+ "%"))
-    end
-    # 対象年
-    if !(@searched.fetch('target_year', nil).blank?)
-      @responses = @responses.where('responses.target_year = ?', @searched.fetch('target_year'))
-    end
-    # 対象月
-    if !(@searched.fetch('target_month', nil).blank?)
-      @responses = @responses.where('responses.target_month = ?', @searched.fetch('target_month'))
-    end
-	# ユーザーID
-    if !(@searched.fetch('user_id', nil).blank?)
-      @responses = @responses.where('responses.user_id = ?', @searched.fetch('user_id'))
-    end
-
-	session[:searchedResponses] = @responses.to_sql
 	
+	#検索条件で回答を検索
+	self.searchResponse
+		
     respond_to do |format|
       format.html # index.html.erb
       format.csv { send_data NKF.nkf('-sW -Lw', Response.to_csv(@responses)), :filename => "responses#{Time.now.strftime('%Y_%m_%d_%H_%M_%S')}.csv", :type => 'text/csv; charset=Shift_JIS' }
@@ -80,7 +63,7 @@
   # GET /responses/1
   # GET /responses/1.json
   def show
-    self.getResponse
+    self.getResponseAsUserId
 	
     respond_to do |format|
       format.html # show.html.erb
@@ -115,7 +98,7 @@
 
   # GET /responses/1/edit
   def edit
-    self.getResponse
+    self.getResponseAsUserId
   end
 
   # POST /responses
@@ -148,7 +131,7 @@
   # PUT /responses/1
   # PUT /responses/1.json
   def update
-    self.getResponse
+    self.getResponseAsUserId
 
     respond_to do |format|
       if @response.update_attributes(params[:response])
@@ -164,7 +147,7 @@
   # DELETE /responses/1
   # DELETE /responses/1.json
   def destroy
-    self.getResponse
+    self.getResponseAsUserId
     # 回答削除時は現在のアンケートを結びつける
 	@response.user.request_questionnaire = @response.request_questionnaire
     @response.user.save
@@ -181,7 +164,7 @@
     end
   end
   
-  def getResponse
+  def getResponseAsUserId
     if current_user.isAuthor?
 	#管理者以外は自分自身のものしか見えないようにする
 	  @response = Response.where(:id => params[:id]).where(:user_id => current_user.id).first
@@ -190,23 +173,46 @@
 	end
   end
   
-  def deleteResponses
-    # 検索された回答を削除する
-	Response.find_by_sql(session[:searchedResponses]).each do |res|
-	  res.destroy
+  def searchResponse
+    # 検索条件が指定されていれば、抽出条件としてwhere句を追加
+    # 顧客名
+    if !(@searched.fetch('csname', nil).blank?)
+      @responses = @responses.includes(:customer).where(Customer.arel_table[:csname].matches("%" + @searched.fetch('csname')+ "%"))
     end
-		
+    # 対象年
+    if !(@searched.fetch('target_year', nil).blank?)
+      @responses = @responses.where('responses.target_year = ?', @searched.fetch('target_year'))
+    end
+    # 対象月
+    if !(@searched.fetch('target_month', nil).blank?)
+      @responses = @responses.where('responses.target_month = ?', @searched.fetch('target_month'))
+    end
+	# ユーザーID
+    if !(@searched.fetch('user_id', nil).blank?)
+      @responses = @responses.where('responses.user_id = ?', @searched.fetch('user_id'))
+    end
+	
+	#検索条件をセッションに保管
+	session[:searchedResponses] = @responses.to_sql
+
+  end
+  
+  def deleteResponses
+	
+	@responses = Response.paginate(:page => params[:page], :per_page => Response.count + 1)
+	@searched = session[:searched]
+	
+	#検索条件で回答を検索
+	self.searchResponse
+	
+	@responses.destroy_all
+	
 	respond_to do |format|
       format.html { redirect_to responses_url ,notice: 'response was successfully deleted.'}
       format.json { head :no_content }
     end
   end
   
-  def import
-    Response.import(params[:file])
-    redirect_to responses_url, notice: "imported."
-  end
-
   def upload
     require 'csv'
     
