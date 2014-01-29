@@ -60,6 +60,28 @@
     <%= link_to "[CSV形式⇒responses.csvを開きます]", responses_path(format: "csv") %>
     <! %= link_to "Excel", responses_path(format: "xls") % >
   </p>
+  <p>
+    回答明細ダウンロード：
+    <%= link_to "[CSV形式⇒responseItems.csvを開きます]", response_items_path(format: "csv") %>
+  </p>
+
+  <hr>    
+  <h5>回答の一括削除：</h5>
+  <%= form_tag '/responses/deleteResponses', :multipart => true do %>
+  <%= submit_tag "検索結果の一括削除" ,{ confirm: 'Are you sure?' } %>
+  <% end %>
+  <hr>
+  <h5>本番サーバーの回答一括登録:（*.csv）</h5>
+  <%= form_tag '/responses/upload', :multipart => true do %>
+  <%= file_field_tag 'upload_file', :accept => 'text/comma-separated-values' %>
+  <%= submit_tag "アップロード", :confirm => "アップロードしていいですか？" %>
+  <% end %>
+  <hr>
+  <h5>本番サーバーの回答明細一括登録:（*.csv）</h5>
+  <%= form_tag '/response_items/upload', :multipart => true do %>
+  <%= file_field_tag 'upload_file', :accept => 'text/comma-separated-values' %>
+  <%= submit_tag "アップロード", :confirm => "アップロードしていいですか？" %>
+  <% end %>
 <% else %>
   <% if current_user.requested? %>
     <%= link_to '回答する', new_response_path %>

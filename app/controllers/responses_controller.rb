@@ -66,10 +66,11 @@
       @responses = @responses.where('responses.user_id = ?', @searched.fetch('user_id'))
     end
 
-
+	session[:searchedResponses] = @responses.to_sql
+	
     respond_to do |format|
       format.html # index.html.erb
-      format.csv { send_data NKF.nkf('-sW -Lw', Response.to_csv(@responses)), :filename => 'responses.csv', :type => 'text/csv; charset=Shift_JIS' }
+      format.csv { send_data NKF.nkf('-sW -Lw', Response.to_csv(@responses)), :filename => "responses#{Time.now.strftime('%Y_%m_%d_%H_%M_%S')}.csv", :type => 'text/csv; charset=Shift_JIS' }
       # format.xls { send_data @responses.to_csv(col_sep: "\t") }
       format.json { render json: @responses }
     end
@@ -188,4 +189,35 @@
       @response = Response.find(params[:id])	
 	end
   end
+  
+  def deleteResponses
+    # 検索された回答を削除する
+	Response.find_by_sql(session[:searchedResponses]).each do |res|
+	  res.destroy
+    end
+		
+	respond_to do |format|
+      format.html { redirect_to responses_url ,notice: 'response was successfully deleted.'}
+      format.json { head :no_content }
+    end
+  end
+  
+  def import
+    Response.import(params[:file])
+    redirect_to responses_url, notice: "imported."
+  end
+
+  def upload
+    require 'csv'
+    
+    if !params[:upload_file].blank?
+      reader = params[:upload_file].read
+      CSV.parse(reader,:headers => true) do |row|
+        r = Response.from_csv(row)
+		r.save
+      end
+    end
+    redirect_to responses_url, notice: 'response was successfully imported.'
+  end
+
 end
