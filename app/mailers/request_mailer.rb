@@ -1,6 +1,6 @@
 class RequestMailer < ActionMailer::Base
-  default from: "from@example.com"
-
+  default from: ENV['MAIL_SENDER']
+  
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #

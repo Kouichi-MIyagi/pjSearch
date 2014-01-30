@@ -1,11 +1,16 @@
-class ResponseItemsController < ApplicationController
+﻿class ResponseItemsController < ApplicationController
   # GET /response_items
   # GET /response_items.json
   def index
-    @response_items = ResponseItem.all
+      if request.format == Mime::CSV
+	  @responses = Response.find_by_sql(session[:searchedResponses])
+	else
+	  @response_item = ResponseItem.all
+	end
 
     respond_to do |format|
       format.html # index.html.erb
+	  format.csv { send_data NKF.nkf('-sW -Lw', ResponseItem.to_csv(@responses)), :filename => "ResponseItem#{Time.now.strftime('%Y_%m_%d_%H_%M_%S')}.csv", :type => 'text/csv; charset=Shift_JIS' }
       format.json { render json: @response_items }
     end
   end
@@ -80,4 +85,18 @@ class ResponseItemsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def upload
+    require 'csv'
+    
+    if !params[:upload_file].blank?
+      reader = params[:upload_file].read
+      CSV.parse(reader,:headers => true) do |row|
+        r = ResponseItem.from_csv(row)
+		r.save
+      end
+    end
+    redirect_to responses_url, notice: 'ResponseItem was successfully imported.'
+  end
+
 end

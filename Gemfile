@@ -59,3 +59,6 @@ gem 'gon', '3.0.5'
 gem 'rspec'
 gem 'carrierwave'
 gem 'mini_magick'
+
+# DBをYAML形式でダンプ/ロード
+gem 'yaml_db'
