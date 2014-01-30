@@ -73,10 +73,6 @@
   <%= submit_tag "アップロード", :confirm => "アップロードしていいですか？" %>
   <% end %>
   <hr>    
-  <p>
-    客先みえるくん分析ツールV3用ファイルの出力：
-    <%= link_to "[CSV形式⇒responseItems.csvを開きます]", response_items_path(format: "csv") %>
-  </p>
 
 <% else %>
   <% if current_user.requested? %>
