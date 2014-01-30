@@ -4,17 +4,8 @@
   belongs_to :response
   
   def self.to_csv(responses)
-    # CSV.generate do |csv|
-      # csv << column_names
-      # responses.each do |res|
-        # res.response_items.each do |item|
-          # csv << item.attributes.values_at(*column_names)
-        # end
-      # end
-    # end
 	CSV.generate do |csv|
-      #csv << "id,response_id,question,selection_number,selection_item,comment,created_at,updated_at,社員名,顧客名,プロジェクト名,対象年,対象月,コメント,質問,回答,コメント".parse_csv
-       csv << column_names + "社員名,顧客名,プロジェクト名,対象年,対象月,コメント,質問,回答,コメント".parse_csv
+      csv << column_names + "社員名,顧客名,プロジェクト名,対象年,対象月,コメント,質問,回答,コメント".parse_csv
 
       responses.each do |res|
         res.response_items.each do |item|
@@ -32,20 +23,20 @@
         end
       end
     end
-
   end
 
   # CSVアップロード
   def self.from_csv(anArray)
     r = new
-    r.id  = anArray[0]
-	r.response_id = anArray[1]
-	r.question = anArray[2].to_s.encode('utf-8', 'sjis')
-	r.selection_number = anArray[3]
-	r.selection_item = anArray[4].to_s.encode('utf-8', 'sjis')
-	r.comment = anArray[5].to_s.encode('utf-8', 'sjis')
-	r.created_at = anArray[6]
-	r.updated_at = anArray[7]
+	#1列目（anArray[0]）は親子区分
+    r.id  = anArray[1]
+	r.response_id = anArray[2]
+	r.question = anArray[3].to_s.encode('utf-8', 'sjis')
+	r.selection_number = anArray[4]
+	r.selection_item = anArray[5].to_s.encode('utf-8', 'sjis')
+	r.comment = anArray[6].to_s.encode('utf-8', 'sjis')
+	r.created_at = anArray[7]
+	r.updated_at = anArray[8]
     return r	
   end
 

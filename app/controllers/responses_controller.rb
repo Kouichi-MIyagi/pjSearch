@@ -198,7 +198,7 @@
   end
   
   def deleteResponses
-	
+	#対象データの削除（本番環境データをローカルに移した後処理）
 	@responses = Response.paginate(:page => params[:page], :per_page => Response.count + 1)
 	@searched = session[:searched]
 	
@@ -219,8 +219,15 @@
     if !params[:upload_file].blank?
       reader = params[:upload_file].read
       CSV.parse(reader,:headers => true) do |row|
-        r = Response.from_csv(row)
-		r.save
+	    if row[0] == "true"
+		#Response
+          r = Response.from_csv(row)
+		  r.save
+		else
+		#Response_item
+		  r_i = ResponseItem.from_csv(row)
+		  r_i.save
+	    end
       end
     end
     redirect_to responses_url, notice: 'response was successfully imported.'

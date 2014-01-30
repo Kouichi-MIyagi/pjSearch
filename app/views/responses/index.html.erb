@@ -52,36 +52,32 @@
 </table>
 <%= will_paginate @responses, :previous_label=>'≪前', :next_label=>'次≫' %>
 
-<br />
+<hr>
 
 <% if can? :update,@users %>
+  <h5>回答結果ダウンロード：</h5>
+
   <p>
-    回答結果ダウンロード：
     <%= link_to "[CSV形式⇒responses.csvを開きます]", responses_path(format: "csv") %>
     <! %= link_to "Excel", responses_path(format: "xls") % >
   </p>
-  <p>
-    回答明細ダウンロード：
-    <%= link_to "[CSV形式⇒responseItems.csvを開きます]", response_items_path(format: "csv") %>
-  </p>
-
-  <hr>    
+　　<br>
   <h5>回答の一括削除：</h5>
   <%= form_tag '/responses/deleteResponses', :multipart => true do %>
-  <%= submit_tag "検索結果の一括削除" ,{ confirm: 'Are you sure?' } %>
+  <%= submit_tag "検索結果の一括削除" ,{ confirm: '一括削除します。本当によろしいですか？' } %>
   <% end %>
-  <hr>
-  <h5>本番サーバーの回答一括登録:（*.csv）</h5>
+　　<br>
+  <h5>回答一括登録（本番環境データ→ローカル）:（*.csv）</h5>
   <%= form_tag '/responses/upload', :multipart => true do %>
   <%= file_field_tag 'upload_file', :accept => 'text/comma-separated-values' %>
   <%= submit_tag "アップロード", :confirm => "アップロードしていいですか？" %>
   <% end %>
-  <hr>
-  <h5>本番サーバーの回答明細一括登録:（*.csv）</h5>
-  <%= form_tag '/response_items/upload', :multipart => true do %>
-  <%= file_field_tag 'upload_file', :accept => 'text/comma-separated-values' %>
-  <%= submit_tag "アップロード", :confirm => "アップロードしていいですか？" %>
-  <% end %>
+  <hr>    
+  <p>
+    客先みえるくん分析ツールV3用ファイルの出力：
+    <%= link_to "[CSV形式⇒responseItems.csvを開きます]", response_items_path(format: "csv") %>
+  </p>
+
 <% else %>
   <% if current_user.requested? %>
     <%= link_to '回答する', new_response_path %>
