@@ -1,4 +1,6 @@
-﻿class ResponsesController < ApplicationController
+﻿class ResponsesController < ApplicationController  
+  before_filter :checkMentenance, :if => :isAuthor?
+  
   # GET /responses
   # GET /responses.json
   def index
@@ -202,15 +204,21 @@
 	@responses = Response.paginate(:page => params[:page], :per_page => Response.count + 1)
 	@searched = session[:searched]
 	
-	#検索条件で回答を検索
-	self.searchResponse
+	#メンテナンス中しか一括削除できないように
+	if self.isMendenanceMode
+	  #検索条件で回答を検索
+	  self.searchResponse
 	
-	@responses.destroy_all
+	  @responses.destroy_all
 	
-	respond_to do |format|
-      format.html { redirect_to responses_url ,notice: 'response was successfully deleted.'}
-      format.json { head :no_content }
-    end
+	  respond_to do |format|
+        format.html { redirect_to responses_url ,notice: 'response was successfully deleted.'}
+        format.json { head :no_content }
+      end
+	else
+	  redirect_to responses_url, alert: 'メンテナンス状態にしてください'
+	end
+	
   end
   
   def upload
@@ -233,4 +241,5 @@
     redirect_to responses_url, notice: 'response was successfully imported.'
   end
 
+  
 end
