@@ -74,6 +74,7 @@ GEM
       subexec (~> 0.2.1)
     multi_json (1.8.2)
     orm_adapter (0.5.0)
+    pg (0.14.1)
     pg (0.14.1-x86-mingw32)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -136,6 +137,7 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     will_paginate (3.0.5)
+    yaml_db (0.2.3)
 
 PLATFORMS
   ruby
@@ -157,3 +159,4 @@ DEPENDENCIES
   sqlite3
   uglifier (>= 1.0.3)
   will_paginate
+  yaml_db

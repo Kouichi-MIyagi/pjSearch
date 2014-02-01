@@ -36,4 +36,5 @@ Questionitem.create(:question => '作業先の雰囲気は悪いですか',
     :answer2 => 2,:answer2_item => 'まあまあ',
      :answer3 => 3,:answer3_item => 'やや悪い',
       :answer4 => 4,:answer4_item => '悪い')
- 
+Status.create(:is_mentenance => false)
+

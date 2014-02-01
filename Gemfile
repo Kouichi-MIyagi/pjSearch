@@ -9,8 +9,6 @@ gem 'rails', '3.2.13'
 
 group :development do
   gem 'sqlite3'
-  gem 'carrierwave'
-  gem 'mini_magick'
 end
 
 group :production do
@@ -59,3 +57,8 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 gem 'gon', '3.0.5'
 
 gem 'rspec'
+gem 'carrierwave'
+gem 'mini_magick'
+
+# DBをYAML形式でダンプ/ロード
+gem 'yaml_db'
