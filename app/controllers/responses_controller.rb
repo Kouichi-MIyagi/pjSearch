@@ -45,9 +45,9 @@
 
 	# ページングを指示
 	if @csvDownLoad
-      @responses = Response.paginate(:page => params[:page], :per_page => @responses.size + 1)
+      @responses = Response.includes([:user,:customer,:response_items]).paginate(:page => params[:page], :per_page => @responses.size + 1)
     else
-      @responses = Response.paginate(:page => params[:page], :per_page => 10)
+      @responses = Response.includes([:user,:customer]).paginate(:page => params[:page], :per_page => 10)
 	end
 	
 	#検索条件で回答を検索
@@ -193,6 +193,9 @@
     if !(@searched.fetch('user_id', nil).blank?)
       @responses = @responses.where('responses.user_id = ?', @searched.fetch('user_id'))
     end
+	# コメント
+    #  @responses = @responses.where("comment not ?", nil)
+	
 	
 	#検索条件をセッションに保管
 	session[:searchedResponses] = @responses.to_sql

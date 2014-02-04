@@ -15,6 +15,10 @@
     return target_year.to_s + "/" + target_month.to_s
   end
   
+  def aPartOfCommnet
+    return self.comment.length < 20 ? self.comment : self.comment[0,20]+"..."
+  end
+  
   # def self.to_csv(options = {})
   def self.to_csv(responses)
     CSV.generate do |csv|
