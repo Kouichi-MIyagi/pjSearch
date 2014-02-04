@@ -27,7 +27,7 @@
   <tr>
     <th>回答者名</th>
     <th>顧客名</th>
-    <th>プロジェクト名</th>
+    <!th>プロジェクト名</th>
     <th>対象年</th>
     <th>対象月</th>
     <th>コメント</th>
@@ -38,10 +38,10 @@
   <tr>
     <td><%= response.user.user_name %></td>
     <td><%= response.customer.csname %></td>
-    <td><%= response.pj_name %></td>
+    <!td><%= response.pj_name %></td>
     <td><%= response.target_year %></td>
     <td><%= response.target_month %></td>
-    <td><%= response.comment %></td>
+    <td><%= response.aPartOfCommnet %></td>
     <td>
       <%= link_to t('Show'), response %>
       <%= link_to t('Edit'), edit_response_path(response) %>
