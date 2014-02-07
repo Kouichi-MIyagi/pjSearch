@@ -32,7 +32,7 @@
   end
   
   def index
-    @users = User.paginate(:page => params[:page], :per_page => 10)
+    @users = User.paginate(:page => params[:page], :per_page => 10).order('role DESC, user_id ASC')
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }

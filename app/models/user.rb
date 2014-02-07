@@ -57,7 +57,7 @@
     u = new
     u.role  = 'author'
     u.email  = anArray[0]
-    u.password  = u.email #暫定対応。初期パスワードはメールアドレス
+    u.password  = u.email.downcase #暫定対応。初期パスワードはメールアドレス
     u.user_name = anArray[7].to_s.encode('utf-8', 'sjis')
     u.resident_email = anArray[25]#暫定対応。客先メールアドレス
     u.recent_project = anArray[24].to_s.encode('utf-8', 'sjis') #暫定対応。プロジェクト名
