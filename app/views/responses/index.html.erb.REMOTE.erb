@@ -41,7 +41,7 @@
     <td><%= response.comment %></td>
     <td><%= link_to 'Show', response %></td>
     <td><%= link_to 'Edit', edit_response_path(response) %></td>
-    <td><%= link_to 'Destroy', response, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Destroy', response, method: :delete, data: { confirm: '削除してもよろしいですか?' } %></td>
   </tr>
 <% end %>
 <td colspan="1"><%= link_to 'CSVダウンロード', responses_path(format:"csv") %></td>

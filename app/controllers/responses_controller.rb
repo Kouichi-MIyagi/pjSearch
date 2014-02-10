@@ -121,7 +121,7 @@
           @userState.save
         end
 
-        format.html { redirect_to @response, notice: 'Response was successfully created.' }
+        format.html { redirect_to root_path, notice: '回答を登録しました．ありがとうございました．' }
         format.json { render json: @response, status: :created, location: @response }
       else
         format.html { render action: "new" }
@@ -137,7 +137,7 @@
 
     respond_to do |format|
       if @response.update_attributes(params[:response])
-        format.html { redirect_to @response, notice: 'Response was successfully updated.' }
+        format.html { redirect_to @response, notice: '回答を更新しました．' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -161,7 +161,7 @@
       @userState.save
     end
     respond_to do |format|
-      format.html { redirect_to responses_url }
+      format.html { redirect_to responses_url ,notice: '回答を削除しました.'}
       format.json { head :no_content }
     end
   end
@@ -215,7 +215,7 @@
 	  @responses.destroy_all
 	
 	  respond_to do |format|
-        format.html { redirect_to responses_url ,notice: 'response was successfully deleted.'}
+        format.html { redirect_to responses_url ,notice: '回答を削除しました.'}
         format.json { head :no_content }
       end
 	else
