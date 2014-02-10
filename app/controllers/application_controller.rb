@@ -19,7 +19,7 @@
     return Status.find(:first).is_mentenance
   end
 
-#  def after_sign_in_path_for(resource)
-#    return current_user.requested? ? new_response_path : root_path
-#  end
+  def after_sign_in_path_for(resource)
+    return current_user.requested? ? new_response_path : root_path
+  end
 end

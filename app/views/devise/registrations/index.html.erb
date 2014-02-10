@@ -29,5 +29,14 @@
 
 </table>
 <%= will_paginate @users, :previous_label=>'≪前', :next_label=>'次≫' %>
+<hr>
+<%= form_tag '/user/upload', :multipart => true do %>
+  <h5>ユーザー登録（管理者用）:（*.csv）</h5>
+  <%= file_field_tag 'upload_file', :accept => 'text/comma-separated-values' %>
+  <br>
+  <%= submit_tag "アップロード", :confirm => "アップロードしていいですか？" %>
+<% end %>
+<br />
+
 <br/>
 <%= link_to t("Back"), :back %>
