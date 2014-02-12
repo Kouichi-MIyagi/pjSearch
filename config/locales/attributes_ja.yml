@@ -19,6 +19,8 @@ ja:
       response:
         pj_name: プロジェクト名
         targetYMD: 対象年月
+      response/response_items:
+        selection_item: 全ての質問の回答
       customer:
         csname: 顧客名
         cscode: 顧客コード
@@ -38,7 +40,4 @@ ja:
         recent_resident: 直近の常駐
         role: 権限
         resident_email: 客先Eメールアドレス
-      response_item:
-        selection_item: 回答
-
 
