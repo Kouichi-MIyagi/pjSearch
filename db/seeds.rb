@@ -10,6 +10,10 @@ User.create(:email => 'tamura_tetsuya@ogis-ri.co.jp',
   :user_id => 'pjsadmin' , :password => 'password' ,
 	:user_name => '管理者' ,
     :role => 'admin' )
+User.create(:email => 'P0000000@tayori.ogis-ri.co.jp',
+  :user_id => 'p0000000' ,  :password => 'password' ,
+	:user_name => '管理者(田村)' ,
+	    :role => 'admin' )
 User.create(:email => 'P8971228@tayori.ogis-ri.co.jp',
   :user_id => 'p8971228' ,  :password => 'password' ,
 	:user_name => '田村' ,
