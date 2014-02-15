@@ -19,6 +19,8 @@ ja:
       response:
         pj_name: プロジェクト名
         targetYMD: 対象年月
+      response/response_items:
+        selection_item: 全ての質問の回答
       customer:
         csname: 顧客名
         cscode: 顧客コード

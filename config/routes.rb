@@ -26,6 +26,7 @@ PjSearch::Application.routes.draw do
     match 'user/index' => 'users/registrations#index'
     match 'user/show/:id' => 'users/registrations#show', :as => :admin_show_user
     match 'users/:id' => 'users/registrations#destroy', :as => :admin_destroy_user
+    match 'user/upload' => 'users/registrations#upload'
   end
  
   root :to => 'menu#index'

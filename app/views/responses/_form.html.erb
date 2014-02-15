@@ -1,7 +1,7 @@
 <%= form_for(@response, :html => {:multipart => true}) do |f| %>
   <% if @response.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@response.errors.count, "error") %> prohibited this response from being saved:</h2>
+      <h2><%= pluralize(@response.errors.count, "") %> 個のエラーがあります:</h2>
 
       <ul>
       <% @response.errors.full_messages.each do |msg| %>
@@ -17,28 +17,31 @@
     <%= f.hidden_field :user_id %>
   </div>
   <div class="field">
-    <%= f.label :targetYMD %>
-    <%= @response.targetYMD %>
-    <%= f.hidden_field :target_year %>
-	<%= f.hidden_field :target_month %>
-  </div>
-  <div class="field">
     <%= f.label :顧客名 %>
     <%= @response.customer.csname %>
     <%= f.hidden_field :customer_id %>
   </div>
   <div class="field">
+	<%= f.label :targetYMD %>
+    <%= @response.targetYMD %>
+    <%= f.hidden_field :target_year %>
+	<%= f.hidden_field :target_month %>
+	<%= f.hidden_field :pj_name %>
+  </div>
+  <!--
+  <div class="field">
     <%= f.label :pj_name %>
     <%= @response.pj_name %>
-    <%= f.hidden_field :pj_name %>
   </div>
   <div class="field">
     <%= f.label :写真をアップロード %><br />
     <%= f.file_field :picture %>
-  </div>
+  </div> -->
 
   <hr>
-
+  <%= ENV['REQUEST_MESSAGE'] %>
+  <p>
+  
   <table class="table table-striped table-bordered table-condensed">
     <tr>
       <th COLSPAN="2">質問</th>
