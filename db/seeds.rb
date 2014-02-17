@@ -10,16 +10,6 @@ User.create(:email => 'tamura_tetsuya@ogis-ri.co.jp',
   :user_id => 'pjsadmin' , :password => 'password' ,
 	:user_name => '管理者' ,
     :role => 'admin' )
-User.create(:email => 'P0000000@tayori.ogis-ri.co.jp',
-  :user_id => 'p0000000' ,  :password => 'password' ,
-	:user_name => '管理者(田村)' ,
-	    :role => 'admin' )
-User.create(:email => 'P8971228@tayori.ogis-ri.co.jp',
-  :user_id => 'p8971228' ,  :password => 'password' ,
-	:user_name => '田村' ,
-	:resident => true , :transfferred => false ,
-	:request_questionnaire_id => 2, :customer_id => 1, :recent_customer => 'xxシステム連合会',
-    :role => 'author' )
 
 Questionitem.create(:question => '業務でなにか困ったことがありますか（難しい要求、クレーム、トラブルなど）',
   :answer1 => 1,:answer1_item => 'ない',
