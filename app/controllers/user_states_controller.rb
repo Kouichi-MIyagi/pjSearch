@@ -2,7 +2,19 @@
   # GET /user_states
   # GET /user_states.json
   def index
-    if params[:page].nil?
+
+    if request.format == Mime::CSV
+	  @csvDownLoad = true
+	  @per_page = UserState.count + 1
+	else
+	  @csvDownLoad = false
+	  @per_page = 10
+	end
+
+    if @csvDownLoad || !(params[:page].nil?)
+	# ページ繰り時：検索条件のセッションからの取り出し
+      @target = session[:target]
+	else
     # ページ繰り以外
       @target = Hash.new()
       session[:target] = @target
@@ -10,17 +22,14 @@
 	  if !params[:target].nil?
 	  # 検索ボタン押下時：画面入力された条件のセッションへの保存
         params[:target].each do | key, value |
-        @target.store(key, value)
+          @target.store(key, value)
         end
-	  end
-	  	
-	else
-	  # ページ繰り時：検索条件のセッションからの取り出し
-      @target = session[:target]
+	  end	  	
 	end
     
-    #　まずはページング指示
-    @user_states = UserState.paginate(:page => params[:page], :per_page => 10).order('target_year DESC, target_month DESC')
+	# ページングを指示	
+	@user_states = UserState.includes([:user]).paginate(:page => params[:page], :per_page => @per_page).order('target_year DESC, target_month DESC')	  
+
     # 検索条件が指定されていれば、抽出条件としてwhere句を追加
     # 対象年
     if !(@target.fetch('target_year', nil).blank?)
@@ -30,9 +39,14 @@
     if !(@target.fetch('target_month', nil).blank?)
       @user_states = @user_states.where('user_states.target_month = ?', @target.fetch('target_month'))
     end
+	
+	# if @showOverTime
+	  # @user_states = @user_states.where(UserState.arel_table[:over_time].gteq(1))
+	# end
 
     respond_to do |format|
       format.html # index.html.erb
+	  format.csv { send_data NKF.nkf('-sW -Lw', UserState.to_csv(@user_states)), :filename => "UserStates#{Time.now.strftime('%Y_%m_%d_%H_%M_%S')}.csv", :type => 'text/csv; charset=Shift_JIS' }
       format.json { render json: @user_states }
     end
   end

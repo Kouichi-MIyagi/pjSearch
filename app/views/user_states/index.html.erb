@@ -1,4 +1,4 @@
-﻿<h1>Listing user_states</h1>
+﻿<h3>勤務先情報一覧</h3>
 <div class="panel panel-info">
   <div class="panel-heading">
     <h5 class="panel-title">検索条件</h5>
@@ -11,7 +11,7 @@
       <td><%= number_field :target, :target_year, :in => 2013..2020, :value => @target.fetch('target_year', "") %><br /></td>
       <td>対象月   </td>
       <td><%= number_field :target, :target_month, :in => 1..12, :value => @target.fetch('target_month', "") %><br /></td>
-    </tr>
+	  </tr>
   </table>
   <br>
   <%= submit_tag "検索" %>
@@ -68,6 +68,11 @@
   <%= file_field_tag 'upload_file', :accept => 'text/comma-separated-values' %>
   <br>
   <%= submit_tag "アップロード", :confirm => "アップロードしていいですか？" %>
+  <hr>
+  <h5>検索結果ダウンロード：</h5>
+  <p>
+    <%= link_to "[CSV形式⇒UserStates.csvを開きます]", user_states_path(format: "csv") %>
+  </p>
 <% end %>
 <br />
 

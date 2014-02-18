@@ -17,16 +17,12 @@
     anArray = Array.new()
     anArray.push("常駐先")
     anArray.push(self.csname)
-#    anArray.push(self.csname)
-#    anArray.push(self.targetYMD)
     anArray.push(aDate.year)
     anArray.push(aDate.month)
     anArray.push(aDate.day)
     anArray.push(aDate.next_month.year)
     anArray.push(aDate.next_month.month)
     anArray.push(1)
-#    anArray.push(aDate.month)
-#    anArray.push(aDate.end_of_month.day)
     return anArray
   end
 
@@ -40,6 +36,16 @@
     u.user = User.where("user_id = ?", 'p' + csv_id).first
     u.over_time = anArray[3]
     return u
+  end
+
+  def self.to_csv(user_state)
+    CSV.generate do |csv|
+      csv << "社員番号,社員名,年,月,残業時間,客先常駐,出向,id".parse_csv
+      user_state.each do |u|
+		#CSV出力
+        csv << [u.user.user_id, u.user.user_name, u.target_year, u.target_month, u.over_time, u.resident, u.transfferred, u.id]
+      end
+    end
   end
 
 end
