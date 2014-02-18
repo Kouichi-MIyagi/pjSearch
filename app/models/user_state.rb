@@ -28,6 +28,18 @@
 #    anArray.push(aDate.month)
 #    anArray.push(aDate.end_of_month.day)
     return anArray
-
   end
+
+  # CSVアップロード　残業時間更新用
+  def UserState.from_csv(anArray)
+    u = new
+	csv_id = anArray[0]
+    if csv_id.size < 7
+      csv_id = "%07d" % anArray[0]
+    end
+    u.user = User.where("user_id = ?", 'p' + csv_id).first
+    u.over_time = anArray[3]
+    return u
+  end
+
 end
