@@ -6,7 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # coding: utf-8
-
 User.create(:email => 'tamura_tetsuya@ogis-ri.co.jp',
   :user_id => 'pjsadmin' , :password => 'password' ,
 	:user_name => '管理者' ,
@@ -105,3 +104,7 @@ ResponseItem.create(:response_id => 1,
 ResponseItem.create(:response_id => 1, 
                       :selection_item => '3.やや悪い', :comment => '' ,
                       :question => Questionitem.where(:id =>[7]).first.question)
+
+Topic.create(:title => 'テスト表示用',
+  :effective_to => '2016-02-03',
+    :contents  => 'サインイン後に表示の確認をするための初期データです。')
