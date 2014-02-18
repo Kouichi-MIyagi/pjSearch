@@ -28,7 +28,7 @@
 	end
     
 	# ページングを指示	
-	@user_states = UserState.includes([:user]).paginate(:page => params[:page], :per_page => @per_page).order('target_year DESC, target_month DESC')	  
+	@user_states = UserState.includes([:user]).paginate(:page => params[:page], :per_page => @per_page).order('target_year DESC, target_month DESC, id ASC')	  
 
     # 検索条件が指定されていれば、抽出条件としてwhere句を追加
     # 対象年
