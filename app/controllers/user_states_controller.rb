@@ -107,7 +107,7 @@
       format.json { head :no_content }
     end
   end
-  
+
   def upload
     require 'csv'
     @target = Hash.new()
@@ -122,42 +122,60 @@
 
     targetYear = @target.fetch('uploadYear')
     targetMonth = @target.fetch('uploadMonth')
+    targetOvertime = params[:updateOvertime]
     
     if !params[:upload_file].blank?
-      reader = params[:upload_file].read
-      #autherのプロジェクト情報をクリア
-      User.where("role = ?", 'author').update_all(:recent_project => nil, :recent_customer => nil, 
+      if targetOvertime.nil?
+        reader = params[:upload_file].read
+        #autherのプロジェクト情報をクリア
+        User.where("role = ?", 'author').update_all(:recent_project => nil, :recent_customer => nil, 
               :customer_id => nil, :resident => false, :transfferred => false)
-      CSV.parse(reader,:headers => true) do |row|
-        u = User.from_csv(row)
-        if u.resident? or u.transfferred?
-        #客先常駐または出向の場合、顧客マスターを確認
-          cu = Customer.where("csname = ?", u.recent_customer).first
-          if cu.blank? 
-          #顧客が存在しない場合は、顧客マスターに新規作成
-            ncu = Customer.create(:csname => u.recent_customer)
-            u.customer_id = ncu.id
+        CSV.parse(reader,:headers => true) do |row|
+          u = User.from_csv(row)
+          if u.resident? or u.transfferred?
+            #客先常駐または出向の場合、顧客マスターを確認
+            cu = Customer.where("csname = ?", u.recent_customer).first
+            if cu.blank? 
+              #顧客が存在しない場合は、顧客マスターに新規作成
+              ncu = Customer.create(:csname => u.recent_customer)
+              u.customer_id = ncu.id
+            else
+              #顧客が存在する場合は、その顧客IDをセット
+              u.customer_id = cu.id
+            end
+          end 
+          current_u = User.where("user_id = ?", u.user_id).first
+          if current_u.blank?
+            #新規ユーザーの場合はＣＳＶファイルの内容でｉｎｓｅｒｔ
+            u.save()
           else
-            #顧客が存在する場合は、その顧客IDをセット
-            u.customer_id = cu.id
-          end
-        end 
-
-        current_u = User.where("user_id = ?", u.user_id).first
-        if current_u.blank?
-        #新規ユーザーの場合はＣＳＶファイルの内容でｉｎｓｅｒｔ
-          u.save()
-        else
-          #既に存在するユーザーの場合は、ＣＳＶファイルの内容でupdate
-          current_u.update_attributes( :email => u.email, :recent_project => u.recent_project, :recent_customer => u.recent_customer,
+            #既に存在するユーザーの場合は、ＣＳＶファイルの内容でupdate
+            current_u.update_attributes( :email => u.email, :recent_project => u.recent_project, :recent_customer => u.recent_customer,
                :customer_id => u.customer_id , :resident => u.resident, :transfferred => u.transfferred)
-          u.id = current_u.id
-        end
-        u_state = UserState.new(csname: u.recent_customer, resident: u.resident, transfferred:u.transfferred,
+            u.id = current_u.id
+          end
+          u_state = UserState.new(csname: u.recent_customer, resident: u.resident, transfferred:u.transfferred,
              user_id: u.id, customer_id:u.customer_id, target_year: targetYear, target_month: targetMonth)
-        u_state.save()
+          u_state.save()
+        end
+      else
+        #残業時間の更新
+        reader = params[:upload_file].read
+        CSV.parse(reader,:headers => true) do |row|
+          u = UserState.from_csv(row)
+          if !u.user_id.nil?
+            current_u = UserState.where("user_id = ?", u.user_id)
+                        .where("target_year = ?", targetYear)
+                        .where("target_month = ?", targetMonth).first
+            if !current_u.blank?
+              #既に存在するユーザーの場合のみ、ＣＳＶファイルの内容でupdate
+             current_u.update_attributes( :over_time => u.over_time)
+            end
+          end
+        end
       end
+      redirect_to user_states_path, notice: 'User state was successfully created.'
     end
-    redirect_to user_states_path, notice: 'User state was successfully created.'
   end
+
 end

@@ -10,6 +10,10 @@ User.create(:email => 'tamura_tetsuya@ogis-ri.co.jp',
   :user_id => 'pjsadmin' , :password => 'password' ,
 	:user_name => '管理者' ,
     :role => 'admin' )
+User.create(:email => 'Miyagi_Kouichi@ogis-ri.co.jp',
+  :user_id => 'p9572264' , :password => 'password' ,
+	:user_name => '宮城　幸一' ,
+    :role => 'admin' )
 
 Questionitem.create(:question => '業務でなにか困ったことがありますか（難しい要求、クレーム、トラブルなど）',
   :answer1 => 1,:answer1_item => 'ない',
@@ -52,3 +56,8 @@ Questionnaire.create(:title => '客先常駐者用アンケートひな型',
   :effective_from => '2014-02-01',
     :effective_to => '2016-02-03',
 	  :questionitems  => Questionitem.where(:id => [1, 2, 3, 4, 5, 6, 7]))
+
+Topic.create(:title => 'テスト表示用',
+  :effective_to => '2016-02-03',
+    :contents  => 'サインイン後に表示の確認をするための初期データです。')
+
