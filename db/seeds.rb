@@ -18,7 +18,7 @@ User.create(:email => 'tamura_tetsuya@ogis-ri.co.jp',
   :user_id => 'p8971228' , :password => 'password' ,
 	:user_name => '管理者' ,
     :role => 'admin' )
-		
+
 Questionitem.create(:question => '業務でなにか困ったことがありますか（難しい要求、クレーム、トラブルなど）',
   :answer1 => 1,:answer1_item => 'ない',
     :answer2 => 2,:answer2_item => 'あまりない',
@@ -61,4 +61,53 @@ Questionnaire.create(:title => '客先常駐者用アンケートひな型',
   :effective_from => '2014-02-01',
     :effective_to => '2016-02-03',
 	  :questionitems  => Questionitem.where(:id => [1, 2, 3, 4, 5, 6, 7]))
-	  
+Customer.create(:csname => 'xxシステム連合会')
+Customer.create(:csname => 'xxx株式会社')
+
+Topic.create(:title => 'テスト表示用',
+  :effective_to => '2016-02-03',
+    :contents  => 'サインイン後に表示の確認をするための初期データです。')
+
+UserState.create(:csname => 'xxシステム連合会',
+                  :customer_id => Customer.where(:csname => ['xxシステム連合会']).first.id,
+				    :target_year => 2014 , :target_month => 1 ,:request_date => '2014-01-04',
+					  :resident => true , :transfferred => false ,
+					    :user_id => 2)
+UserState.create(:csname => 'xxシステム連合会',
+                  :customer_id => Customer.where(:csname => ['xxシステム連合会']).first.id,
+				    :target_year => 2014 , :target_month => 2 ,:request_date => '2014-02-03',
+					  :resident => true , :transfferred => false ,
+					    :user_id => 2)
+
+RequestQuestionnaire.create(:questionnaire_id => 1, 
+                             :target_year => 2014 , :target_month => 1 , :resident => true) 
+RequestQuestionnaire.create(:questionnaire_id => 1, 
+                             :target_year => 2014 , :target_month => 2 , :resident => true) 
+
+Response.create(:user_id => 2, :customer_id => 1, :target_year => 2014 , :target_month => 1 ,
+                 :comment => '' , :picture => '' , :pj_name => '' , 
+				 :request_questionnaire_id => 1, :questionnaire_id => 1)
+				 
+ResponseItem.create(:response_id => 1, 
+                      :selection_item => '3.ある', :comment => '' ,
+                      :question => Questionitem.where(:id =>[1]).first.question)
+ResponseItem.create(:response_id => 1, 
+                      :selection_item => '2.あまり感じてない', :comment => '' ,
+                      :question => Questionitem.where(:id =>[2]).first.question)
+ResponseItem.create(:response_id => 1, 
+                      :selection_item => '4.きわめて曖昧', :comment => '' ,
+                      :question => Questionitem.where(:id =>[3]).first.question)
+ResponseItem.create(:response_id => 1, 
+                      :selection_item => '1.変わらない', :comment => '' ,
+                      :question => Questionitem.where(:id =>[4]).first.question)
+ResponseItem.create(:response_id => 1, 
+                      :selection_item => '2.ほぼ足りている', :comment => '' ,
+                      :question => Questionitem.where(:id =>[5]).first.question)
+ResponseItem.create(:response_id => 1, 
+                      :selection_item => '2.あまりいない', :comment => '' ,
+                      :question => Questionitem.where(:id =>[6]).first.question)
+ResponseItem.create(:response_id => 1, 
+                      :selection_item => '3.やや悪い', :comment => '' ,
+                      :question => Questionitem.where(:id =>[7]).first.question)
+
+
