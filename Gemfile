@@ -9,6 +9,8 @@ gem 'rails', '3.2.13'
 
 group :development do
   gem 'sqlite3'
+# パフォーマンス測定  
+#  gem 'rack-mini-profiler'
 end
 
 group :production do
