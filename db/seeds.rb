@@ -6,19 +6,17 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # coding: utf-8
-User.create(:email => 'P8971228@tayori.ogis-ri.co.jp',
+User.create(:email => 'tamura_tetsuya@ogis-ri.co.jp',
   :user_id => 'pjsadmin' , :password => 'password' ,
 	:user_name => '管理者' ,
     :role => 'admin' )
-User.create(:email => 'hina_isao@ogis-ri.co.jp',
-  :user_id => 'p8671620' , :password => 'password' ,
-	:user_name => '管理者' ,
-    :role => 'admin' )
-User.create(:email => 'tamura_tetsuya@ogis-ri.co.jp',
-  :user_id => 'p8971228' , :password => 'password' ,
-	:user_name => '管理者' ,
-    :role => 'admin' )
-
+User.create(:email => 'P8971228@tayori.ogis-ri.co.jp',
+  :user_id => 'p8971228' ,  :password => 'password' ,
+	:user_name => '田村' ,
+	:resident => true , :transfferred => false ,
+	:request_questionnaire_id => 2, :customer_id => 1, :recent_customer => 'xxシステム連合会',
+    :role => 'author' )
+		
 Questionitem.create(:question => '業務でなにか困ったことがありますか（難しい要求、クレーム、トラブルなど）',
   :answer1 => 1,:answer1_item => 'ない',
     :answer2 => 2,:answer2_item => 'あまりない',
@@ -61,12 +59,9 @@ Questionnaire.create(:title => '客先常駐者用アンケートひな型',
   :effective_from => '2014-02-01',
     :effective_to => '2016-02-03',
 	  :questionitems  => Questionitem.where(:id => [1, 2, 3, 4, 5, 6, 7]))
+	  
 Customer.create(:csname => 'xxシステム連合会')
 Customer.create(:csname => 'xxx株式会社')
-
-Topic.create(:title => 'テスト表示用',
-  :effective_to => '2016-02-03',
-    :contents  => 'サインイン後に表示の確認をするための初期データです。')
 
 UserState.create(:csname => 'xxシステム連合会',
                   :customer_id => Customer.where(:csname => ['xxシステム連合会']).first.id,
@@ -110,4 +105,7 @@ ResponseItem.create(:response_id => 1,
                       :selection_item => '3.やや悪い', :comment => '' ,
                       :question => Questionitem.where(:id =>[7]).first.question)
 
+Topic.create(:title => 'テスト表示用',
+  :effective_to => '2016-02-03',
+    :contents  => 'サインイン後に表示の確認をするための初期データです。')
 
