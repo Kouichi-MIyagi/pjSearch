@@ -9,8 +9,7 @@ gem 'rails', '3.2.13'
 
 group :development do
   gem 'sqlite3'
-# パフォーマンス測定  
-#  gem 'rack-mini-profiler'
+  gem 'rack-mini-profiler'
 end
 
 group :production do
@@ -64,3 +63,5 @@ gem 'mini_magick'
 
 # DBをYAML形式でダンプ/ロード
 gem 'yaml_db'
+# 一括インサート
+gem 'activerecord-import'
