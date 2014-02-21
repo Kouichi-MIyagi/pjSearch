@@ -152,7 +152,7 @@
 		    u = User.from_csv(row)
 			if u.resident? or u.transfferred?
 			  #客先常駐または出向の場合、顧客マスターを確認
-			  cu = Customer.select("id").where("csname = ?", u.recent_customer).first
+			  cu = Customer.where("csname = ?", u.recent_customer).first
 			  if cu.blank? 
 			    #顧客が存在しない場合は、顧客マスターに新規作成
 			    ncu = Customer.create(:csname => u.recent_customer)
@@ -162,7 +162,7 @@
 			    u.customer_id = cu.id
 			  end
 			end 
-			current_u = User.select("id").where("user_id = ?", u.user_id).first
+			current_u = User.where("user_id = ?", u.user_id).first
 			if current_u.blank?
 		      #新規ユーザーの場合はＣＳＶファイルの内容でｉｎｓｅｒｔ
 			  u.save()
