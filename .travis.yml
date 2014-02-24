@@ -7,7 +7,7 @@ gemfile:
   - Gemfile
 
 script:
-  - bundle exec rake 
+  - bundle exec rake db:reset
   
 deploy:
   provider: heroku
