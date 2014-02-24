@@ -5,7 +5,7 @@
 
     if request.format == Mime::CSV
 	  @csvDownLoad = true
-	  @per_page = UserState.count + 1
+	  @per_page = UserState.count(:id) + 1
 	else
 	  @csvDownLoad = false
 	  @per_page = 10

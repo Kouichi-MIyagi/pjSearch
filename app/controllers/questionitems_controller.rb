@@ -1,4 +1,4 @@
-class QuestionitemsController < ApplicationController
+﻿class QuestionitemsController < ApplicationController
   # GET /questionitems
   # GET /questionitems.json
   def index
@@ -25,10 +25,11 @@ class QuestionitemsController < ApplicationController
   # GET /questionitems/new.json
   def new
     @questionitem = Questionitem.new
-      @questionitem.answer1 = 1
-      @questionitem.answer2 = 2
-      @questionitem.answer3 = 3
-      @questionitem.answer4 = 4
+	  #回答は良いほうから4.3.2.1.の順
+      @questionitem.answer1 = 4
+      @questionitem.answer2 = 3
+      @questionitem.answer3 = 2
+      @questionitem.answer4 = 1
 	  
     respond_to do |format|
       format.html # new.html.erb

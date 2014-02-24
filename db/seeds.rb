@@ -22,40 +22,40 @@ User.create(:email => 'P8971228@tayori.ogis-ri.co.jp',
     :role => 'author' )
 		
 Questionitem.create(:question => '業務でなにか困ったことがありますか（難しい要求、クレーム、トラブルなど）',
-  :answer1 => 1,:answer1_item => 'ない',
-    :answer2 => 2,:answer2_item => 'あまりない',
-     :answer3 => 3,:answer3_item => 'ある',
-      :answer4 => 4,:answer4_item => 'よくある')
+  :answer1 => 4,:answer1_item => 'ない',
+    :answer2 => 3,:answer2_item => 'あまりない',
+     :answer3 => 2,:answer3_item => 'ある',
+      :answer4 => 1,:answer4_item => 'よくある')
 Questionitem.create(:question => '業務において負担や負荷を感じていますか',
-  :answer1 => 1,:answer1_item => '感じていない',
-    :answer2 => 2,:answer2_item => 'あまり感じてない',
-     :answer3 => 3,:answer3_item => '感じている',
-      :answer4 => 4,:answer4_item => '強く感じている')
+  :answer1 => 4,:answer1_item => '感じていない',
+    :answer2 => 3,:answer2_item => 'あまり感じてない',
+     :answer3 => 2,:answer3_item => '感じている',
+      :answer4 => 1,:answer4_item => '強く感じている')
 Questionitem.create(:question => 'あなたの役割は明確になっていますか',
-  :answer1 => 1,:answer1_item => '明確になっている',
-    :answer2 => 2,:answer2_item => 'ほぼ明確になっている',
-     :answer3 => 3,:answer3_item => 'やや曖昧',
-      :answer4 => 4,:answer4_item => 'きわめて曖昧')
+  :answer1 => 4,:answer1_item => '明確になっている',
+    :answer2 => 3,:answer2_item => 'ほぼ明確になっている',
+     :answer3 => 2,:answer3_item => 'やや曖昧',
+      :answer4 => 1,:answer4_item => 'きわめて曖昧')
 Questionitem.create(:question => 'あなたの業務内容はよく変わりますか',
-  :answer1 => 1,:answer1_item => '変わらない',
-    :answer2 => 2,:answer2_item => 'あまり変わらない',
-     :answer3 => 3,:answer3_item => '時々変わる',
-      :answer4 => 4,:answer4_item => 'よく変わる')
+  :answer1 => 4,:answer1_item => '変わらない',
+    :answer2 => 3,:answer2_item => 'あまり変わらない',
+     :answer3 => 2,:answer3_item => '時々変わる',
+      :answer4 => 1,:answer4_item => 'よく変わる')
 Questionitem.create(:question => '担当業務の作業要員は足りていますか',
-  :answer1 => 1,:answer1_item => '足りている',
-    :answer2 => 2,:answer2_item => 'ほぼ足りている',
-     :answer3 => 3,:answer3_item => 'やや不足気味',
-      :answer4 => 4,:answer4_item => '増員が必要')
+  :answer1 => 4,:answer1_item => '足りている',
+    :answer2 => 3,:answer2_item => 'ほぼ足りている',
+     :answer3 => 2,:answer3_item => 'やや不足気味',
+      :answer4 => 1,:answer4_item => '増員が必要')
 Questionitem.create(:question => 'あなたの周りに高圧的な方はおられますか（お客様を含め）',
-  :answer1 => 1,:answer1_item => 'いない',
-    :answer2 => 2,:answer2_item => 'あまりいない',
-     :answer3 => 3,:answer3_item => 'たまにいる',
-      :answer4 => 4,:answer4_item => 'いる')
+  :answer1 => 4,:answer1_item => 'いない',
+    :answer2 => 3,:answer2_item => 'あまりいない',
+     :answer3 => 2,:answer3_item => 'たまにいる',
+      :answer4 => 1,:answer4_item => 'いる')
 Questionitem.create(:question => '職場環境や雰囲気はいかがですか',
-  :answer1 => 1,:answer1_item => 'よい',
-    :answer2 => 2,:answer2_item => 'ややよい',
-     :answer3 => 3,:answer3_item => 'やや悪い',
-      :answer4 => 4,:answer4_item => '悪い')
+  :answer1 => 4,:answer1_item => 'よい',
+    :answer2 => 3,:answer2_item => 'ややよい',
+     :answer3 => 2,:answer3_item => 'やや悪い',
+      :answer4 => 1,:answer4_item => '悪い')
 	  
 Status.create(:is_mentenance => false)
 
@@ -88,25 +88,25 @@ Response.create(:user_id => 2, :customer_id => 1, :target_year => 2014 , :target
 				 :request_questionnaire_id => 1, :questionnaire_id => 1)
 				 
 ResponseItem.create(:response_id => 1, 
-                      :selection_item => '3.ある', :comment => '' ,
+                      :selection_item => '2.ある', :comment => '' ,
                       :question => Questionitem.where(:id =>[1]).first.question)
 ResponseItem.create(:response_id => 1, 
-                      :selection_item => '2.あまり感じてない', :comment => '' ,
+                      :selection_item => '3.あまり感じてない', :comment => '' ,
                       :question => Questionitem.where(:id =>[2]).first.question)
 ResponseItem.create(:response_id => 1, 
-                      :selection_item => '4.きわめて曖昧', :comment => '' ,
+                      :selection_item => '1.きわめて曖昧', :comment => '' ,
                       :question => Questionitem.where(:id =>[3]).first.question)
 ResponseItem.create(:response_id => 1, 
-                      :selection_item => '1.変わらない', :comment => '' ,
+                      :selection_item => '4.変わらない', :comment => '' ,
                       :question => Questionitem.where(:id =>[4]).first.question)
 ResponseItem.create(:response_id => 1, 
-                      :selection_item => '2.ほぼ足りている', :comment => '' ,
+                      :selection_item => '3.ほぼ足りている', :comment => '' ,
                       :question => Questionitem.where(:id =>[5]).first.question)
 ResponseItem.create(:response_id => 1, 
-                      :selection_item => '2.あまりいない', :comment => '' ,
+                      :selection_item => '3.あまりいない', :comment => '' ,
                       :question => Questionitem.where(:id =>[6]).first.question)
 ResponseItem.create(:response_id => 1, 
-                      :selection_item => '3.やや悪い', :comment => '' ,
+                      :selection_item => '2.やや悪い', :comment => '' ,
                       :question => Questionitem.where(:id =>[7]).first.question)
 
 Topic.create(:title => 'テスト表示用',
