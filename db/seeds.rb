@@ -11,7 +11,7 @@ User.create(:email => 'p8971228@tayori.ogis-ri.co.jp',
 	:user_name => '管理者' ,
     :role => 'admin' )
 User.create(:email => 'P8671620@tayori.ogis-ri.co.jp',
-  :user_id => 'pjsguest' , :password => 'guest' ,
+  :user_id => 'pjsguest' , :password => 'guestuser' ,
 	:user_name => 'ゲストユーザー' ,
     :role => 'admin' )
 		
