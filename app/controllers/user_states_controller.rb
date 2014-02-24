@@ -124,6 +124,8 @@
 
   def upload
     require 'csv'
+	require 'kconv'
+	
     @target = Hash.new()
     session[:target] = @target
     
@@ -141,37 +143,41 @@
     if !params[:upload_file].blank?
       if targetOvertime.nil?
         reader = params[:upload_file].read
-        #autherのプロジェクト情報をクリア
-        User.where("role = ?", 'author').update_all(:recent_project => nil, :recent_customer => nil, 
-              :customer_id => nil, :resident => false, :transfferred => false)
-        CSV.parse(reader,:headers => true) do |row|
-          u = User.from_csv(row)
-          if u.resident? or u.transfferred?
-            #客先常駐または出向の場合、顧客マスターを確認
-            cu = Customer.where("csname = ?", u.recent_customer).first
-            if cu.blank? 
-              #顧客が存在しない場合は、顧客マスターに新規作成
-              ncu = Customer.create(:csname => u.recent_customer)
-              u.customer_id = ncu.id
-            else
-              #顧客が存在する場合は、その顧客IDをセット
-              u.customer_id = cu.id
-            end
-          end 
-          current_u = User.where("user_id = ?", u.user_id).first
-          if current_u.blank?
-            #新規ユーザーの場合はＣＳＶファイルの内容でｉｎｓｅｒｔ
-            u.save()
-          else
-            #既に存在するユーザーの場合は、ＣＳＶファイルの内容でupdate
-            current_u.update_attributes( :email => u.email, :recent_project => u.recent_project, :recent_customer => u.recent_customer,
-               :customer_id => u.customer_id , :resident => u.resident, :transfferred => u.transfferred)
-            u.id = current_u.id
-          end
-          u_state = UserState.new(csname: u.recent_customer, resident: u.resident, transfferred:u.transfferred,
-             user_id: u.id, customer_id:u.customer_id, target_year: targetYear, target_month: targetMonth)
-          u_state.save()
-        end
+		ActiveRecord::Base.transaction do
+		  #autherのプロジェクト情報をクリア
+		  User.where("role = ?", 'author').update_all(:recent_project => nil, :recent_customer => nil, 
+				  :customer_id => nil, :resident => false, :transfferred => false)
+		  newUserStates = []
+		  CSV.parse(reader.kconv(Kconv::UTF8, Kconv::SJIS),:headers => true) do |row|
+		    u = User.from_csv(row)
+			if u.resident? or u.transfferred?
+			  #客先常駐または出向の場合、顧客マスターを確認
+			  cu = Customer.where("csname = ?", u.recent_customer).first
+			  if cu.blank? 
+			    #顧客が存在しない場合は、顧客マスターに新規作成
+			    ncu = Customer.create(:csname => u.recent_customer)
+			    u.customer_id = ncu.id
+			  else
+			    #顧客が存在する場合は、その顧客IDをセット
+			    u.customer_id = cu.id
+			  end
+			end 
+			current_u = User.where("user_id = ?", u.user_id).first
+			if current_u.blank?
+		      #新規ユーザーの場合はＣＳＶファイルの内容でｉｎｓｅｒｔ
+			  u.save()
+			else
+			  #既に存在するユーザーの場合は、ＣＳＶファイルの内容でupdate
+			  current_u.update_attributes( :email => u.email, :recent_project => u.recent_project, :recent_customer => u.recent_customer,
+			   :customer_id => u.customer_id , :resident => u.resident, :transfferred => u.transfferred)
+				u.id = current_u.id
+			end
+			newUserStates << UserState.new(csname: u.recent_customer, resident: u.resident, transfferred:u.transfferred,
+			  user_id: u.id, customer_id:u.customer_id, target_year: targetYear, target_month: targetMonth)
+		  end
+		  #UserStateの一括インサート
+		  UserState.import newUserStates
+		end
       else
         #残業時間の更新
         reader = params[:upload_file].read

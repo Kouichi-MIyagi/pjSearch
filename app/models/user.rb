@@ -54,22 +54,38 @@
   
   # CSVアップロード
   def self.from_csv(anArray)
+    # u = new
+    # u.role  = 'author'
+    # u.email  = anArray[0]
+    # u.password  = u.email.downcase #初期パスワードはメールアドレス
+	# anArray[4].to_s.encode('utf-8', 'sjis') == '出向' ? u.transfferred = true : u.transfferred = false
+    # u.user_name = anArray[7].to_s.encode('utf-8', 'sjis')
+    # u.user_name = anArray[7]
+	# csv_id = anArray[8]
+	# if csv_id.size < 7
+       # csv_id = "%07d" % anArray[8]
+    # end
+    # u.user_id = 'p' + csv_id
+	# anArray[9].to_s == '1' ? u.resident = true : u.resident = false
+    # u.recent_customer = anArray[12].to_s.encode('utf-8', 'sjis')
+    # u.recent_customer = anArray[12]
+#   u.recent_project = anArray[24].to_s.encode('utf-8', 'sjis') #暫定対応。プロジェクト名
+#   u.resident_email = anArray[25]#暫定対応。客先メールアドレス
+    # return u 
     u = new
     u.role  = 'author'
     u.email  = anArray[0]
-    u.password  = u.email.downcase #暫定対応。初期パスワードはメールアドレス
-    u.user_name = anArray[7].to_s.encode('utf-8', 'sjis')
-    u.resident_email = anArray[25]#暫定対応。客先メールアドレス
-    u.recent_project = anArray[24].to_s.encode('utf-8', 'sjis') #暫定対応。プロジェクト名
-    u.recent_customer = anArray[12].to_s.encode('utf-8', 'sjis')
+    u.password  = u.email.downcase #初期パスワードはメールアドレス
+	anArray[4] == '出向' ? u.transfferred = true : u.transfferred = false
+    u.user_name = anArray[7]
 	csv_id = anArray[8]
 	if csv_id.size < 7
        csv_id = "%07d" % anArray[8]
     end
     u.user_id = 'p' + csv_id
 	anArray[9].to_s == '1' ? u.resident = true : u.resident = false
-	anArray[4].to_s.encode('utf-8', 'sjis') == '出向' ? u.transfferred = true : u.transfferred = false
-    return u    	
+    u.recent_customer = anArray[12]
+    return u 
   end
   
   def targetUserState(targetYear,targetMonth)
