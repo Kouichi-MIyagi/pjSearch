@@ -7,12 +7,20 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # coding: utf-8
 User.create(:email => 'p8971228@tayori.ogis-ri.co.jp',
-  :user_id => 'pjsadmin' , :password => 'password' ,
-	:user_name => '管理者' ,
+  :user_id => 'pjsadmin' , :password => 'ogisadmin' ,
+	:user_name => 'admin' ,
     :role => 'admin' )
 User.create(:email => 'P8671620@tayori.ogis-ri.co.jp',
-  :user_id => 'pjsguest' , :password => 'guestuser' ,
+  :user_id => 'pjsguest' , :password => 'ogisguest' ,
 	:user_name => 'ゲストユーザー' ,
+    :role => 'admin' )
+User.create(:email => 'Hina_Isao@ogis-ri.co.jp',
+  :user_id => 'p8671620' , :password => 'hina_isao@ogis-ri.co.jp' ,
+	:user_name => '（管理者）比奈' ,
+    :role => 'admin' )
+User.create(:email => 'Tamura_Tetsuya@ogis-ri.co.jp',
+  :user_id => 'p8971228' , :password => 'password' ,
+	:user_name => '（管理者）田村' ,
     :role => 'admin' )
 		
 Questionitem.create(:question => '業務でなにか困ったことがありますか（難しい要求、クレーム、トラブルなど）',
