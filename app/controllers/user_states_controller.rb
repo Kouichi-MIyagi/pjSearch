@@ -139,15 +139,20 @@
     targetYear = @target.fetch('uploadYear')
     targetMonth = @target.fetch('uploadMonth')
     targetOvertime = params[:updateOvertime]
+    addUserState = params[:addUserState]
     
     if !params[:upload_file].blank?
       if targetOvertime.nil?
         reader = params[:upload_file].read
 		ActiveRecord::Base.transaction do
-		  #autherのプロジェクト情報をクリア
-		  User.where("role = ?", 'author').update_all(:recent_project => nil, :recent_customer => nil, 
-				  :customer_id => nil, :resident => false, :transfferred => false)
+		  if addUserState.nil?
+		    #autherのプロジェクト情報をクリア(追加の場合はクリア不要)
+		    User.where("role = ?", 'author').update_all(:resident => false, :transfferred => false)
+		  end 
+		  #一括インサート用の配列作成
 		  newUserStates = []
+
+		  #CSVファイルの読み込み
 		  CSV.parse(reader.kconv(Kconv::UTF8, Kconv::SJIS),:headers => true) do |row|
 		    u = User.from_csv(row)
 			if u.resident? or u.transfferred?
