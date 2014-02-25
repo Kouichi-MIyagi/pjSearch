@@ -125,19 +125,19 @@ class RequestQuestionnairesController < ApplicationController
   
   # 対象ユーザを判別し、対象となったユーザにリクエストをセットすると同時に、対象外のユーザはリセットする
   def requestToTargetUsers
-    User.all.each do |user|
-      user.request_questionnaire = nil
-      user.save
-    end
-    self.extractTargetUsers.each do |user|
-      user.request_questionnaire = @request_questionnaire
-      user.save
-      #ユーザー情報のアンケート依頼日を更新する
-      userState = user.targetUserState(@request_questionnaire.target_year,@request_questionnaire.target_month)
-      if !(userState.blank?)
-        userState.request_date = Time.now
-        userState.save
-      end   
+    
+    ActiveRecord::Base.transaction do
+      User.update_all :request_questionnaire_id => nil
+      self.extractTargetUsers.each do |user|
+        user.request_questionnaire = @request_questionnaire
+        user.save
+        #ユーザー情報のアンケート依頼日を更新する
+        userState = user.targetUserState(@request_questionnaire.target_year,@request_questionnaire.target_month)
+        if !(userState.blank?)
+          userState.request_date = Time.now
+          userState.save
+        end   
+      end
     end
   end
 
