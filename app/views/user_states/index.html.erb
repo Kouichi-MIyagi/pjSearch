@@ -61,6 +61,14 @@
       <td><%= number_field :target, :uploadMonth, :value => @target.fetch('uploadMonth', Time.now.month) %><br /></td>
       <td>残業時間更新</td>
       <td><%= check_box_tag :updateOvertime, true, false, {} %></td>
+	  <tr>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	  <td>追加登録  </td>
+      <td><%= check_box_tag :addUserState, true, false, {} %></td>
+    </tr>
     </tr>
   </table>
 <br />
