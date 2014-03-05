@@ -2,7 +2,7 @@
   mount_uploader :picture, PictureUploader
   attr_accessible :comment, :customer_id, :pj_name, :target_month, :target_year, :user_id, :request_questionnaire_id, :questionnaire_id, :picture
   
-  has_many :response_items, :dependent => :delete_all
+  has_many :response_items, :dependent => :delete_all, :order => 'id ASC'
   accepts_nested_attributes_for :response_items
   attr_accessible :response_items_attributes
   
