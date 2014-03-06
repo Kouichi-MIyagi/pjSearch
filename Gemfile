@@ -65,5 +65,5 @@ gem 'mini_magick'
 gem 'yaml_db'
 # 一括インサート
 gem 'activerecord-import'
-# webserver
+# web server
 gem 'thin'
