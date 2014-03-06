@@ -139,16 +139,15 @@
     targetYear = @target.fetch('uploadYear')
     targetMonth = @target.fetch('uploadMonth')
     targetOvertime = params[:updateOvertime]
-    addUserState = params[:addUserState]
     
     if !params[:upload_file].blank?
       if targetOvertime.nil?
         reader = params[:upload_file].read
 		ActiveRecord::Base.transaction do
-		  if addUserState.nil?
-		    #autherのプロジェクト情報をクリア(追加の場合はクリア不要)
+		  if !UserState.exists?(:target_year => targetYear, :target_month => targetMonth) 
+		    #autherの情報をクリア(同一年月のUserStateがない場合のみ)
 		    User.where("role = ?", 'author').update_all(:resident => false, :transfferred => false)
-		  end 
+		  end
 		  #一括インサート用の配列作成
 		  newUserStates = []
 
