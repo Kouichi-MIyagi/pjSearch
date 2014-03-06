@@ -56,6 +56,8 @@
     require 'csv'
 	require 'kconv'
 
+	uploadUserRoll = params[:userRoll]
+	
     if !params[:upload_file].blank?
       reader = params[:upload_file].read
 	  CSV.parse(reader.kconv(Kconv::UTF8, Kconv::SJIS),:headers => true) do |row|
@@ -73,6 +75,11 @@
           end
         end 
 
+		if uploadUserRoll.blank?
+		  u.role = 'author'
+		else
+		  u.role = uploadUserRoll
+		end
         current_u = User.where("user_id = ?", u.user_id).first
         if current_u.blank?
         #新規ユーザーの場合はＣＳＶファイルの内容でｉｎｓｅｒｔ
@@ -80,7 +87,7 @@
         else
           #既に存在するユーザーの場合は、ＣＳＶファイルの内容でupdate
           current_u.update_attributes( :email => u.email, :recent_project => u.recent_project, :recent_customer => u.recent_customer,
-               :customer_id => u.customer_id , :resident => u.resident, :transfferred => u.transfferred)
+               :customer_id => u.customer_id , :resident => u.resident, :transfferred => u.transfferred, :role => u.role)
         end
       end
     end
