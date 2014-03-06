@@ -54,9 +54,11 @@
   
   def upload
     require 'csv'
+	require 'kconv'
+
     if !params[:upload_file].blank?
       reader = params[:upload_file].read
-      CSV.parse(reader,:headers => true) do |row|
+	  CSV.parse(reader.kconv(Kconv::UTF8, Kconv::SJIS),:headers => true) do |row|
         u = User.from_csv(row)
         if u.resident? or u.transfferred?
         #客先常駐または出向の場合、顧客マスターを確認
