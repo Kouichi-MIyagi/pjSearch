@@ -8,7 +8,7 @@
   
   def self.to_csv(responses)
 	CSV.generate do |csv|
-      csv << column_names + "社員名,顧客名,プロジェクト名,対象年,対象月,コメント,質問,回答,コメント".parse_csv
+      csv << column_names + "社員名,顧客名,プロジェクト名,対象年,対象月,コメント,設問,回答,コメント".parse_csv
 
       responses.each do |res|
         res.response_items.each do |item|
