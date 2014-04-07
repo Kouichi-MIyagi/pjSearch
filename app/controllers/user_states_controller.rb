@@ -41,7 +41,7 @@
     end
 	# 未回答（回答依頼ありで回答がないもの）
     if !(@target.fetch('noResponse', nil).blank?)
-		@user_states = @user_states.where('request_date not ?', nil).where(respose_date: nil)
+		@user_states = @user_states.where('request_date IS NOT NULL').where(respose_date: nil)
 	end
 	# user_idでの検索
     if !(@target.fetch('target_user', nil).blank?)
