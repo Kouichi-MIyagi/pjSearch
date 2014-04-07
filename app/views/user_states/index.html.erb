@@ -1,4 +1,4 @@
-﻿<h3>勤務先情報一覧</h3>
+﻿<h3>月別ユーザー情報</h3>
 <div class="panel panel-info">
   <div class="panel-heading">
     <h5 class="panel-title">検索条件</h5>
@@ -7,11 +7,15 @@
   <%= form_tag "/user_states/index" do %>
   <table id = "square" >
     <tr>
-      <td>対象年   </td>
-      <td><%= number_field :target, :target_year, :in => 2013..2020, :value => @target.fetch('target_year', "") %><br /></td>
-      <td>対象月   </td>
-      <td><%= number_field :target, :target_month, :in => 1..12, :value => @target.fetch('target_month', "") %><br /></td>
-	  </tr>
+      <td>対象年</td>
+      <td><%= number_field :target, :target_year, :in => 2013..2020, :value => @target.fetch('target_year', "") %></td>
+      <td>対象月</td>
+      <td><%= number_field :target, :target_month, :in => 1..12, :value => @target.fetch('target_month', "") %></td>
+      <td>User</td>
+      <td><%= text_field :target, :target_user, :value => @target.fetch('target_user', "") %></td>
+      <td>未回答</td>
+      <td><%= check_box_tag 'target[noResponse]', true, false, {} %></td> </tr>
+	  
   </table>
   <br>
   <%= submit_tag "検索" %>

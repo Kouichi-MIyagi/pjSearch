@@ -22,13 +22,13 @@
   # def self.to_csv(options = {})
   def self.to_csv(responses)
     CSV.generate do |csv|
-      csv << "response?".parse_csv + column_names + "社員名,顧客名,プロジェクト名".parse_csv
+      csv << "response?".parse_csv + column_names + "社員名,顧客名,社員番号".parse_csv
       responses.each do |res|
 		#回答の出力
         csv << [true, res.id, res.user_id, res.customer_id, res.pj_name, res.target_year, 
 		        res.target_month, res.comment, res.created_at, res.updated_at,
 				res.request_questionnaire_id, res.questionnaire_id, res.picture,
-				res.user.user_name,res.customer.csname]
+				res.user.user_name,res.customer.csname,res.user.user_id]
 		#回答明細分の出力
 		res.response_items.each do |res_i|
 		  csv << [false,res_i.id, res_i.response_id, res_i.question, res_i.selection_number, 
