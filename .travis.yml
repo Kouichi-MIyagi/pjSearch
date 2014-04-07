@@ -2,12 +2,13 @@
 
 rvm:
   - 2.0.0
-
+env:
+  - DB=postgresql
 gemfile:
   - Gemfile
 
 script:
-  - bundle exec rake 
+  - RAILS_ENV=test bundle exec rake --trace db:migrate test
   
 deploy:
   provider: heroku
@@ -15,3 +16,5 @@ deploy:
     secure: Z/ktPbh8eB5P9x0ayHcVoHtXXO749Fl2stHTIlMx3orcaio7jlLkxaezKvRS/JOCtCA7Ija7UNOKQ+Ao06Vg0M9+NBMLvYlhDE1RP6SYjeRpM6XJQkpBfQiMfRdzwjzh3RKaM79OQBfXLA0bt0grSWEtcOCq7n6Ew7imMCljX7M=
   app:
     staging: pjsearch-staging
+before_script:
+  - psql -c 'create database pjsearch_test' -U postgres

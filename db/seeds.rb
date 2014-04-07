@@ -108,4 +108,3 @@ ResponseItem.create(:response_id => 1,
 Topic.create(:title => 'テスト表示用',
   :effective_to => '2016-02-03',
     :contents  => 'サインイン後に表示の確認をするための初期データです。')
-

@@ -2,7 +2,7 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.all
+    @topics = Topic.find(:all, :order => "effective_to DESC")
 
     respond_to do |format|
       format.html # index.html.erb

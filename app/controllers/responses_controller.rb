@@ -229,16 +229,26 @@
     
     if !params[:upload_file].blank?
       reader = params[:upload_file].read
-      CSV.parse(reader,:headers => true) do |row|
-	    if row[0] == "true"
-		#Response
-          r = Response.from_csv(row)
-		  r.save
-		else
-		#Response_item
-		  r_i = ResponseItem.from_csv(row)
-		  r_i.save
-	    end
+	  
+	  ActiveRecord::Base.transaction do
+
+	  	#一括インサート用の配列作成
+		newResponses = []
+		newResponseItem = []
+		  
+        CSV.parse(reader,:headers => true) do |row|  
+	      if row[0] == "true"
+		    #Response
+            newResponses << Response.from_csv(row)
+		  else
+		    #Response_item
+		    newResponseItem << ResponseItem.from_csv(row)
+	      end
+		end
+		
+	    #ResponseとResponse_itemの一括インサート
+		Response.import newResponses
+		ResponseItem.import newResponseItem
       end
     end
     redirect_to responses_url, notice: 'response was successfully imported.'
