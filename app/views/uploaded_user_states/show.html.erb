@@ -1,0 +1,12 @@
+﻿<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Comment:</b>
+  <%= @uploaded_user_state.comment %>
+  <b>CSVfile:</b>
+  <%= @uploaded_user_state.csvfile %>
+</p>
+
+
+<%= link_to 'Edit', edit_uploaded_user_state_path(@uploaded_user_state) %> |
+<%= link_to 'Back', uploaded_user_states_path %>

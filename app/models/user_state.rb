@@ -34,7 +34,7 @@
       csv_id = "%07d" % anArray[0]
     end
     u.user = User.where("user_id = ?", 'p' + csv_id).first
-    u.over_time = anArray[3]
+    u.over_time = anArray[2]
     return u
   end
 
