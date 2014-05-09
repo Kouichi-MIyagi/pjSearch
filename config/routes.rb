@@ -1,5 +1,8 @@
 PjSearch::Application.routes.draw do
   
+  resources :uploaded_user_states
+
+
   resources :statuses
 
   resources :user_states
