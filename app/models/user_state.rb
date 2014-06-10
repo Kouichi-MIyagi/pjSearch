@@ -1,6 +1,6 @@
 ﻿class UserState < ActiveRecord::Base
   attr_accessible :csname, :customer_id, :over_time, :request_date, :resident, :respose_date, 
-    :target_month, :target_year, :transfferred, :user_id
+    :target_month, :target_year, :transfferred, :user_id, :mc_time
 
   belongs_to :user
   belongs_to :customer
@@ -35,15 +35,16 @@
     end
     u.user = User.where("user_id = ?", 'p' + csv_id).first
     u.over_time = anArray[2]
+    u.mc_time = anArray[3]
     return u
   end
 
   def self.to_csv(user_state)
     CSV.generate do |csv|
-      csv << "社員番号,社員名,年,月,残業時間,客先常駐,出向,顧客名,request_date,respose_date,id".parse_csv
+      csv << "社員番号,社員名,年,月,残業時間,長時間検診用時間,客先常駐,出向,顧客名,request_date,respose_date,id".parse_csv
       user_state.each do |u|
 		#CSV出力
-        csv << [u.user.user_id, u.user.user_name, u.target_year, u.target_month, u.over_time, u.resident, u.transfferred, u.csname, u.request_date, u.respose_date, u.id]
+        csv << [u.user.user_id, u.user.user_name, u.target_year, u.target_month, u.over_time, u.mc_time, u.resident, u.transfferred, u.csname, u.request_date, u.respose_date, u.id]
       end
     end
   end

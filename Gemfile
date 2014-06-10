@@ -67,3 +67,5 @@ gem 'yaml_db'
 gem 'activerecord-import'
 # webserver
 gem 'thin'
+#ActiveRecordと同じように振る舞う、テーブル無しのモデルを扱う
+gem 'active_attr'
