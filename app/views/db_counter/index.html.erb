@@ -1,0 +1,50 @@
+﻿<h3>DB行件数確認画面</h3>
+<div id="chart_div" style="height:300pt"></div>
+
+<!------------------------------------------------------------------------>
+<!-- AJAX API のロード -->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script> 
+<script type="text/javascript">
+　　google.load("visualization", "1", {packages:["corechart"]});
+　　google.setOnLoadCallback(drawChart);
+	function drawChart() { 
+	
+	  var data = new google.visualization.DataTable();
+	  	
+	  data.addColumn('string','result');
+	  for (var row in gon.table_name){
+ 	    data.addColumn('number',gon.table_name[row])
+      }
+	
+	  data.addRow(gon.rows);
+	  	  
+	  //ex.
+	  //data.addColumn('number','customers');
+	  //data.addColumn('number','questionitems');
+	  //data.addColumn('number','...');
+	  //data.addRow(['',2,7,7,1,2,7,1,1,2,2,1,0]);
+
+	　　var options = { 
+		isStacked: true}; 
+		
+	　　var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+	　　chart.draw(data, options);
+	} 
+	
+</script> 
+
+<table class="table table-striped table-bordered table-condensed">
+  <tr>
+    <th>テーブル名</th>
+    <th>行数</th>
+  </tr>
+
+<% @db_counters.each do |counter| %>
+  <tr>
+    <td><%= counter.TableName %></td>
+    <td><%= counter.NumberOfRows %></td>
+    </td>
+  </tr>
+<% end %>
+</table>
+

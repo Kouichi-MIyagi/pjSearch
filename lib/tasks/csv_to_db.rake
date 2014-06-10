@@ -6,7 +6,6 @@
     task :user_states, ['targetYear', 'targetMonth', 'filePath'] => :environment do |task, args|
 	  require 'csv'
       require 'kconv'	  
-#	  puts args.filePath
 	  puts "#{Time.now} -- csv_to_db:user_states start !!"
 
 	  reader = File.read(args.filePath)
@@ -15,6 +14,22 @@
 	  _UserStatesController.CsvToUserStates(args.targetYear,args.targetMonth,reader)
 	  
 	  puts "#{Time.now} -- user_states inserted !!"
+
+	end
+	
+  # call ResponsesController.CsvToResponse
+  # $ rake csv_to_db:response['tmp/xxxxx.csv'] 
+
+    task :response, ['filePath'] => :environment do |task, args|
+	  require 'csv'
+	  puts "#{Time.now} -- csv_to_db:response start !!"
+
+	  reader = File.read(args.filePath)
+	  
+	  _ResponsesController = ResponsesController.new
+	  _ResponsesController.CsvToResponse(reader)
+	  
+	  puts "#{Time.now} -- Response inserted !!"
 
 	end
 

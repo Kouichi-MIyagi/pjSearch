@@ -162,7 +162,7 @@
                         .where("target_month = ?", targetMonth).first
             if !current_u.blank?
               #既に存在するユーザーの場合のみ、ＣＳＶファイルの内容でupdate
-             current_u.update_attributes( :over_time => u.over_time)
+             current_u.update_attributes( :over_time => u.over_time ,:mc_time => u.mc_time)
             end
           end
         end
