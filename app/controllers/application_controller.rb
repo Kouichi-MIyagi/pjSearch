@@ -4,7 +4,8 @@
   # before_filter :configure_permitted_parameters, if: :devise_controller!
   # before_filter :checkMentenance, :if => :isAuthor?
 
-  
+  load_and_authorize_resource
+
   def isAuthor?
 	return current_user.isAuthor?
   end
