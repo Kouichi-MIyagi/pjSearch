@@ -1,6 +1,5 @@
 ﻿class MenuController < ApplicationController
- before_filter :authenticate_user!
-
+  skip_load_and_authorize_resource
   # def index
   # end
   

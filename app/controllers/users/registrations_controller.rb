@@ -1,4 +1,6 @@
 ﻿class Users::RegistrationsController < Devise::RegistrationsController
+  skip_load_and_authorize_resource
+
   def cancel
     super
   end
@@ -20,11 +22,35 @@
   end
 
   def update
-    super
+    account_update_params = params[:user]
+  
+	@user = User.find(account_update_params[:id])
+	
+    successfully_updated = if needs_password?(@user, params)
+      @user.update_with_password(account_update_params)
+    else
+      # remove the virtual current_password attribute
+      # update_without_password doesn't know how to ignore it
+      params[:user].delete(:current_password)
+      @user.update_without_password(account_update_params)
+    end
+
+    if successfully_updated
+      set_flash_message :notice, :updated
+      # Sign in the user bypassing validation in case their password changed
+	  if current_user.isAdmin? then
+	    @user = User.find(current_user.id)
+	  end
+      sign_in @user, :bypass => true
+	  redirect_to after_update_path_for(@user)
+    else
+      render "edit"
+    end
   end
 
   def destroy
     @user = User.find(params[:id])
+	unauthorized! if cannot? :destroy, @user
     @user.destroy
     if @user.destroy
 	  redirect_to user_index_path, notice: "User deleted."	 
@@ -93,6 +119,20 @@
     end
     redirect_to user_index_path, notice: 'User was successfully created.'
 
+  end
+  
+  def become
+    return unless current_user.isAdmin?
+    sign_in(:user, User.find(params[:id]), { :bypass => true })
+    redirect_to root_url
+  end
+  
+  private
+  # check if we need password to update user data
+  # ie if password or email was changed
+  # extend this as needed
+  def needs_password?(user, params)
+      params[:user][:password].present?
   end
 
 end

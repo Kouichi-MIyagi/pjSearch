@@ -15,15 +15,14 @@
   belongs_to :customer
   belongs_to :request_questionnaire
   has_many :questionnaires, :through => :request_questionnaires
-  has_many :user_states, :order => 'target_year DESC , target_month DESC'
+  has_many :user_states, :order => 'target_year DESC , target_month DESC', :dependent => :destroy
+  has_many :responses, :dependent => :destroy
 
   # attr_accessible :login
   attr_accessible :login
   
   attr_accessible :role
   ROLES=%w[admin author]
-
-  belongs_to :customer
   
   # user_id check by Miyagi 2013/12/4
   validates :user_id,

@@ -52,6 +52,10 @@
     <div><%= f.label :role %>
     <%= f.collection_select :role, User::ROLES, :to_s, :humanize%></div>
   <% end %>
+  <div><%= f.label :id %><br />
+  <%= f.text_field :id, :readonly => true %></div>
+
+
 <br>
 
   <%= f.submit %>

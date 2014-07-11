@@ -1,6 +1,7 @@
 ﻿class ResponsesController < ApplicationController  
   before_filter :checkMentenance, :if => :isAuthor?
-  
+  skip_load_and_authorize_resource
+
   # GET /responses
   # GET /responses.json
   def index

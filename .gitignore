@@ -16,3 +16,6 @@
 
 # Ignore local vendor/bundle
 /vendor/bundle
+
+/screenshot
+/coverage

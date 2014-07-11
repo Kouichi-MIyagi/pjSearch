@@ -24,8 +24,11 @@
     <td><%= u.id %></td>
     <td><%= u.isAdmin? %></td>
     <td><%= link_to t('Show'), admin_show_user_path(u), method: :show %>
-	<%= link_to t('Edit'), edit_user_registration_path(u) %>
-	<%= link_to t('Destroy'), admin_destroy_user_path(u), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<% if can? :update,@users %>
+	  <%= link_to t('Edit'), edit_user_registration_path(u) %>
+	  <%= link_to t('become'), sign_in_as_another_user_path(u.id) %>
+	  <%= link_to t('Destroy'), admin_destroy_user_path(u), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<% end %>
   </tr>
 <% end %>
 
