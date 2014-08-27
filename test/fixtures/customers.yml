@@ -1,9 +1,16 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  csname: MyString
-  cscode: MyString
+customers0:
+  id: 1
+  csname: xxシステム連合会
+  cscode: 
+  created_at: '2014-08-27 09:59:02.542627'
+  updated_at: '2014-08-27 09:59:02.542627'
 
-two:
-  csname: MyString
-  cscode: MyString
+
+customers1:
+  id: 2
+  csname: xxx株式会社
+  cscode: 
+  created_at: '2014-08-27 09:59:02.598298'
+  updated_at: '2014-08-27 09:59:02.598298'
+
