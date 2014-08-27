@@ -1,9 +1,6 @@
 
 questionnaires0:
-  id: 1
   title: 客先常駐者用アンケートひな型
   effective_from: '2014-02-01'
   effective_to: '2016-02-03'
-  created_at: '2014-08-27 09:59:02.365844'
-  updated_at: '2014-08-27 09:59:02.365844'
 
