@@ -4,7 +4,7 @@ class LoginTest <AcceptanceTest
   #fixtures :users
   
    # [正常系] 管理者でサインアップ -> サインアウト
-  test "sign up with admin and then sign out" do
+  test "scenario-01 sign up with admin" do
     visit_root
     ensure_browser_size
     
@@ -25,7 +25,7 @@ class LoginTest <AcceptanceTest
 	end	
 	
 	# [正常系] 一般ユーザでサインアップ -> サインアウト
-  test "sign up with user and then sign out" do
+  test "scenario-02 sign up with user" do
     visit_root
     ensure_browser_size
     
@@ -46,14 +46,13 @@ class LoginTest <AcceptanceTest
 	end
 
   # [異常系] ユーザーIDとパスワード不整合
-  test "try to sign up without password" do
+  test "scenario-03 try to sign up without password" do
     visit_root
     ensure_browser_size
     
       save_screenshot "scenario-03-01.png" 
 
       fill_in "user_user_id", with: "pjsadmin"
-      fill_in "user_password", with: "pjsadmin"
       save_screenshot "scenario-03-02.png" 
 
       click_button "サインイン"
