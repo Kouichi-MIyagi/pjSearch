@@ -1,13 +1,91 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
+questionitems0:
   id: 1
-  question: MyString
-  selectionNumber: 1
-  questionItem: MyString
+  question: 業務でなにか困ったことがありますか（難しい要求、クレーム、トラブルなど）
+  answer1: 4
+  answer1_item: ない
+  answer2: 3
+  answer2_item: あまりない
+  answer3: 2
+  answer3_item: ある
+  answer4: 1
+  answer4_item: よくある
+  questionnaires: questionnaires0
 
-two:
-  id: 1
-  question: MyString
-  selectionNumber: 1
-  questionItem: MyString
+questionitems1:
+  id: 2
+  question: 業務において負担や負荷を感じていますか
+  answer1: 4
+  answer1_item: 感じていない
+  answer2: 3
+  answer2_item: あまり感じてない
+  answer3: 2
+  answer3_item: 感じている
+  answer4: 1
+  answer4_item: 強く感じている
+  questionnaires: questionnaires0
+
+questionitems2:
+  id: 3
+  question: あなたの役割は明確になっていますか
+  answer1: 4
+  answer1_item: 明確になっている
+  answer2: 3
+  answer2_item: ほぼ明確になっている
+  answer3: 2
+  answer3_item: やや曖昧
+  answer4: 1
+  answer4_item: きわめて曖昧
+  questionnaires: questionnaires0
+
+questionitems3:
+  id: 4
+  question: あなたの業務内容はよく変わりますか
+  answer1: 4
+  answer1_item: 変わらない
+  answer2: 3
+  answer2_item: あまり変わらない
+  answer3: 2
+  answer3_item: 時々変わる
+  answer4: 1
+  answer4_item: よく変わる
+  questionnaires: questionnaires0
+
+questionitems4:
+  id: 5
+  question: 担当業務の作業要員は足りていますか
+  answer1: 4
+  answer1_item: 足りている
+  answer2: 3
+  answer2_item: ほぼ足りている
+  answer3: 2
+  answer3_item: やや不足気味
+  answer4: 1
+  answer4_item: 増員が必要
+  questionnaires: questionnaires0
+
+questionitems5:
+  id: 6
+  question: あなたの周りに高圧的な方はおられますか（お客様を含め）
+  answer1: 4
+  answer1_item: いない
+  answer2: 3
+  answer2_item: あまりいない
+  answer3: 2
+  answer3_item: たまにいる
+  answer4: 1
+  answer4_item: いる
+  questionnaires: questionnaires0
+
+questionitems6:
+  id: 7
+  question: 職場環境や雰囲気はいかがですか
+  answer1: 4
+  answer1_item: よい
+  answer2: 3
+  answer2_item: ややよい
+  answer3: 2
+  answer3_item: やや悪い
+  answer4: 1
+  answer4_item: 悪い
+  questionnaires: questionnaires0

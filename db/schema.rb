@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140320043752) do
+ActiveRecord::Schema.define(:version => 20140520042158) do
 
   create_table "customers", :force => true do |t|
     t.string   "csname"
@@ -101,6 +101,13 @@ ActiveRecord::Schema.define(:version => 20140320043752) do
     t.string   "picture"
   end
 
+  create_table "uploaded_user_states", :force => true do |t|
+    t.string   "comment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "csvfile"
+  end
+
   create_table "user_states", :force => true do |t|
     t.integer  "user_id"
     t.integer  "customer_id"
@@ -114,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20140320043752) do
     t.string   "csname"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.float    "mc_time"
   end
 
   create_table "users", :force => true do |t|

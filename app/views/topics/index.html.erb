@@ -4,15 +4,13 @@
 
   <tr>
     <th>タイトル</th>
-    <th>トピックス</th>
-    <th>表示期限</th>
-    <th></th>
+    <th width=15%>表示期限</th>
+    <th width=15%></th>
   </tr>
 
 <% @topics.each do |topic| %>
   <tr>
     <td><%= simple_format(topic.title) %></td>
-    <td><%= simple_format(topic.contents) %></td>
     <td><%= topic.effective_to %></td>
     <td><%= link_to t('Show'), topic %>
     <% if can? :update,@topics %>

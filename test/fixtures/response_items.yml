@@ -1,15 +1,77 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
+response_items0:
+  id: 1
   response_id: 1
-  question: MyString
-  selectionNumber: 1
-  selectionItem: MyString
-  Comment: MyString
+  question: 業務でなにか困ったことがありますか（難しい要求、クレーム、トラブルなど）
+  selection_number: 
+  selection_item: 2.ある
+  comment: ''
+  created_at: '2014-08-27 09:59:03.366961'
+  updated_at: '2014-08-27 09:59:03.366961'
 
-two:
+
+response_items1:
+  id: 2
   response_id: 1
-  question: MyString
-  selectionNumber: 1
-  selectionItem: MyString
-  Comment: MyString
+  question: 業務において負担や負荷を感じていますか
+  selection_number: 
+  selection_item: 3.あまり感じてない
+  comment: ''
+  created_at: '2014-08-27 09:59:03.417750'
+  updated_at: '2014-08-27 09:59:03.417750'
+
+
+response_items2:
+  id: 3
+  response_id: 1
+  question: あなたの役割は明確になっていますか
+  selection_number: 
+  selection_item: 1.きわめて曖昧
+  comment: ''
+  created_at: '2014-08-27 09:59:03.493932'
+  updated_at: '2014-08-27 09:59:03.493932'
+
+
+response_items3:
+  id: 4
+  response_id: 1
+  question: あなたの業務内容はよく変わりますか
+  selection_number: 
+  selection_item: 4.変わらない
+  comment: ''
+  created_at: '2014-08-27 09:59:03.559371'
+  updated_at: '2014-08-27 09:59:03.559371'
+
+
+response_items4:
+  id: 5
+  response_id: 1
+  question: 担当業務の作業要員は足りていますか
+  selection_number: 
+  selection_item: 3.ほぼ足りている
+  comment: ''
+  created_at: '2014-08-27 09:59:03.595509'
+  updated_at: '2014-08-27 09:59:03.595509'
+
+
+response_items5:
+  id: 6
+  response_id: 1
+  question: あなたの周りに高圧的な方はおられますか（お客様を含め）
+  selection_number: 
+  selection_item: 3.あまりいない
+  comment: ''
+  created_at: '2014-08-27 09:59:03.646298'
+  updated_at: '2014-08-27 09:59:03.646298'
+
+
+response_items6:
+  id: 7
+  response_id: 1
+  question: 職場環境や雰囲気はいかがですか
+  selection_number: 
+  selection_item: 2.やや悪い
+  comment: ''
+  created_at: '2014-08-27 09:59:03.696109'
+  updated_at: '2014-08-27 09:59:03.696109'
+

@@ -8,6 +8,7 @@ gem 'rails', '3.2.13'
 #gem 'heroku'
 
 group :development do
+  gem 'yaml_db'
   gem 'sqlite3'
   gem 'rack-mini-profiler'
 end
@@ -57,13 +58,20 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 # for passing some data from controller to javascript
 gem 'gon', '3.0.5'
 
-gem 'rspec'
 gem 'carrierwave'
 gem 'mini_magick'
 
-# DBをYAML形式でダンプ/ロード
-gem 'yaml_db'
 # 一括インサート
 gem 'activerecord-import'
-# web server
+# webserver
 gem 'thin'
+#ActiveRecordと同じように振る舞う、テーブル無しのモデルを扱う
+gem 'active_attr'
+
+# gem for Test
+group :test do
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
+  gem 'simplecov'
+end

@@ -1,9 +1,10 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  contents: MyString
-  effective_to: 2013-12-10
+topics0:
+  id: 1
+  contents: サインイン後に表示の確認をするための初期データです。
+  effective_to: '2016-02-03'
+  created_at: '2014-08-27 09:59:03.862148'
+  updated_at: '2014-08-27 09:59:03.862148'
+  title: テスト表示用
+  picture: 
 
-two:
-  contents: MyString
-  effective_to: 2013-12-10

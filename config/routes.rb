@@ -1,5 +1,11 @@
 PjSearch::Application.routes.draw do
   
+  get "db_counter/index"
+
+  get "db_counter/show"
+
+  resources :uploaded_user_states
+
   resources :statuses
 
   resources :user_states
@@ -27,6 +33,7 @@ PjSearch::Application.routes.draw do
     match 'user/show/:id' => 'users/registrations#show', :as => :admin_show_user
     match 'users/:id' => 'users/registrations#destroy', :as => :admin_destroy_user
     match 'user/upload' => 'users/registrations#upload'
+    match 'user/become/:id' => 'users/registrations#become', :as => :sign_in_as_another_user
   end
  
   root :to => 'menu#index'
