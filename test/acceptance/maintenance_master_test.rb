@@ -6,7 +6,6 @@ class MentenanceMasterTest <AcceptanceTest
 	   # 管理者でサインアップ -> 回答結果一覧
   test "scenario-21 maintenance masters" do
     visit_root
-    ensure_browser_size
     
     save_screenshot "scenario-21-01.png" 
       
@@ -35,7 +34,6 @@ class MentenanceMasterTest <AcceptanceTest
 	   
   test "scenario-22 maintenance masters" do
     visit_root
-    ensure_browser_size
     
     save_screenshot "scenario-22-01.png" 
       
@@ -62,6 +60,8 @@ class MentenanceMasterTest <AcceptanceTest
 
       click_link "Back"
       save_screenshot "scenario-22-09.png" 
+	  assert_equal statuses_path, current_path
+	  
 	  sign_out
       save_screenshot "scenario-22-10.png" 
 	#一般ユーザーでログイン
@@ -71,6 +71,8 @@ class MentenanceMasterTest <AcceptanceTest
 
       click_button "サインイン"
       save_screenshot "scenario-22-21.png" 
+      # メニュー画面でエラー
+      assert_equal '/', current_path
 
 	  sign_out
       fill_in "user_user_id", with: "pjsadmin"
@@ -97,14 +99,23 @@ class MentenanceMasterTest <AcceptanceTest
       click_link "Back"
       save_screenshot "scenario-22-29.png" 
 	  sign_out
+ 
+	  	#一般ユーザーでログイン
+	  fill_in "user_user_id", with: "p8971228"
+      fill_in "user_password", with: "password"
       save_screenshot "scenario-22-30.png" 
 
+      click_button "サインイン"
+      save_screenshot "scenario-22-31.png" 
+      # 今度は回答画面が開く
+      assert_equal new_response_path, current_path
+
+      sign_out
 
 	end	
 	   # 管理者でサインアップ -> 管理部門トピックの登録変更
   test "scenario-23 add topic" do
     visit_root
-    ensure_browser_size
     
     save_screenshot "scenario-23-01.png" 
       
