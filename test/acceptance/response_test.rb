@@ -1,46 +1,47 @@
 ﻿require 'test_helper'
 
 class ResponseTest <AcceptanceTest
-  # [エラーケース] 一般ユーザでサインアップ -> サインアウト
-  test "scenario-05 add Response No1 --error" do
+
+  # [エラーケース] 一般ユーザでサインアップ -> 選択肢１項目のみ入力で登録
+  test "scenario-12 add Response No1 " do
     visit_root
     ensure_browser_size
     
-    save_screenshot "scenario-05-01.png" 
+    save_screenshot "scenario-12-01.png" 
       
       fill_in "user_user_id", with: "p8971228"
       fill_in "user_password", with: "password"
-      save_screenshot "scenario-05-02.png" 
+      save_screenshot "scenario-12-02.png" 
 
       click_button "サインイン"
-      save_screenshot "scenario-05-03.png" 
+      save_screenshot "scenario-12-03.png" 
 
       # 適切な画面に遷移したかを確認
       assert_equal new_response_path, current_path
 	  
 	  select "ない", from: "response_response_items_attributes_0_selection_item"
-      save_screenshot "scenario-05-04.png" 
+      save_screenshot "scenario-12-04.png" 
 	  
       click_button "登録する"
-      save_screenshot "scenario-05-05.png" 
+      save_screenshot "scenario-12-05.png" 
 
       sign_out
 
 	end
 
-	# [正常ケース] 一般ユーザでサインアップ -> サインアウト
-	test "scenario-06 add Response No2" do
+	# [正常ケース] 一般ユーザでサインアップ -> 全て入力し登録-> 一覧画面がら選択し修正登録
+	test "scenario-13 add Response No2" do
     visit_root
     ensure_browser_size
     
-    save_screenshot "scenario-06-01.png" 
+    save_screenshot "scenario-13-01.png" 
       
       fill_in "user_user_id", with: "p8971228"
       fill_in "user_password", with: "password"
-      save_screenshot "scenario-06-02.png" 
+      save_screenshot "scenario-13-02.png" 
 
       click_button "サインイン"
-      save_screenshot "scenario-06-03.png" 
+      save_screenshot "scenario-13-03.png" 
 
       # 適切な画面に遷移したかを確認
       assert_equal new_response_path, current_path
@@ -62,32 +63,33 @@ class ResponseTest <AcceptanceTest
       fill_in "response_comment", with: "週一回状況確認に来てくれている。。\nもう少し話を聞いてくれるとありがたい"
 	  
 	  
-      save_screenshot "scenario-06-04.png" 
+      save_screenshot "scenario-13-04.png" 
       click_button "登録する"
-      save_screenshot "scenario-06-05.png" 
+      save_screenshot "scenario-13-05.png" 
 	  
       # 適切な画面に遷移したかを確認
       assert_equal "/", current_path
-      save_screenshot "scenario-06-06.png" 
+      save_screenshot "scenario-13-06.png" 
 
       click_link "回答結果一覧"
-      save_screenshot "scenario-06-07.png" 
+      save_screenshot "scenario-13-07.png" 
 
       page.all(:link,"表示")[1].click
-      save_screenshot "scenario-06-08.png" 
+      save_screenshot "scenario-13-08.png" 
 	  
 	  click_link "戻る"
 
       page.all(:link,"編集")[1].click
-      save_screenshot "scenario-06-09.png" 
+      save_screenshot "scenario-13-09.png" 
 
 	  select "よい", from: "response_response_items_attributes_6_selection_item"
-      save_screenshot "scenario-06-10.png" 
+      save_screenshot "scenario-13-10.png" 
       click_button "更新する"
-      save_screenshot "scenario-06-11.png" 
+      save_screenshot "scenario-13-11.png" 
 
       sign_out
 
 	end
-	
+
+
 end

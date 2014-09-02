@@ -38,7 +38,7 @@ class LoginTest <AcceptanceTest
       click_button "サインイン"
       save_screenshot "scenario-02-03.png" 
 
-      # 適切な画面に遷移したかを確認
+      # 適切な画面に遷移したかを確認(依頼がない状態)
       assert_equal new_response_path, current_path
 
     sign_out
