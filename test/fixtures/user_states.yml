@@ -11,8 +11,6 @@ user_states0:
   request_date: '2014-01-04'
   respose_date: 
   csname: xxシステム連合会
-  created_at: '2014-08-27 09:59:02.733083'
-  updated_at: '2014-08-27 09:59:02.733083'
   mc_time: 
 
 
@@ -28,7 +26,19 @@ user_states1:
   request_date: '2014-02-03'
   respose_date: 
   csname: xxシステム連合会
-  created_at: '2014-08-27 09:59:02.819033'
-  updated_at: '2014-08-27 09:59:02.819033'
+  mc_time: 
+
+user_states2:
+  id: 3
+  user_id: 2
+  customer_id: 1
+  target_year: 2014
+  target_month: 3
+  over_time: 
+  resident: t
+  transfferred: f
+  request_date:
+  respose_date: 
+  csname: xxシステム連合会
   mc_time: 
 
