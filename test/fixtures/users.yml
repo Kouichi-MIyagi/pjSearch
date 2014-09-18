@@ -1,11 +1,56 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+users0:
+  id: 1
+  email: tamura_tetsuya@ogis-ri.co.jp
+  encrypted_password: $2a$10$qCVlgN1Mok19IV6.Tw61ye3TSuD6rkdZe4TfI21pC5T0700zuvu.q
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: 0
+  current_sign_in_at: 
+  last_sign_in_at: 
+  current_sign_in_ip: 
+  last_sign_in_ip: 
+  created_at: '2014-08-27 09:59:01.099064'
+  updated_at: '2014-08-27 09:59:01.099064'
+  user_name: 管理者
+  customer_id: 
+  user_access: 
+  recent_project: 
+  recent_customer: 
+  recent_resident: 
+  user_id: pjsadmin
+  resident: 
+  transfferred: 
+  request_questionnaire_id: 
+  role: admin
+  resident_email: 
+
+
+users1:
+  id: 2
+  email: P8971228@tayori.ogis-ri.co.jp
+  encrypted_password: $2a$10$pDalvxR2HWy/roIjRSePGuGIsKYiMYUWXCZMR5gHSWfOMSm2tOd0.
+  reset_password_token: 
+  reset_password_sent_at: 
+  remember_created_at: 
+  sign_in_count: 0
+  current_sign_in_at: 
+  last_sign_in_at: 
+  current_sign_in_ip: 
+  last_sign_in_ip: 
+  created_at: '2014-08-27 09:59:01.398911'
+  updated_at: '2014-08-27 09:59:01.398911'
+  user_name: 田村
+  customer_id: 1
+  user_access: 
+  recent_project: 
+  recent_customer: xxシステム連合会
+  recent_resident: 
+  user_id: p8971228
+  resident: t
+  transfferred: f
+  request_questionnaire_id: 2
+  role: author
+  resident_email: 
+

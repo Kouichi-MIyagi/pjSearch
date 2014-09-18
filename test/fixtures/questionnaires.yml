@@ -1,13 +1,6 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  id: 1
-  title: MyString
-  effectiveFrom: 2013-11-30
-  effectiveTo: 2013-11-30
+questionnaires0:
+  title: 客先常駐者用アンケートひな型
+  effective_from: '2014-02-01'
+  effective_to: '2016-02-03'
 
-two:
-  id: 1
-  title: MyString
-  effectiveFrom: 2013-11-30
-  effectiveTo: 2013-11-30
