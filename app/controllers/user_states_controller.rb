@@ -184,6 +184,9 @@
 	  #一括インサート用の配列作成
 	  newUserStates = []
 
+	  #sqlをLog出力しないように設定
+	  self.setInfoToLoglevel
+	  
 	  #CSVファイルの読み込み
 	  CSV.parse(reader.kconv(Kconv::UTF8, Kconv::SJIS),:headers => true) do |row|
 		u = User.from_csv(row)
@@ -214,6 +217,10 @@
 	  end
 	  #UserStateの一括インサート
 	  UserState.import newUserStates
+	  
+	  #Log出力を元に戻す
+	  self.backOnloglevel	  
+
 	end
   end
 

@@ -228,7 +228,13 @@
   def upload
     if !params[:upload_file].blank?
       reader = params[:upload_file].read
+	  #sqlをLog出力しないように設定
+	  self.setInfoToLoglevel
+	  
 	  self.CsvToResponse(reader)
+	  
+	  #Log出力を元に戻す
+	  self.backOnloglevel	  
     end
     redirect_to responses_url, notice: 'response was successfully imported.'
   end
