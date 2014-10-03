@@ -23,4 +23,13 @@
   def after_sign_in_path_for(resource)
     return current_user.requested? ? new_response_path : root_path
   end
+  
+  def setInfoToLoglevel
+    @old_logger = Rails.logger.level
+	Rails.logger.level = Logger::INFO
+  end
+
+  def backOnloglevel
+	Rails.logger.level = @old_logger
+  end
 end
