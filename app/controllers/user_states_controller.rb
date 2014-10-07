@@ -131,7 +131,7 @@
   end
 
   def upload
-    require 'csv'
+    #require 'csv'
 	
     @target = Hash.new()
     session[:target] = @target
@@ -173,7 +173,7 @@
   
   # CSVファイルからUser_Stateを作成
   def CsvToUserStates(targetYear,targetMonth,reader)
-    require 'csv'
+    #require 'csv'
 	require 'kconv'
 	
 	ActiveRecord::Base.transaction do
@@ -209,8 +209,8 @@
 		else
 		  #既に存在するユーザーの場合は、ＣＳＶファイルの内容でupdate
 		  current_u.update_attributes( :email => u.email, :recent_project => u.recent_project, :recent_customer => u.recent_customer,
-		   :customer_id => u.customer_id , :resident => u.resident, :transfferred => u.transfferred)
-			u.id = current_u.id
+		   :customer_id => u.customer_id , :resident => u.resident, :transfferred => u.transfferred, :user_name => u.user_name)
+		  u.id = current_u.id
 		end
 		newUserStates << UserState.new(csname: u.recent_customer, resident: u.resident, transfferred:u.transfferred,
 		  user_id: u.id, customer_id:u.customer_id, target_year: targetYear, target_month: targetMonth)

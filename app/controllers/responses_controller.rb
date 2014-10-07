@@ -241,7 +241,7 @@
 
     # CSVファイルからUser_Stateを作成
   def CsvToResponse(reader)
-    require 'csv'
+    #require 'csv'
 	ActiveRecord::Base.transaction do
 
 	  #一括インサート用の配列作成
