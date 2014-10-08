@@ -155,15 +155,10 @@
         #残業時間の更新
         reader = params[:upload_file].read
         CSV.parse(reader,:headers => true) do |row|
-          u = UserState.from_csv(row)
-          if !u.user_id.nil?
-            current_u = UserState.where("user_id = ?", u.user_id)
-                        .where("target_year = ?", targetYear)
-                        .where("target_month = ?", targetMonth).first
-            if !current_u.blank?
-              #既に存在するユーザーの場合のみ、ＣＳＶファイルの内容でupdate
-             current_u.update_attributes( :over_time => u.over_time ,:mc_time => u.mc_time)
-            end
+          u = UserState.from_csv(row, targetYear, targetMonth)
+          if !u.blank?
+              #既に存在する場合、ＣＳＶファイルの内容で更新
+             u.save
           end
         end
       end
@@ -202,16 +197,9 @@
 			u.customer_id = cu.id
 		  end
 		end 
-		current_u = User.where("user_id = ?", u.user_id).first
-		if current_u.blank?
-		  #新規ユーザーの場合はＣＳＶファイルの内容でｉｎｓｅｒｔ
-		  u.save()
-		else
-		  #既に存在するユーザーの場合は、ＣＳＶファイルの内容でupdate
-		  current_u.update_attributes( :email => u.email, :recent_project => u.recent_project, :recent_customer => u.recent_customer,
-		   :customer_id => u.customer_id , :resident => u.resident, :transfferred => u.transfferred, :user_name => u.user_name)
-		  u.id = current_u.id
-		end
+		#Userを更新
+		u.save
+		#CSVファイルごとにUser_Stateを作成
 		newUserStates << UserState.new(csname: u.recent_customer, resident: u.resident, transfferred:u.transfferred,
 		  user_id: u.id, customer_id:u.customer_id, target_year: targetYear, target_month: targetMonth)
 	  end
