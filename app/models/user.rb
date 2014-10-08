@@ -52,18 +52,18 @@
   end
   
   # CSVアップロード
-  def self.from_csv(anArray)
-    u = new
-    u.role  = 'author'
-    u.email  = anArray[0]
-    u.password  = u.email.downcase #初期パスワードはメールアドレス
-	anArray[4] == '出向' ? u.transfferred = true : u.transfferred = false
-    u.user_name = anArray[7]
-	csv_id = anArray[8]
+  def self.from_csv(anArray)  
+    csv_id = anArray[8]
 	if csv_id.size < 7
        csv_id = "%07d" % anArray[8]
-    end
-    u.user_id = 'p' + csv_id
+    end	
+  	p_id = 'p'.concat(csv_id)
+	
+    u = User.find_by_user_id(p_id) || new(:role => 'author', :password => anArray[0].downcase,
+											:user_id => p_id)
+    u.email  = anArray[0]
+	anArray[4] == '出向' ? u.transfferred = true : u.transfferred = false
+    u.user_name = anArray[7]
 	anArray[9].to_s == '1' ? u.resident = true : u.resident = false
     u.recent_customer = anArray[12]
     return u 

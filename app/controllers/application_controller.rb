@@ -26,7 +26,10 @@
   
   def setInfoToLoglevel
     @old_logger = Rails.logger.level
-	Rails.logger.level = Logger::INFO
+	unless Rails.env.production?
+	  #production環境以外でログレベルをINFOに変更
+	  Rails.logger.level = Logger::INFO
+	end
   end
 
   def backOnloglevel

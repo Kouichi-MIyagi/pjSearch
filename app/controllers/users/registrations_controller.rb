@@ -79,7 +79,7 @@
   end
   
   def upload
-    require 'csv'
+    #require 'csv'
 	require 'kconv'
 
 	uploadUserRoll = params[:userRoll]
