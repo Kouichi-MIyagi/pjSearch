@@ -87,7 +87,7 @@
   end
   
   def upload
-    require 'csv'
+    #require 'csv'
     
     if !params[:upload_file].blank?
       reader = params[:upload_file].read
