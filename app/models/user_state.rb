@@ -27,16 +27,25 @@
   end
 
   # CSVアップロード　残業時間更新用
-  def UserState.from_csv(anArray)
-    u = new
-	csv_id = anArray[0]
-    if csv_id.size < 7
-      csv_id = "%07d" % anArray[0]
-    end
-    u.user = User.where("user_id = ?", 'p' + csv_id).first
-    u.over_time = anArray[2]
-    u.mc_time = anArray[3]
-    return u
+  def UserState.from_csv(anArray, targetYear, targetMonth)
+    csv_id = anArray[0]
+	if csv_id.size < 7
+       csv_id = "%07d" % anArray[0]
+    end	
+	
+	current_u = User.find_by_user_id('p'.concat(csv_id))
+	if current_u.nil?
+	  return nil
+	end
+	
+    u = UserState.find_by_user_id_and_target_year_and_target_month(current_u.id,targetYear,targetMonth)
+	#User_Stateが存在した場合、残業時間などをセット
+	if !u.blank?
+	  u.over_time = anArray[2]
+      u.mc_time = anArray[3]
+	end
+	
+	return u
   end
 
   def self.to_csv(user_state)

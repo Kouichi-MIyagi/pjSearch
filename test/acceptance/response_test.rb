@@ -72,11 +72,13 @@ class ResponseTest <AcceptanceTest
       click_link "回答結果一覧"
       save_screenshot "scenario-32-07.png" 
 
+	  sleep(5)
       page.all(:link,"表示")[1].click
       save_screenshot "scenario-32-08.png" 
 	  
 	  click_link "戻る"
 
+	  sleep(5)
       page.all(:link,"編集")[1].click
       save_screenshot "scenario-32-09.png" 
 

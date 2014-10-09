@@ -79,7 +79,7 @@
   end
   
   def upload
-    require 'csv'
+    #require 'csv'
 	require 'kconv'
 
 	uploadUserRoll = params[:userRoll]
@@ -113,7 +113,8 @@
         else
           #既に存在するユーザーの場合は、ＣＳＶファイルの内容でupdate
           current_u.update_attributes( :email => u.email, :recent_project => u.recent_project, :recent_customer => u.recent_customer,
-               :customer_id => u.customer_id , :resident => u.resident, :transfferred => u.transfferred, :role => u.role)
+               :customer_id => u.customer_id , :resident => u.resident, :transfferred => u.transfferred, :role => u.role,
+			   :user_name => u.user_name)
         end
       end
     end

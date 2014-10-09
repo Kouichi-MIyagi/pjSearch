@@ -1,14 +1,14 @@
-﻿ENV['RAILS_ENV'] ||= 'test'
+﻿require "simplecov"
+SimpleCov.start "rails"
+
+ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 ENV['no_proxy'] = '127.0.0.1'
 
 # add for AcceptanceTest
-require "simplecov"
 require "capybara/rails"
 require "fileutils"
-
-SimpleCov.start "rails"
 
 
 class ActiveSupport::TestCase
