@@ -42,7 +42,7 @@ class RequestQuestionnairesController < ApplicationController
   # POST /request_questionnaires
   # POST /request_questionnaires.json
   def create
-    @request_questionnaire = RequestQuestionnaire.new(params[:request_questionnaire])
+    @request_questionnaire = RequestQuestionnaire.new(request_questionnaire_params)
     self.requestToTargetUsers
     
     respond_to do |format|
@@ -63,7 +63,7 @@ class RequestQuestionnairesController < ApplicationController
     self.requestToTargetUsers
     
     respond_to do |format|
-      if @request_questionnaire.update_attributes(params[:request_questionnaire])
+      if @request_questionnaire.update_attributes(request_questionnaire_params)
         format.html { redirect_to @request_questionnaire, notice: 'Request questionnaire was successfully updated.' }
         format.json { head :no_content }
       else
@@ -141,4 +141,13 @@ class RequestQuestionnairesController < ApplicationController
     end
   end
 
+
+  private
+
+  def request_questionnaire_params
+    params.require(:request_questionnaire).permit(:questionnaire_id, :target_month, :target_year, :user_id, 
+      :mail_tilte, :mail_banner, :mail_content, :mail_trailer, :day_of_mail_sent, :resident, :transfferred)
+  end    
+
+  
 end

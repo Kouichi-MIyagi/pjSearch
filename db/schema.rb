@@ -9,21 +9,21 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140520042158) do
+ActiveRecord::Schema.define(version: 20140520042158) do
 
-  create_table "customers", :force => true do |t|
+  create_table "customers", force: true do |t|
     t.string   "csname"
     t.string   "cscode"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "questionitems", :force => true do |t|
+  create_table "questionitems", force: true do |t|
     t.string   "question"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "answer1"
     t.string   "answer1_item"
     t.integer  "answer2"
@@ -34,25 +34,25 @@ ActiveRecord::Schema.define(:version => 20140520042158) do
     t.string   "answer4_item"
   end
 
-  create_table "questionitems_questionnaires", :id => false, :force => true do |t|
+  create_table "questionitems_questionnaires", id: false, force: true do |t|
     t.integer "questionitem_id"
     t.integer "questionnaire_id"
   end
 
-  create_table "questionnaires", :force => true do |t|
+  create_table "questionnaires", force: true do |t|
     t.string   "title"
     t.date     "effective_from"
     t.date     "effective_to"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
-  create_table "request_questionnaires", :force => true do |t|
+  create_table "request_questionnaires", force: true do |t|
     t.integer  "questionnaire_id"
     t.integer  "target_year"
     t.integer  "target_month"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "mail_tilte"
     t.text     "mail_banner"
     t.text     "mail_content"
@@ -62,53 +62,53 @@ ActiveRecord::Schema.define(:version => 20140520042158) do
     t.string   "transfferred"
   end
 
-  create_table "response_items", :force => true do |t|
+  create_table "response_items", force: true do |t|
     t.integer  "response_id"
     t.string   "question"
     t.integer  "selection_number"
     t.string   "selection_item"
     t.text     "comment"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
-  create_table "responses", :force => true do |t|
+  create_table "responses", force: true do |t|
     t.integer  "user_id"
     t.integer  "customer_id"
     t.string   "pj_name"
     t.integer  "target_year"
     t.integer  "target_month"
     t.text     "comment"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "request_questionnaire_id"
     t.integer  "questionnaire_id"
     t.string   "picture"
   end
 
-  create_table "statuses", :force => true do |t|
+  create_table "statuses", force: true do |t|
     t.boolean  "is_mentenance"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  create_table "topics", :force => true do |t|
+  create_table "topics", force: true do |t|
     t.text     "contents"
     t.date     "effective_to"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "title"
     t.string   "picture"
   end
 
-  create_table "uploaded_user_states", :force => true do |t|
+  create_table "uploaded_user_states", force: true do |t|
     t.string   "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "csvfile"
   end
 
-  create_table "user_states", :force => true do |t|
+  create_table "user_states", force: true do |t|
     t.integer  "user_id"
     t.integer  "customer_id"
     t.integer  "target_year"
@@ -119,24 +119,24 @@ ActiveRecord::Schema.define(:version => 20140520042158) do
     t.date     "request_date"
     t.date     "respose_date"
     t.string   "csname"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.float    "mc_time"
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "email",                    :default => "", :null => false
-    t.string   "encrypted_password",       :default => "", :null => false
+  create_table "users", force: true do |t|
+    t.string   "email",                    default: "", null: false
+    t.string   "encrypted_password",       default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",            :default => 0,  :null => false
+    t.integer  "sign_in_count",            default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "user_name"
     t.integer  "customer_id"
     t.string   "user_access"
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(:version => 20140520042158) do
     t.string   "resident_email"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

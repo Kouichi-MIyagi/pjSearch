@@ -2,7 +2,7 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.find(:all, :order => "effective_to DESC")
+    @topics = Topic.all.order("effective_to DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,7 +40,7 @@ class TopicsController < ApplicationController
   # POST /topics
   # POST /topics.json
   def create
-    @topic = Topic.new(params[:topic])
+    @topic = Topic.new(topic_params)
 
     respond_to do |format|
       if @topic.save
@@ -59,7 +59,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
 
     respond_to do |format|
-      if @topic.update_attributes(params[:topic])
+      if @topic.update_attributes(topic_params)
         format.html { redirect_to @topic, notice: 'Topic was successfully updated.' }
         format.json { head :no_content }
       else
@@ -80,4 +80,12 @@ class TopicsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+
+  def topic_params
+    params.require(:topic).permit(:contents, :effective_to, :title, :picture)
+  end
+
+  
 end

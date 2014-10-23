@@ -41,7 +41,7 @@
   # POST /customers
   # POST /customers.json
   def create
-    @customer = Customer.new(params[:customer])
+    @customer = Customer.new(customer_params)
 
     respond_to do |format|
       if @customer.save
@@ -60,7 +60,7 @@
     @customer = Customer.find(params[:id])
 
     respond_to do |format|
-      if @customer.update_attributes(params[:customer])
+      if @customer.update_attributes(customer_params)
         format.html { redirect_to @customer, notice: 'Customer was successfully updated.' }
         format.json { head :no_content }
       else
@@ -81,4 +81,11 @@
       format.json { head :no_content }
     end
   end
+  
+  private
+
+  def customer_params
+    params.require(:customer).permit(:cscode, :csname)
+  end
+
 end

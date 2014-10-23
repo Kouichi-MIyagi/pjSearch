@@ -6,6 +6,9 @@
 
   load_and_authorize_resource
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  
   def isAuthor?
 	return current_user.isAuthor?
   end
@@ -17,7 +20,7 @@
   end
 
   def isMendenanceMode
-    return Status.find(:first).is_mentenance
+    return Status.first.is_mentenance
   end
 
   def after_sign_in_path_for(resource)
@@ -35,4 +38,11 @@
   def backOnloglevel
 	Rails.logger.level = @old_logger
   end
+  
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << :user_id
+  end
+
 end

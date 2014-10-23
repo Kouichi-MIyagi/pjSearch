@@ -1,6 +1,4 @@
 ﻿class UserState < ActiveRecord::Base
-  attr_accessible :csname, :customer_id, :over_time, :request_date, :resident, :respose_date, 
-    :target_month, :target_year, :transfferred, :user_id, :mc_time
 
   belongs_to :user
   belongs_to :customer

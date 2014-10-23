@@ -1,6 +1,4 @@
 class RequestQuestionnaire < ActiveRecord::Base
-  attr_accessible :questionnaire_id, :target_month, :target_year, :user_id, :mail_tilte, :mail_banner,
-    :mail_content, :mail_trailer, :day_of_mail_sent, :resident, :transfferred
   
   belongs_to :questionnaire
   has_many :users

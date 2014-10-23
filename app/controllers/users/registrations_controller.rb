@@ -136,4 +136,11 @@
       params[:user][:password].present?
   end
 
+  
+  def user_params
+    params.require(:status).permit(:email, :password, :password_confirmation, :remember_me, :user_id,
+    :user_name, :customer_id,:recent_project, :recent_customer, :recent_resident, :resident, 
+    :transfferred, :request_questionnaire_id, :resident_email, :role)
+  end
+
 end

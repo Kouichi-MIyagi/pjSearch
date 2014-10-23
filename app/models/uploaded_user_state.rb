@@ -1,5 +1,4 @@
 ﻿class UploadedUserState < ActiveRecord::Base
-  attr_accessible :comment, :csvfile
   mount_uploader :csvfile, CsvfileUploader
 
   def csvfilePath

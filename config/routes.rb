@@ -8,11 +8,14 @@ PjSearch::Application.routes.draw do
 
   resources :statuses
 
-  resources :user_states
-
-
-  match 'request_questionnaires/sendRequestMail/:id' => 'request_questionnaires#sendRequestMail'
-  match 'responses/index/:request_id' => 'responses#index'
+  resources :user_states do
+    collection do
+      post 'upload'
+    end
+  end
+  
+  get 'request_questionnaires/sendRequestMail/:id' => 'request_questionnaires#sendRequestMail'
+  get 'responses/index/:request_id' => 'responses#index'
 
   resources :topics
 
@@ -29,11 +32,11 @@ PjSearch::Application.routes.draw do
   }
   
   devise_scope :user do
-    match 'user/index' => 'users/registrations#index'
-    match 'user/show/:id' => 'users/registrations#show', :as => :admin_show_user
-    match 'users/:id' => 'users/registrations#destroy', :as => :admin_destroy_user
-    match 'user/upload' => 'users/registrations#upload'
-    match 'user/become/:id' => 'users/registrations#become', :as => :sign_in_as_another_user
+    get 'user/index' => 'users/registrations#index'
+    get 'user/show/:id' => 'users/registrations#show', :as => :admin_show_user
+    get 'users/:id' => 'users/registrations#destroy', :as => :admin_destroy_user
+    post 'user/upload' => 'users/registrations#upload'
+    get 'user/become/:id' => 'users/registrations#become', :as => :sign_in_as_another_user
   end
  
   root :to => 'menu#index'
@@ -41,7 +44,13 @@ PjSearch::Application.routes.draw do
   resources :customers
 
   resources :response_items
-  resources :responses
+  resources :responses do
+      collection do
+      post 'upload'
+      post 'deleteResponses'
+    end
+  end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -98,5 +107,5 @@ PjSearch::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-   match ':controller(/:action(/:id))(.:format)'
+   get ':controller(/:action(/:id))(.:format)'
 end

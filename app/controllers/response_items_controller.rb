@@ -45,7 +45,7 @@
   # POST /response_items
   # POST /response_items.json
   def create
-    @response_item = ResponseItem.new(params[:response_item])
+    @response_item = ResponseItem.new(response_item_params)
 
     respond_to do |format|
       if @response_item.save
@@ -64,7 +64,7 @@
     @response_item = ResponseItem.find(params[:id])
 
     respond_to do |format|
-      if @response_item.update_attributes(params[:response_item])
+      if @response_item.update_attributes(response_item_params)
         format.html { redirect_to @response_item, notice: 'Response item was successfully updated.' }
         format.json { head :no_content }
       else
@@ -99,4 +99,11 @@
     redirect_to responses_url, notice: 'ResponseItem was successfully imported.'
   end
 
+  private
+
+  def response_item_params
+    params.require(:response_item).permit(:comment, :question, :response_id, :selection_item, :selection_number)
+  end
+
+  
 end

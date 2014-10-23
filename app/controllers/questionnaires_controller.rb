@@ -41,7 +41,7 @@ class QuestionnairesController < ApplicationController
   # POST /questionnaires
   # POST /questionnaires.json
   def create
-    @questionnaire = Questionnaire.new(params[:questionnaire])
+    @questionnaire = Questionnaire.new(questionnaire_params)
 
     respond_to do |format|
       if @questionnaire.save
@@ -60,7 +60,7 @@ class QuestionnairesController < ApplicationController
     @questionnaire = Questionnaire.find(params[:id])
 
     respond_to do |format|
-      if @questionnaire.update_attributes(params[:questionnaire])
+      if @questionnaire.update_attributes(questionnaire_params)
         format.html { redirect_to @questionnaire, notice: 'Questionnaire was successfully updated.' }
         format.json { head :no_content }
       else
@@ -81,4 +81,11 @@ class QuestionnairesController < ApplicationController
       format.json { head :no_content }
     end
   end
+    
+  private
+
+  def questionnaire_params
+    params.require(:questionnaire).permit(:id, :effective_from, :effective_to, :title, :questionitems, :questionitem_ids)
+  end    
+      
 end

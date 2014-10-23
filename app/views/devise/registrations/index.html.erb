@@ -35,7 +35,7 @@
 </table>
 <%= will_paginate @users, :previous_label=>'≪前', :next_label=>'次≫' %>
 <hr>
-<%= form_tag '/user/upload', :multipart => true do %>
+<%= form_tag({controller: "user", action: "upload", method: "post"}, {multipart: true}) do %>
   <h5>ユーザー登録（追加用）:（*.csv）</h5>
   <%= file_field_tag 'upload_file', :accept => 'text/comma-separated-values' %>
   <%= select_tag 'userRoll', options_for_select({"" => "", "管理者" => "admin", "常駐者" => "author"})  %>

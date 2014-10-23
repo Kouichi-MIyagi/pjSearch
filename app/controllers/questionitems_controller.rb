@@ -45,7 +45,7 @@
   # POST /questionitems
   # POST /questionitems.json
   def create
-    @questionitem = Questionitem.new(params[:questionitem])
+    @questionitem = Questionitem.new(questionitem_params)
 
     respond_to do |format|
       if @questionitem.save
@@ -64,7 +64,7 @@
     @questionitem = Questionitem.find(params[:id])
 
     respond_to do |format|
-      if @questionitem.update_attributes(params[:questionitem])
+      if @questionitem.update_attributes(questionitem_params)
         format.html { redirect_to @questionitem, notice: 'Questionitem was successfully updated.' }
         format.json { head :no_content }
       else
@@ -85,4 +85,13 @@
       format.json { head :no_content }
     end
   end
+  
+    
+  private
+
+  def questionitem_params
+    params.require(:questionitem).permit(:id, :question, :answer1, :answer1_item,
+      :answer2, :answer2_item, :answer3, :answer3_item, :answer4, :answer4_item, :questionnaire_ids)
+  end
+  
 end

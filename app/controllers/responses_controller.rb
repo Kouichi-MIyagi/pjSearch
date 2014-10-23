@@ -107,7 +107,7 @@
   # POST /responses
   # POST /responses.json
   def create
-    @response = Response.new(params[:response])
+    @response = Response.new(response_params)
     @response.request_questionnaire =  current_user.request_questionnaire
     @response.questionnaire =  current_user.request_questionnaire.questionnaire
 	@response.user.request_questionnaire = nil
@@ -137,7 +137,7 @@
     self.getResponseAsUserId
 
     respond_to do |format|
-      if @response.update_attributes(params[:response])
+      if @response.update_attributes(response_params)
         format.html { redirect_to @response, notice: '回答を更新しました．' }
         format.json { head :no_content }
       else
@@ -264,5 +264,15 @@
     end
 
   end
+  
+   
+  private
+
+  def response_params
+    params.require(:response).permit(:comment, :customer_id, :pj_name, :target_month, :target_year, 
+    :user_id, :request_questionnaire_id, :questionnaire_id, :picture,
+    response_items_attributes: [:comment, :question, :response_id, :selection_item, :selection_number])
+  end
+
   
 end

@@ -6,22 +6,21 @@
 
   # Setup accessible (or protected) attributes for your model
   # Change user_id etc. 2013/12/3 by Miyagi 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :user_id, :user_name, :customer_id,
-    :user_access, :recent_project, :recent_customer, :recent_resident, :resident, :transfferred, :request_questionnaire_id, :resident_email
+  #attr_accessible :email, :password, :password_confirmation, :remember_me, :user_id, :user_name, :customer_id,
+  #  :user_access, :recent_project, :recent_customer, :recent_resident, :resident, :transfferred, :request_questionnaire_id, :resident_email
   # , :login
 
-  # attr_accessible :title, :body
    
   belongs_to :customer
   belongs_to :request_questionnaire
   has_many :questionnaires, :through => :request_questionnaires
-  has_many :user_states, :order => 'target_year DESC , target_month DESC', :dependent => :destroy
+  has_many :user_states,:dependent => :destroy 
+#  has_many :user_states, :order => 'target_year DESC , target_month DESC', :dependent => :destroy
   has_many :responses, :dependent => :destroy
 
   # attr_accessible :login
-  attr_accessible :login
   
-  attr_accessible :role
+  #attr_accessible :role
   ROLES=%w[admin author]
   
   # user_id check by Miyagi 2013/12/4

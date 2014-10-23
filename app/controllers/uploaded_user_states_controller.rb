@@ -40,7 +40,7 @@ class UploadedUserStatesController < ApplicationController
   # POST /uploaded_user_states
   # POST /uploaded_user_states.json
   def create
-    @uploaded_user_state = UploadedUserState.new(params[:uploaded_user_state])
+    @uploaded_user_state = UploadedUserState.new(uploaded_user_state_params)
 
     respond_to do |format|
       if @uploaded_user_state.save
@@ -59,7 +59,7 @@ class UploadedUserStatesController < ApplicationController
     @uploaded_user_state = UploadedUserState.find(params[:id])
 
     respond_to do |format|
-      if @uploaded_user_state.update_attributes(params[:uploaded_user_state])
+      if @uploaded_user_state.update_attributes(uploaded_user_state_params)
         format.html { redirect_to @uploaded_user_state, notice: 'Uploaded user state was successfully updated.' }
         format.json { head :no_content }
       else
@@ -80,4 +80,11 @@ class UploadedUserStatesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+
+  def uploaded_user_state_params
+    params.require(:topic).permit(:comment, :csvfile)
+  end
+  
 end
