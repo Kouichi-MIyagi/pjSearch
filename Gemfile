@@ -64,7 +64,7 @@ gem 'mini_magick'
 # 一括インサート
 gem 'activerecord-import'
 # webserver
-gem 'thin'
+# gem 'thin'
 #ActiveRecordと同じように振る舞う、テーブル無しのモデルを扱う
 gem 'active_attr'
 
