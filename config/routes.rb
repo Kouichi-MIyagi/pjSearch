@@ -4,13 +4,16 @@ PjSearch::Application.routes.draw do
 
   get "db_counter/show"
 
-  resources :uploaded_user_states
+#  resources :uploaded_user_states
 
   resources :statuses
 
-  resources :user_states
-
-
+  resources :user_states do
+    collection do
+      post 'upload'
+    end
+  end
+  
   match 'request_questionnaires/sendRequestMail/:id' => 'request_questionnaires#sendRequestMail'
   match 'responses/index/:request_id' => 'responses#index'
 

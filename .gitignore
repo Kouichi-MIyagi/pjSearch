@@ -21,4 +21,4 @@
 /screenshot
 /coverage
 
-/***/*.csv
+/test/*.csv

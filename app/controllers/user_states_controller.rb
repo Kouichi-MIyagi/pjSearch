@@ -126,6 +126,8 @@
         end
       end
       redirect_to user_states_path, notice: 'User state was successfully created.'
+    else
+      redirect_to user_states_path, notice: 'CSV File is not Find!!'
     end
   end
   
