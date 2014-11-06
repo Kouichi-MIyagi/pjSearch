@@ -4,7 +4,7 @@ PjSearch::Application.routes.draw do
 
   get "db_counter/show"
 
-  resources :uploaded_user_states
+#  resources :uploaded_user_states
 
   resources :statuses
 

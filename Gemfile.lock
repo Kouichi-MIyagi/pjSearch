@@ -33,8 +33,8 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
-    bcrypt (3.1.7)
-    bcrypt (3.1.7-x86-mingw32)
+    bcrypt (3.1.9)
+    bcrypt (3.1.9-x86-mingw32)
     bootstrap-sass (3.0.3.0)
       sass (~> 3.2)
     builder (3.2.2)
@@ -119,6 +119,11 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.6)
       sprockets-rails (~> 2.0)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.2)
+    rails_stdout_logging (0.0.3)
     railties (4.1.6)
       actionpack (= 4.1.6)
       activesupport (= 4.1.6)
@@ -179,7 +184,7 @@ GEM
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2014.8)
+    tzinfo-data (1.2014.9)
       tzinfo (>= 1.0.0)
     uglifier (2.5.3)
       execjs (>= 0.3.0)
@@ -212,6 +217,7 @@ DEPENDENCIES
   mini_magick
   pg
   rails (~> 4.1)
+  rails_12factor
   ransack
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
