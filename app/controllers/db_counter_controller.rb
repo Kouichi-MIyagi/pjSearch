@@ -11,7 +11,8 @@
 	_Rows << ''
 	
 	table_names.each do |table_name, i|	 
-      rows = ActiveRecord::Base.connection.select_all("SELECT count(*) FROM #{table_name}")
+#      rows = ActiveRecord::Base.connection.select_all("SELECT count(*) FROM #{table_name}")
+      rows = ActiveRecord::Base.connection.select_rows("SELECT count(*) FROM #{table_name}")
 
 	  res = rows.to_s.match(%r(\d+)).to_s
 	  

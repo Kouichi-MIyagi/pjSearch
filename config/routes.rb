@@ -4,13 +4,16 @@ PjSearch::Application.routes.draw do
 
   get "db_counter/show"
 
-  resources :uploaded_user_states
+#  resources :uploaded_user_states
 
   resources :statuses
 
-  resources :user_states
-
-
+  resources :user_states do
+    collection do
+      post 'upload'
+    end
+  end
+  
   match 'request_questionnaires/sendRequestMail/:id' => 'request_questionnaires#sendRequestMail'
   match 'responses/index/:request_id' => 'responses#index'
 
@@ -30,6 +33,7 @@ PjSearch::Application.routes.draw do
   
   devise_scope :user do
     match 'user/index' => 'users/registrations#index'
+    match 'users' => 'users/registrations#index'
     match 'user/show/:id' => 'users/registrations#show', :as => :admin_show_user
     match 'users/:id' => 'users/registrations#destroy', :as => :admin_destroy_user
     match 'user/upload' => 'users/registrations#upload'

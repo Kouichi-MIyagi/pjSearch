@@ -68,6 +68,9 @@ gem 'thin'
 #ActiveRecordと同じように振る舞う、テーブル無しのモデルを扱う
 gem 'active_attr'
 
+# 検索
+gem 'ransack'
+
 # gem for Test
 group :test do
   gem 'capybara'
