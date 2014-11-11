@@ -31,9 +31,16 @@ class AcceptanceTest <ActionDispatch::IntegrationTest
   SCREENSHOTS_DIR = "screenshot"
   self.use_transactional_fixtures = false
 
+  profile = Selenium::WebDriver::Firefox::Profile.new
+  # 0:デスクトップに出力, 1:デフォルトのダウンロードディレクトリ
+  profile["browser.download.folderList"] = 0
+  profile["browser.download.useDownloadDir"] = "true"
+  profile["browser.helperApps.neverAsk.saveToDisk"] = "text/csv, text/comma-separated-values"
+
+  
   setup do
     Capybara.register_driver :selenium_firefox do |app|
-      Capybara::Selenium::Driver.new(app, browser: :firefox)
+      Capybara::Selenium::Driver.new(app, browser: :firefox, :profile => profile)
     end
     Capybara.default_driver = :selenium_firefox
 
