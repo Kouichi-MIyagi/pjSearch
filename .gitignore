@@ -20,3 +20,5 @@
 
 /screenshot
 /coverage
+
+/test/*.csv

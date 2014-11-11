@@ -4,53 +4,16 @@
   def index
 
     if request.format == Mime::CSV
-	  @csvDownLoad = true
 	  @per_page = UserState.count(:id) + 1
 	else
-	  @csvDownLoad = false
 	  @per_page = 10
 	end
 
-    if @csvDownLoad || !(params[:page].nil?)
-	# ページ繰り時：検索条件のセッションからの取り出し
-      @target = session[:target]
-	else
-    # ページ繰り以外
-      @target = Hash.new()
-      session[:target] = @target
+    @target = Hash.new()
+    session[:target] = @target
 	  	
-	  if !params[:target].nil?
-	  # 検索ボタン押下時：画面入力された条件のセッションへの保存
-        params[:target].each do | key, value |
-          @target.store(key, value)
-        end
-	  end	  	
-	end
-    
-	# ページングを指示	
-	@user_states = UserState.includes([:user]).paginate(:page => params[:page], :per_page => @per_page).order('target_year DESC, target_month DESC, user_states.id ASC')	  
-
-    # 検索条件が指定されていれば、抽出条件としてwhere句を追加
-    # 対象年
-    if !(@target.fetch('target_year', nil).blank?)
-      @user_states = @user_states.where('user_states.target_year = ?', @target.fetch('target_year'))
-    end
-    # 対象月
-    if !(@target.fetch('target_month', nil).blank?)
-      @user_states = @user_states.where('user_states.target_month = ?', @target.fetch('target_month'))
-    end
-	# 未回答（回答依頼ありで回答がないもの）
-    if !(@target.fetch('noResponse', nil).blank?)
-		@user_states = @user_states.where('request_date IS NOT NULL').where(respose_date: nil)
-	end
-	# user_idでの検索
-    if !(@target.fetch('target_user', nil).blank?)
-		@user_states = @user_states.where(User.arel_table[:user_id].eq(@target.fetch('target_user')))
-	end
-
-	# if @showOverTime
-	  # @user_states = @user_states.where(UserState.arel_table[:over_time].gteq(1))
-	# end
+	@search = UserState.ransack(params[:q])
+    @user_states = @search.result.includes([:user]).paginate(:page => params[:page], :per_page => @per_page).order('target_year DESC, target_month DESC, user_states.id ASC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -163,6 +126,8 @@
         end
       end
       redirect_to user_states_path, notice: 'User state was successfully created.'
+    else
+      redirect_to user_states_path, notice: 'CSV File is not Find!!'
     end
   end
   

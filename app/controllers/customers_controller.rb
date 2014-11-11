@@ -3,7 +3,9 @@
   # GET /customers
   # GET /customers.json
   def index
-	@customers = Customer.paginate(:page => params[:page], :per_page => 20).order('csname ASC, id  ASC')
+  	@search = Customer.search(params[:q])
+    @customers = @search.result.paginate(:page => params[:page], :per_page => 20).order('csname ASC, id  ASC')
+#	@customers = Customer.paginate(:page => params[:page], :per_page => 20).order('csname ASC, id  ASC')
 
     respond_to do |format|
       format.html # index.html.erb
