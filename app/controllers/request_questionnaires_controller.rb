@@ -129,11 +129,11 @@ class RequestQuestionnairesController < ApplicationController
     ActiveRecord::Base.transaction do
       User.update_all :request_questionnaire_id => nil
       self.extractTargetUsers.each do |user|
-        user.request_questionnaire = @request_questionnaire
-        user.save
-        #ユーザー情報のアンケート依頼日を更新する
+        #ユーザーのアンケート依頼番号とユーザー情報のアンケート依頼日を更新する
         userState = user.targetUserState(@request_questionnaire.target_year,@request_questionnaire.target_month)
         if !(userState.blank?)
+          user.request_questionnaire = @request_questionnaire
+          user.save
           userState.request_date = Time.now
           userState.save
         end   
