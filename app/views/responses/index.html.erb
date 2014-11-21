@@ -5,7 +5,7 @@
     <h2 class="panel-title">検索条件</h2>
   </div>
   <div class="panel-body">
-<%= form_tag "/responses/index" do %>
+<%= form_tag(responses_path, :method => :get) do %>
 <table id = "square" >
   <tr>
     <td>顧客名   </td>

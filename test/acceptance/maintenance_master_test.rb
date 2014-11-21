@@ -268,5 +268,68 @@ class MentenanceMasterTest <AcceptanceTest
       sign_out
 
 	end	
+      # 管理者でサインアップ -> 顧客の登録変更
+    test "scenario-27 update customer" do
+      visit_root
     
+      save_screenshot "scenario-27-01.png" 
+      
+      fill_in "user_user_id", with: "pjsadmin"
+      fill_in "user_password", with: "password"
+      save_screenshot "scenario-27-02.png" 
+
+      click_button "サインイン"
+      save_screenshot "scenario-27-03.png" 
+
+      click_link "ユーザー一覧"
+      save_screenshot "scenario-27-04.png" 
+      # 適切な画面に遷移したかを確認
+      assert_equal user_index_path, current_path
+	  
+      sleep(3)
+      page.all(:link,"表示")[1].click
+
+      # 適切な画面に遷移したかを確認
+      save_screenshot "scenario-27-05.png" 
+      #puts current_path
+      assert_equal admin_show_user_path(1), current_path      
+	  
+      click_link "戻る"
+	  
+      save_screenshot "scenario-27-06.png" 
+	  
+	  visit root_path
+      save_screenshot "scenario-27-07.png" 
+
+      sign_out
+
+	end	
+	   # 管理者でサインアップ -> 回答結果一覧出力
+    test "scenario-28 maintenance masters" do
+      visit_root
+    
+      save_screenshot "scenario-28-01.png" 
+      
+      fill_in "user_user_id", with: "pjsadmin"
+      fill_in "user_password", with: "password"
+      save_screenshot "scenario-28-02.png" 
+
+      click_button "サインイン"
+      save_screenshot "scenario-28-03.png" 
+
+      click_link "回答結果一覧"
+      save_screenshot "scenario-28-04.png" 
+
+      # 適切な画面に遷移したかを確認
+      assert_equal responses_path, current_path
+	        
+	  click_link "[CSV形式⇒responses.csvを開きます]"
+      save_screenshot "scenario-28-05.png" 
+      #File file = new File("ファイルのパス");
+      #Assert.assertTrue( file.exists() );
+
+      sign_out
+
+	end	
+
 end
