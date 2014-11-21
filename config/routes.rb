@@ -33,6 +33,7 @@ PjSearch::Application.routes.draw do
   
   devise_scope :user do
     get 'user/index' => 'users/registrations#index'
+    get 'users' => 'users/registrations#index'
     get 'user/show/:id' => 'users/registrations#show', :as => :admin_show_user
     get 'users/:id' => 'users/registrations#destroy', :as => :admin_destroy_user
     post 'user/upload' => 'users/registrations#upload'

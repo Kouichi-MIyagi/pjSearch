@@ -1,4 +1,4 @@
-class DbCounterController < ApplicationController
+﻿class DbCounterController < ApplicationController
   def index
     @db_counters = Array.new()
     #対象外のテーブル

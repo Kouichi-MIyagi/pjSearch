@@ -70,7 +70,6 @@ GEM
       warden (~> 1.2.3)
     docile (1.1.5)
     erubis (2.7.0)
-    eventmachine (1.0.3)
     eventmachine (1.0.3-x86-mingw32)
     execjs (2.2.2)
     ffi (1.9.6)

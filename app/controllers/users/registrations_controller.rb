@@ -58,7 +58,9 @@
   end
   
   def index
-    @users = User.paginate(:page => params[:page], :per_page => 10).order('role DESC, user_id ASC')
+#    @users = User.paginate(:page => params[:page], :per_page => 10).order('role DESC, user_id ASC')
+	@search = User.ransack(params[:q])
+    @users = @search.result.paginate(:page => params[:page], :per_page => 10).order('role DESC, user_id ASC')
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }

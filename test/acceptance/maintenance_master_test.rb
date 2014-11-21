@@ -154,5 +154,119 @@ class MentenanceMasterTest <AcceptanceTest
 
 	end	
 
-	
+  # 管理者でサインアップ -> データ件数確認 
+  test "scenario-24 show NumberOfDbRows" do
+    visit_root
+    
+    save_screenshot "scenario-24-01.png" 
+      
+      fill_in "user_user_id", with: "pjsadmin"
+      fill_in "user_password", with: "password"
+      save_screenshot "scenario-24-02.png" 
+
+      click_button "サインイン"
+      save_screenshot "scenario-24-03.png" 
+
+      click_link "データ件数確認"
+      save_screenshot "scenario-24-04.png" 
+      # 適切な画面に遷移したかを確認
+      assert_equal db_counter_index_path, current_path
+      
+	  sleep(3)
+	  
+	  visit root_path
+      save_screenshot "scenario-24-05.png" 
+
+      sign_out
+
+	end	
+
+  # 管理者でサインアップ -> 顧客の登録変更
+  test "scenario-25 update customer" do
+    visit_root
+    
+    save_screenshot "scenario-25-01.png" 
+      
+      fill_in "user_user_id", with: "pjsadmin"
+      fill_in "user_password", with: "password"
+      save_screenshot "scenario-25-02.png" 
+
+      click_button "サインイン"
+      save_screenshot "scenario-25-03.png" 
+
+      click_link "顧客一覧"
+      save_screenshot "scenario-25-04.png" 
+      # 適切な画面に遷移したかを確認
+      assert_equal customers_path, current_path
+	  
+      sleep(3)
+      page.all(:link,"編集")[1].click
+
+      # 適切な画面に遷移したかを確認
+      save_screenshot "scenario-25-05.png" 
+      #puts current_path
+      assert_equal edit_customer_path(1), current_path      
+	  
+	  fill_in "customer_csname", with: "△△△株式会社"
+      #fill_in "customer_cscode", with: "10"
+
+	  save_screenshot "scenario-25-06.png" 
+      click_button "更新する"
+	  
+      save_screenshot "scenario-25-07.png" 
+	  
+	  visit root_path
+      save_screenshot "scenario-25-08.png" 
+
+      sign_out
+
+	end	
+
+  # 管理者でサインアップ -> show user_states -> DownLoad CSV
+  test "scenario-26 show user_states" do
+    visit_root
+    
+    save_screenshot "scenario-26-01.png" 
+      
+      fill_in "user_user_id", with: "pjsadmin"
+      fill_in "user_password", with: "password"
+      save_screenshot "scenario-26-02.png" 
+
+      click_button "サインイン"
+      save_screenshot "scenario-26-03.png" 
+
+      click_link "月別ユーザー情報"
+      save_screenshot "scenario-26-04.png" 
+      # 適切な画面に遷移したかを確認
+      assert_equal user_states_path, current_path
+	  
+      sleep(2)
+      page.all(:link,"Show")[1].click
+
+      # 適切な画面に遷移したかを確認
+      save_screenshot "scenario-26-05.png" 
+  
+      sleep(2)
+
+      #puts current_path
+      assert_equal user_state_path(2), current_path      
+	  
+      click_link "Back"
+      
+      # 適切な画面に遷移したかを確認
+      assert_equal user_states_path, current_path
+      save_screenshot "scenario-26-06.png" 
+      
+	  click_link "[CSV形式⇒UserStates.csvを開きます]"
+      save_screenshot "scenario-26-07.png" 
+      #File file = new File("ファイルのパス");
+      #Assert.assertTrue( file.exists() );
+
+      visit root_path
+      save_screenshot "scenario-26-08.png" 
+
+      sign_out
+
+	end	
+    
 end
