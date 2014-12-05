@@ -14,7 +14,7 @@
   belongs_to :customer
   belongs_to :request_questionnaire
   has_many :questionnaires, :through => :request_questionnaires
-  has_many :user_states,:dependent => :destroy 
+  has_many :user_states, ->{order("target_year DESC  , target_month DESC") }, dependent: :destroy
 #  has_many :user_states, :order => 'target_year DESC , target_month DESC', :dependent => :destroy
   has_many :responses, :dependent => :destroy
 

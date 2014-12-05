@@ -39,7 +39,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 group :development do
   gem 'yaml_db'
   gem 'sqlite3'
-#  gem 'rack-mini-profiler'
+  gem 'rack-mini-profiler'
 end
 
 group :production do

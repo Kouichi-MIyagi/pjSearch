@@ -287,12 +287,12 @@ class MentenanceMasterTest <AcceptanceTest
       assert_equal user_index_path, current_path
 	  
       sleep(3)
-      page.all(:link,"表示")[1].click
+      page.all(:link,"表示")[0].click
 
       # 適切な画面に遷移したかを確認
       save_screenshot "scenario-27-05.png" 
       #puts current_path
-      assert_equal admin_show_user_path(1), current_path      
+      assert_equal admin_show_user_path(2), current_path      
 	  
       click_link "戻る"
 	  

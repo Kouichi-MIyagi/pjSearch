@@ -1,7 +1,7 @@
 ﻿class Response < ActiveRecord::Base
   mount_uploader :picture, PictureUploader
   
-  has_many :response_items, :dependent => :delete_all
+  has_many :response_items, ->{order("id ASC") }, :dependent => :delete_all
 #  has_many :response_items, :dependent => :delete_all, :order => 'id ASC'
   accepts_nested_attributes_for :response_items
   
