@@ -271,7 +271,7 @@
   def response_params
     params.require(:response).permit(:comment, :customer_id, :pj_name, :target_month, :target_year, 
     :user_id, :request_questionnaire_id, :questionnaire_id, :picture,
-    response_items_attributes: [:comment, :question, :response_id, :selection_item, :selection_number])
+    response_items_attributes: [:id, :comment, :question, :response_id, :selection_item, :selection_number, :_destroy])
   end
 
   
