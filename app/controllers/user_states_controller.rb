@@ -52,7 +52,7 @@
   # POST /user_states
   # POST /user_states.json
   def create
-    @user_state = UserState.new(params[:user_state])
+    @user_state = UserState.new(user_state_params)
 
     respond_to do |format|
       if @user_state.save
@@ -71,7 +71,7 @@
     @user_state = UserState.find(params[:id])
 
     respond_to do |format|
-      if @user_state.update_attributes(params[:user_state])
+      if @user_state.update_attributes(user_state_params)
         format.html { redirect_to @user_state, notice: 'User state was successfully updated.' }
         format.json { head :no_content }
       else
@@ -177,4 +177,13 @@
 	end
   end
 
+  private
+
+  def user_state_params
+    params.require(:user_state).permit(:csname, :customer_id, :over_time, :request_date, :resident, 
+    :respose_date, :target_month, :target_year, :transfferred, :user_id, :mc_time)
+  end
+
+
+  
 end

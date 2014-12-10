@@ -55,7 +55,7 @@
 </table>
 <%= will_paginate @user_states, :previous_label=>'≪前', :next_label=>'次≫' %>
 <hr>
-<%= form_tag '/user_states/upload', :multipart => true do %>
+<%= form_tag({controller: "user_states", action: "upload", method: "post"}, {multipart: true}) do %>
   <table id = "square">
     <tr>
       <td>アップロード年</td>

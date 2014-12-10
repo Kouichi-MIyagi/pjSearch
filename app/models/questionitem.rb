@@ -1,8 +1,6 @@
 class Questionitem < ActiveRecord::Base
-  attr_accessible :id, :question, :answer1, :answer1_item, :answer2, :answer2_item, :answer3, :answer3_item, :answer4, :answer4_item
   
   has_and_belongs_to_many :questionnaires
-  attr_accessible :questionnaire_ids
   
   def answers_select
    return {self.answer1_item => a_1, self.answer2_item => a_2, self.answer3_item => a_3, self.answer4_item => a_4}

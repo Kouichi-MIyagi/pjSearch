@@ -5,7 +5,7 @@
     <h2 class="panel-title">検索条件</h2>
   </div>
   <div class="panel-body">
-<%= form_tag "/responses/index" do %>
+<%= form_tag(responses_path, :method => :get) do %>
 <table id = "square" >
   <tr>
     <td>顧客名   </td>
@@ -63,14 +63,14 @@
     <%= link_to "[CSV形式⇒responses.csvを開きます]", responses_path(format: "csv") %>
     <! %= link_to "Excel", responses_path(format: "xls") % >
   </p>
-　　<br>
+  <br>
   <h5>回答の一括削除：</h5>
-  <%= form_tag '/responses/deleteResponses', :multipart => true do %>
+  <%= form_tag({controller: "responses", action: "deleteResponses", method: "post"}, {multipart: true}) do %>
   <%= submit_tag "検索結果の一括削除" ,{ confirm: '一括削除します。本当によろしいですか？' } %>
   <% end %>
-　　<br>
+  <br>
   <h5>回答一括登録（本番環境データ→ローカル）:（*.csv）</h5>
-  <%= form_tag '/responses/upload', :multipart => true do %>
+  <%= form_tag({controller: "responses", action: "upload", method: "post"}, {multipart: true}) do %>
   <%= file_field_tag 'upload_file', :accept => 'text/comma-separated-values' %>
   <%= submit_tag "アップロード", :confirm => "アップロードしていいですか？" %>
   <% end %>

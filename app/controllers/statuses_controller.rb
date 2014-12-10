@@ -40,7 +40,7 @@ class StatusesController < ApplicationController
   # POST /statuses
   # POST /statuses.json
   def create
-    @status = Status.new(params[:status])
+    @status = Status.new(status_params)
 
     respond_to do |format|
       if @status.save
@@ -59,7 +59,7 @@ class StatusesController < ApplicationController
     @status = Status.find(params[:id])
 
     respond_to do |format|
-      if @status.update_attributes(params[:status])
+      if @status.update_attributes(status_params)
         format.html { redirect_to @status, notice: 'Status was successfully updated.' }
         format.json { head :no_content }
       else
@@ -80,4 +80,11 @@ class StatusesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+
+  def status_params
+    params.require(:status).permit(:is_mentenance)
+  end
+
 end
