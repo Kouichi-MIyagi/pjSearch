@@ -28,7 +28,7 @@ PjSearch::Application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # See everything in the log (default is :info)
   # config.log_level = :debug
@@ -69,7 +69,6 @@ PjSearch::Application.configure do
   
   config.action_mailer.default_url_options = { :host => 'pjsearch.herokuapp.com' }
   
-  config.force_ssl = true
   config.to_prepare { Devise::SessionsController.force_ssl }
   config.to_prepare { Devise::RegistrationsController.force_ssl }
   config.to_prepare { Devise::PasswordsController.force_ssl }
