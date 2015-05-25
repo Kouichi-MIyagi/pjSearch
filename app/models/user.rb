@@ -59,14 +59,18 @@
     end	
   	p_id = 'p'.concat(csv_id)
 	
-    u = User.find_by_user_id(p_id) || new(:role => 'author', :password => anArray[0].downcase,
-											:user_id => p_id)
-    u.email  = anArray[0]
-	anArray[4] == '出向' ? u.transfferred = true : u.transfferred = false
-    u.user_name = anArray[7]
-	anArray[9].to_s == '1' ? u.resident = true : u.resident = false
-    u.recent_customer = anArray[12]
-    return u 
+	if p_id.size == 8
+      u = User.find_by_user_id(p_id) || new(:role => 'author', :password => anArray[0].downcase,
+      											:user_id => p_id)
+      u.email  = anArray[0]
+	  anArray[4] == '出向' ? u.transfferred = true : u.transfferred = false
+      u.user_name = anArray[7]
+	  anArray[9].to_s == '1' ? u.resident = true : u.resident = false
+      u.recent_customer = anArray[12]
+      return u
+    else
+      return nil
+    end
   end
   
   def targetUserState(targetYear,targetMonth)

@@ -125,7 +125,7 @@
           end
         end
       end
-      redirect_to user_states_path, notice: 'User state was successfully created.'
+      redirect_to user_states_path, notice: 'Update User_state process is complete.'
     else
       redirect_to user_states_path, notice: 'CSV File is not Find!!'
     end
@@ -150,23 +150,26 @@
 	  #CSVファイルの読み込み
 	  CSV.parse(reader.kconv(Kconv::UTF8, Kconv::SJIS),:headers => true) do |row|
 		u = User.from_csv(row)
-		if u.resident? or u.transfferred?
-		  #客先常駐または出向の場合、顧客マスターを確認
-		  cu = Customer.where("csname = ?", u.recent_customer).first
-		  if cu.blank? 
-			#顧客が存在しない場合は、顧客マスターに新規作成
-			ncu = Customer.create(:csname => u.recent_customer)
-			u.customer_id = ncu.id
-		  else
-			#顧客が存在する場合は、その顧客IDをセット
-			u.customer_id = cu.id
-		  end
-		end 
-		#Userを更新
-		u.save
-		#CSVファイルごとにUser_Stateを作成
-		newUserStates << UserState.new(csname: u.recent_customer, resident: u.resident, transfferred:u.transfferred,
-		  user_id: u.id, customer_id:u.customer_id, target_year: targetYear, target_month: targetMonth)
+		if u.present?
+		  #Userを作成した場合
+		  if u.resident? or u.transfferred?
+		    #客先常駐または出向の場合、顧客マスターを確認
+		    cu = Customer.where("csname = ?", u.recent_customer).first
+		    if cu.blank? 
+		  	#顧客が存在しない場合は、顧客マスターに新規作成
+			  ncu = Customer.create(:csname => u.recent_customer)
+			  u.customer_id = ncu.id
+		    else
+			  #顧客が存在する場合は、その顧客IDをセット
+			  u.customer_id = cu.id
+		    end
+		  end 
+		  #Userを更新(保存できない場合、例外を発生させる)
+		  u.save!
+		  #CSVファイルごとにUser_Stateを作成
+		  newUserStates << UserState.new(csname: u.recent_customer, resident: u.resident, transfferred:u.transfferred,
+		    user_id: u.id, customer_id:u.customer_id, target_year: targetYear, target_month: targetMonth)
+		end
 	  end
 	  #UserStateの一括インサート
 	  UserState.import newUserStates
